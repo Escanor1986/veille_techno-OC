@@ -8,8 +8,7 @@
 
 body {
   font-family: var(--body-font-family);
-  /* background-color: var(--color-background); */
-  background-color: pink !important;
+  background-color: var(--color-background);
   color: #333;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
