@@ -3,6 +3,8 @@ title: Accueil
 nav_order: 1
 ---
 
+<img src="assets/images/veille_tech.webp" alt="Logo de la veille" width="200" style="margin-bottom: 1rem;" />
+
 # 👀 Veille Technologique – Projet OpenClassrooms
 
 Ce tableau de bord présente une veille structurée autour des besoins de l’entreprise, avec un focus sur :
