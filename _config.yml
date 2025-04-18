@@ -1,0 +1,10 @@
+title: "Veille Technologique – OC"
+description: "Dashboard de veille technologique structuré par thématiques – Projet OpenClassrooms"
+theme: minima
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Pour GitHub Pages
+repository: Escanor1986/veille_techno-OC
