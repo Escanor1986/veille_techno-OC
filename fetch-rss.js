@@ -7,7 +7,7 @@ const feeds = [
     name: "Librairies de test",
     file: "auto_tests.md",
     permalink: "/auto_tests/",
-    rss: "https://feeds.feedburner.com/SoftwareTestingHelp" // RSS de test généraliste
+    rss: "https://feeds.feedburner.com/SoftwareTestingHelp"
   },
   {
     name: "Librairies UI",
@@ -35,13 +35,20 @@ const feeds = [
       const data = await parser.parseURL(feed.rss);
       let content = `---\ntitle: "Veille auto : ${feed.name}"\nlayout: page\npermalink: ${feed.permalink}\n---\n\n# 📰 Veille automatique – ${feed.name}\n\n`;
 
-      data.items.slice(0, 5).forEach(item => {
-        content += `- [${item.title}](${item.link}) – *${item.pubDate}*\n`;
-      });
+      if (data.items.length === 0) {
+        content += `> Aucune publication trouvée pour le moment.`;
+      } else {
+        data.items.slice(0, 5).forEach(item => {
+          content += `- [${item.title}](${item.link}) – *${item.pubDate}*\n`;
+        });
+      }
 
       fs.writeFileSync(feed.file, content);
     } catch (error) {
-      console.error(`Erreur lors de la récupération du flux ${feed.name} :`, error.message);
+      console.error(`❌ Erreur flux "${feed.name}" : ${error.message}`);
+
+      const fallback = `---\ntitle: "Veille auto : ${feed.name}"\nlayout: page\npermalink: ${feed.permalink}\n---\n\n# 📰 Veille automatique – ${feed.name}\n\n> ⚠️ Erreur lors de la récupération du flux RSS.\n> Détail : ${error.message}`;
+      fs.writeFileSync(feed.file, fallback);
     }
   }
 })();
