@@ -19,7 +19,7 @@ const feeds = [
     name: "Paradigmes de programmation",
     file: "auto_paradigmes.md",
     permalink: "/auto_paradigmes/",
-    rss: "https://dev.to/feed/tag/programmingparadigms"
+    rss: "https://www.geeksforgeeks.org/feed/"
   },
   {
     name: "Stack Java / Angular",
@@ -31,13 +31,17 @@ const feeds = [
 
 (async () => {
   for (const feed of feeds) {
-    const data = await parser.parseURL(feed.rss);
-    let content = `---\ntitle: "Veille auto : ${feed.name}"\nlayout: page\npermalink: ${feed.permalink}\n---\n\n# 📰 Veille automatique – ${feed.name}\n\n`;
+    try {
+      const data = await parser.parseURL(feed.rss);
+      let content = `---\ntitle: "Veille auto : ${feed.name}"\nlayout: page\npermalink: ${feed.permalink}\n---\n\n# 📰 Veille automatique – ${feed.name}\n\n`;
 
-    data.items.slice(0, 5).forEach(item => {
-      content += `- [${item.title}](${item.link}) – *${item.pubDate}*\n`;
-    });
+      data.items.slice(0, 5).forEach(item => {
+        content += `- [${item.title}](${item.link}) – *${item.pubDate}*\n`;
+      });
 
-    fs.writeFileSync(feed.file, content);
+      fs.writeFileSync(feed.file, content);
+    } catch (error) {
+      console.error(`Erreur lors de la récupération du flux ${feed.name} :`, error.message);
+    }
   }
 })();
