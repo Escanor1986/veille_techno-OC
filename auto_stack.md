@@ -1,6 +1,7 @@
 ---
 title: "Veille auto : Stack Java / Angular"
-nav_order: 10
+layout: page
+permalink: /auto_stack/
 ---
 
 # 📰 Veille automatique – Stack Java / Angular
