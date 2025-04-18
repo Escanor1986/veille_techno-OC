@@ -4,7 +4,9 @@ layout: page
 permalink: /auto_stack/
 ---
 
-# 📰 Veille automatique – Stack Java / Angular
+      # 📰 Veille automatique – Stack Java / Angular
+
+      🕒 *Dernière mise à jour : vendredi 18 avril 2025*
 
 - [Java Weekly, Issue 590](https://feeds.feedblitz.com/~/916847789/0/baeldung~Java-Weekly-Issue) – *Thu, 17 Apr 2025 15:32:59 +0000*
 - [Set Multiple Headers at Once in Spring WebClient](https://feeds.feedblitz.com/~/916791077/0/baeldung~Set-Multiple-Headers-at-Once-in-Spring-WebClient) – *Wed, 16 Apr 2025 16:13:46 +0000*

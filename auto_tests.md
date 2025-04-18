@@ -4,7 +4,9 @@ layout: page
 permalink: /auto_tests/
 ---
 
-# 📰 Veille automatique – Librairies de test
+      # 📰 Veille automatique – Librairies de test
+
+      🕒 *Dernière mise à jour : vendredi 18 avril 2025*
 
 - [How To Be a Good Team Mentor, Coach and a True Team-Defender in an Agile Testing World?](https://www.softwaretestinghelp.com/how-to-be-a-good-team-mentor-coach-and-a-true-team-defender-in-an-agile-testing-world-the-inspiration/) – *Mon, 30 Jan 2023 16:55:25 +0000*
 - [How to Implement Efficient Test Automation in the Agile World](https://www.softwaretestinghelp.com/automation-in-agile-world/) – *Sat, 24 Dec 2022 23:33:28 +0000*

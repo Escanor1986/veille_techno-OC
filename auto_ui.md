@@ -4,7 +4,9 @@ layout: page
 permalink: /auto_ui/
 ---
 
-# 📰 Veille automatique – Librairies UI
+      # 📰 Veille automatique – Librairies UI
+
+      🕒 *Dernière mise à jour : vendredi 18 avril 2025*
 
 - [5 Top Lovable Alternatives in 2025](https://blog.bitsrc.io/5-top-lovable-alternatives-in-2025-72def3f96ac1?source=rss----5c2fdf847f4a---4) – *Thu, 13 Mar 2025 04:11:12 GMT*
 - [Design System Success with AI Coding Assistants](https://blog.bitsrc.io/design-system-success-with-ai-coding-assistants-78b13443ca23?source=rss----5c2fdf847f4a---4) – *Thu, 13 Mar 2025 04:07:53 GMT*

@@ -4,7 +4,9 @@ layout: page
 permalink: /auto_paradigmes/
 ---
 
-# 📰 Veille automatique – Paradigmes de programmation
+      # 📰 Veille automatique – Paradigmes de programmation
+
+      🕒 *Dernière mise à jour : vendredi 18 avril 2025*
 
 - [JSX Over The Wire](https://overreacted.io/jsx-over-the-wire/) – *Wed, 16 Apr 2025 00:00:00 GMT*
 - [React for Two Computers](https://overreacted.io/react-for-two-computers/) – *Wed, 09 Apr 2025 00:00:00 GMT*
