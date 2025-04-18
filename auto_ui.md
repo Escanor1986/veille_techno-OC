@@ -7,4 +7,4 @@ permalink: /auto_ui/
 # 📰 Veille automatique – Librairies UI
 
 > ⚠️ Erreur lors de la récupération du flux RSS.
-> Détail : Status code 429
+> Détail : Status code 404
