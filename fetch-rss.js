@@ -13,7 +13,7 @@ const feeds = [
     name: "Librairies UI",
     file: "auto_ui.md",
     permalink: "/auto_ui/",
-    rss: "https://feeds.feedburner.com/AngularInDepth" // Blog Angular InDepth.dev (source sérieuse)
+    rss: "https://blog.bitsrc.io/feed"
   },
   {
     name: "Paradigmes de programmation",
