@@ -13,13 +13,13 @@ const feeds = [
     name: "Librairies UI",
     file: "auto_ui.md",
     permalink: "/auto_ui/",
-    rss: "https://uxdesign.cc/feed"
+    rss: "https://feeds.feedburner.com/AngularInDepth" // Blog Angular InDepth.dev (source sérieuse)
   },
   {
     name: "Paradigmes de programmation",
     file: "auto_paradigmes.md",
     permalink: "/auto_paradigmes/",
-    rss: "https://medium.com/feed/tag/software-architecture"
+    rss: "https://overreacted.io/rss.xml"
   },
   {
     name: "Stack Java / Angular",
