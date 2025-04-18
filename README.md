@@ -22,17 +22,33 @@ Ce tableau de bord rassemble une veille ciblée sur les technologies utilisées 
 
 ## 🧱 Structure du projet
 
-veille_techno-OC/ ├── .github/workflows/rss.yml # Workflow GitHub Actions (mise à jour auto) ├── fetch-rss.js # Script Node.js qui récupère les flux RSS ├── _config.yml # Configuration du site Jekyll ├── assets/css/custom.css # Style personnalisé du thème ├── index.md # Page d'accueil du tableau de veille
+```bash
+veille_techno-OC/
+├── .github/
+│   └── workflows/
+│       └── rss.yml                 # Workflow GitHub Actions (mise à jour auto)
+├── fetch-rss.js                    # Script Node.js qui récupère les flux RSS
+├── _config.yml                     # Configuration du site Jekyll
+├── assets/
+│   └── css/
+│       └── custom.css              # Style personnalisé du thème
+│   └── images/
+│       └── [image pixel art]       # Illustration du projet
+├── index.md                        # Page d'accueil du tableau de veille
 
-Pages statiques (analyses manuelles)
-├── tests.md ├── ui.md ├── paradigmes.md ├── stack.md ├── methodologie.md
+# Pages statiques (analyses manuelles)
+├── tests.md
+├── ui.md
+├── paradigmes.md
+├── stack.md
+├── methodologie.md
 
-Pages générées automatiquement via RSS
-├── auto_tests.md ├── auto_ui.md ├── auto_paradigmes.md ├── auto_stack.md
-
-yaml
-Copier
-Modifier
+# Pages générées automatiquement via RSS
+├── auto_tests.md
+├── auto_ui.md
+├── auto_paradigmes.md
+├── auto_stack.md
+```
 
 ---
 
