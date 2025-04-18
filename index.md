@@ -17,6 +17,13 @@ Ce tableau de bord présente une veille structurée autour des besoins de l’en
 
 ![GitHub Workflow Status](https://github.com/Escanor1986/veille_techno-OC/actions/workflows/rss.yml/badge.svg)
 
+## 📚 Sommaire
+
+- [👀 Veille Technologique – Projet OpenClassrooms](#-veille-technologique--projet-openclassrooms)
+  - [📚 Sommaire](#-sommaire)
+  - [📝 Veille statique](#-veille-statique)
+  - [🔄 Veille automatique](#-veille-automatique)
+
 ---
 
 ## 📝 Veille statique
