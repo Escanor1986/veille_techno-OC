@@ -56,8 +56,6 @@ veille_techno-OC/
 │       └── rss.yml                 # Workflow GitHub Actions (mise à jour auto)
 ├── fetch-rss.js                    # Script Node.js qui récupère les flux RSS
 ├── _config.yml                     # Configuration du site Jekyll
-├── _includes/
-│   └── head_custom.html  
 ├── assets/
 │   ├── css/
 │   │   └── custom.css              # Style personnalisé du thème
