@@ -1,10 +1,18 @@
 title: "Veille Technologique – OC"
-description: "Dashboard de veille technologique structuré par thématiques – Projet OpenClassrooms"
-theme: minima
-markdown: kramdown
+description: "Dashboard de veille technologique structuré et automatisé pour OpenClassrooms"
+theme: just-the-docs
+
+# Activer la recherche (facultatif mais conseillé)
+search_enabled: true
+
+# Lien vers le dépôt GitHub (optionnel mais bien vu)
+repository_url: https://github.com/Escanor1986/veille_techno-OC
+
+# Configuration GitHub Pages
+url: "https://escanor1986.github.io"
+baseurl: "/veille_techno-OC"
+
+# Plugins recommandés
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-
-# Pour GitHub Pages
-repository: Escanor1986/veille_techno-OC
