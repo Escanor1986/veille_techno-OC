@@ -23,6 +23,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l’en
   - [📚 Sommaire](#-sommaire)
   - [📝 Veille statique](#-veille-statique)
   - [🔄 Veille automatique](#-veille-automatique)
+  - [📊 Mini Dashboard Analytique](#-mini-dashboard-analytique)
 
 ---
 
@@ -42,3 +43,15 @@ Ce tableau de bord présente une veille structurée autour des besoins de l’en
 - [Veille auto : UI](auto_ui.md)
 - [Veille auto : Paradigmes](auto_paradigmes.md)
 - [Veille auto : Stack Java / Angular](auto_stack.md)
+
+---
+
+## 📊 Mini Dashboard Analytique
+
+<div id="dashboard-stats">
+  <p>Chargement des statistiques en cours...</p>
+</div>
+
+<script src="assets/js/stats.js"></script>
+
+---
