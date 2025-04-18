@@ -1,7 +1,6 @@
 ---
-layout: page
 title: "Paradigmes de programmation"
-permalink: /paradigmes/
+nav_order: 4
 ---
 
 # 🧠 Paradigmes de programmation

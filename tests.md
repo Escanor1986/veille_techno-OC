@@ -1,7 +1,6 @@
 ---
-layout: page
 title: "Librairies de Test"
-permalink: /tests/
+nav_order: 2
 ---
 
 # 🔬 Librairies de Test

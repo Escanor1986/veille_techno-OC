@@ -1,7 +1,6 @@
 ---
-layout: page
 title: "Librairies UI"
-permalink: /ui/
+nav_order: 3
 ---
 
 # 🎨 Librairies UI

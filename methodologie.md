@@ -1,7 +1,6 @@
 ---
-layout: page
 title: "Méthodologie de veille"
-permalink: /methodologie/
+nav_order: 6
 ---
 
 # 📚 Méthodologie de veille

@@ -1,7 +1,6 @@
 ---
-layout: page
 title: "Stack Java / Angular"
-permalink: /stack/
+nav_order: 5
 ---
 
 # 🌐 Stack Java / Angular

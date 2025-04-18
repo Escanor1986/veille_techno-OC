@@ -1,7 +1,6 @@
 ---
 title: "Veille auto : Librairies de test"
-layout: page
-permalink: /auto_tests/
+nav_order: 7
 ---
 
 # 📰 Veille automatique – Librairies de test

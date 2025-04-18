@@ -1,6 +1,6 @@
 ---
-layout: home
-title: "Tableau de Veille Technologique"
+title: Accueil
+nav_order: 1
 ---
 
 # 👀 Veille Technologique – Projet OpenClassrooms
@@ -10,32 +10,26 @@ Ce tableau de bord présente une veille structurée autour des besoins de l’en
 - 🔬 les librairies de test
 - 🎨 les librairies UI
 - 🧠 les paradigmes de programmation
-- 🌐 les technologies de la stack Java / Angular
+- 🌐 la stack Java / Angular
+- ⚙️ une automatisation via RSS + GitHub Actions
 
-## ⚙️ Automatisation
-
-![GitHub Workflow Status](https://github.com/Escanor1986/veille_techno-OC/actions/workflows/rss.yml/badge.svg)  
-> Ce tableau de bord est mis à jour automatiquement grâce à un script Node.js et GitHub Actions.
+![GitHub Workflow Status](https://github.com/Escanor1986/veille_techno-OC/actions/workflows/rss.yml/badge.svg)
 
 ---
 
-### 📝 Veille statique (réflexions personnelles + synthèses)
+## 📝 Veille statique
 
-Ces pages ont été rédigées manuellement à partir de sources vérifiées, analysées et croisées.
-
-- 🔬 [Librairies de test](./tests/)
-- 🎨 [Librairies UI](./ui/)
-- 🧠 [Paradigmes de programmation](./paradigmes/)
-- 🌐 [Stack Java / Angular](./stack/)
-- 📚 [Méthodologie de veille](./methodologie/)
+- [Librairies de test](tests.md)
+- [Librairies UI](ui.md)
+- [Paradigmes de programmation](paradigmes.md)
+- [Stack Java / Angular](stack.md)
+- [Méthodologie de veille](methodologie.md)
 
 ---
 
-### 🔄 Veille automatique (mise à jour chaque semaine)
+## 🔄 Veille automatique
 
-Ces pages sont mises à jour automatiquement via GitHub Actions à partir de flux RSS ciblés sur chaque thématique.
-
-- 🔬 [Veille auto : Librairies de test](./auto_tests/)
-- 🎨 [Veille auto : UI](./auto_ui/)
-- 🧠 [Veille auto : Paradigmes](./auto_paradigmes/)
-- 🌐 [Veille auto : Stack Java / Angular](./auto_stack/)
+- [Veille auto : Librairies de test](auto_tests.md)
+- [Veille auto : UI](auto_ui.md)
+- [Veille auto : Paradigmes](auto_paradigmes.md)
+- [Veille auto : Stack Java / Angular](auto_stack.md)
