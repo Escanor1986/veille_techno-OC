@@ -1,3 +1,8 @@
+---
+layout: home
+title: "Tableau de Veille Technologique"
+---
+
 # Veille Technologique – Projet OpenClassrooms
 
 Ce tableau de bord présente une veille structurée autour des besoins de l’entreprise, avec un focus sur :
