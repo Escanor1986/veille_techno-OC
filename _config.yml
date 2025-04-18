@@ -14,5 +14,5 @@ plugins:
   - jekyll-seo-tag
 
 just_the_docs:
-  custom_css: "/assets/css/custom.css"
-  favicon_ico: "/assets/images/favicon.ico"
+  custom_css: "assets/css/custom.css"
+  favicon_ico: "assets/images/favicon.ico"
