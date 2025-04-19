@@ -292,3 +292,63 @@ body.dark-theme .link-card:hover {
     flex-direction: column;
   }
 }
+
+/* Correction pour la barre de recherche */
+.search-input {
+  padding-left: 2.3rem !important; /* Espace pour l'icône de loupe */
+  background-position: 0.7rem 0.7rem !important; /* Position ajustée de l'icône */
+  background-size: 1rem 1rem !important; /* Taille de l'icône */
+}
+
+.search-label .search-icon {
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #959396;
+}
+
+/* Correction du focus sur la recherche */
+.search-input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 0;
+  box-shadow: none;
+}
+
+/* Correction pour les résultats de recherche */
+.search-results {
+  width: 100%;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  background-color: var(--color-background);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 14px rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+
+/* Mode sombre pour la recherche */
+body.dark-theme .search-input {
+  background-color: #161b22;
+  border-color: #30363d;
+  color: #c9d1d9;
+}
+
+body.dark-theme .search-label .search-icon {
+  color: #8b949e;
+}
+
+body.dark-theme .search-input:focus {
+  outline-color: #58a6ff;
+}
+
+body.dark-theme .search-results {
+  background-color: #161b22;
+  border-color: #30363d;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 14px rgba(0,0,0,0.15);
+}
+
+/* En cas de besoin, cette classe peut être ajoutée au conteneur de recherche pour plus de contrôle */
+.search-container-fixed {
+  position: relative;
+}

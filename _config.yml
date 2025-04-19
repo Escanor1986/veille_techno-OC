@@ -1,9 +1,16 @@
-title: "Veille Technologique – OC"
+title: "Veille Technologique"
 description: "Dashboard de veille technologique structuré et automatisé pour OpenClassrooms"
 remote_theme: just-the-docs/just-the-docs
 
 # Paramètres de recherche
 search_enabled: true
+
+# Configuration de la recherche
+search:
+  # Texte du placeholder dans la barre de recherche
+  placeholder: "Rechercher..."
+  # Texte affiché quand aucun résultat n'est trouvé
+  no_results_text: "Aucun résultat trouvé"
 
 # URL du dépôt et du site
 url: "https://escanor1986.github.io"
@@ -18,7 +25,7 @@ plugins:
 
 # Thème et apparence
 # Utiliser un schéma intégré au lieu d'un personnalisé
-color_scheme: light
+color_scheme: dark
 favicon_ico: "/assets/images/favicon.ico"
 
 # Navigation et liens
