@@ -25,7 +25,7 @@ plugins:
 
 # Thème et apparence
 # Utiliser un schéma intégré au lieu d'un personnalisé
-color_scheme: dark
+color_scheme: light
 favicon_ico: "/assets/images/favicon.ico"
 
 # Navigation et liens
