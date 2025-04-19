@@ -1,2 +1,15 @@
-<!-- Fichier _includes/head_custom.html -->
+<!-- _includes/head_custom.html -->
+<!-- Chargement de la police Inter depuis Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Chargement du CSS personnalisé -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<!-- Préchargement de Chart.js pour le dashboard -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" 
+        integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+        defer></script>

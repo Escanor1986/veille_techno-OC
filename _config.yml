@@ -28,3 +28,10 @@ aux_links:
 # Paramètres supplémentaires
 back_to_top: true
 back_to_top_text: "Retour en haut"
+
+# Activation de l'inclusion de styles personnalisés
+# Note: ceci est important pour que votre CSS personnalisé fonctionne
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
