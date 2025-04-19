@@ -51,6 +51,11 @@ Ce tableau de bord rassemble une veille ciblée sur les technologies utilisées 
 
 ```bash
 veille_techno-OC/
+├── includes/
+│   └── head_custom.html
+├── _sass/
+│   └── color_scheme/
+│       └── veille.scss             #scss color scheme
 ├── .github/
 │   └── workflows/
 │       └── rss.yml                 # Workflow GitHub Actions (mise à jour auto)

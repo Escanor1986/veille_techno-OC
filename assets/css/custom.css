@@ -1,108 +1,137 @@
+/* custom.css - styles personnalisés pour Just the Docs */
+
+/* Importation de la police */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
   --color-accent: #1f6feb;
   --color-background: #fdfdfd;
   --color-sidebar-background: #f2f2f2;
+  --color-text: #333;
+  --color-inline-code-bg: #f1f1f1;
   --color-inline-code-text: #d6336c;
-  --body-font-family: "Inter", sans-serif;
+  --body-font-family: "Inter", system-ui, sans-serif;
 }
 
+/* Styles globaux */
 body {
   font-family: var(--body-font-family);
   background-color: var(--color-background);
-  color: #333;
+  color: var(--color-text);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Titres */
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
   color: var(--color-accent);
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
 }
 
-a {
+/* Liens */
+.main-content a {
   color: var(--color-accent);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
-a:hover {
+.main-content a:hover {
   text-decoration: underline;
 }
 
-a:visited,
-a:active {
-  color: var(--color-accent);
+/* Code */
+.main-content code {
+  background-color: var(--color-inline-code-bg);
+  color: var(--color-inline-code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
 }
 
-/* Code blocks & inline */
-code, pre {
-  background-color: var(--color-inline-code-text);
-  color: #fff;
-  padding: 2px 6px;
+.main-content pre {
+  background-color: #f8f8f8;
   border-radius: 4px;
+  padding: 1em;
+  overflow-x: auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-pre {
-  display: block;
-  padding: 12px;
-  overflow-x: auto;
+.main-content pre code {
+  background-color: transparent;
+  padding: 0;
 }
 
-/* Sidebar styling */
-.sidebar {
-  background-color: var(--color-sidebar-background);
-  padding: 20px;
+/* Images */
+.main-content img {
   border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar h2 {
-  color: var(--color-accent);
+/* Dashboard */
+#dashboard-stats {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.sidebar a {
-  color: var(--color-accent);
-  display: block;
+#dashboard-stats table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#dashboard-stats th {
+  text-align: left;
   padding: 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
 }
 
-.sidebar a:hover,
-.sidebar a:visited,
-.sidebar a:active {
+#dashboard-stats td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Badges et éléments spéciaux */
+.badge {
+  display: inline-block;
+  padding: 0.3em 0.6em;
+  font-size: 0.75em;
+  font-weight: 600;
+  border-radius: 99px;
   background-color: var(--color-accent);
-  color: #fff;
+  color: white;
+  margin: 0 0.2em;
 }
 
-.sidebar code, .sidebar pre {
-  background-color: var(--color-inline-code-text);
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.sidebar .sidebar-item {
-  margin-bottom: 10px;
-}
-
-/* 🌙 Mode sombre automatique */
+/* Mode sombre */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: #1a1a1a;
     --color-sidebar-background: #222;
+    --color-text: #ddd;
     --color-accent: #58a6ff;
+    --color-inline-code-bg: #2d2d2d;
     --color-inline-code-text: #bb86fc;
   }
-
-  body {
-    color: #ddd;
+  
+  .main-content pre {
+    background-color: #2d2d2d;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--color-accent);
+  
+  #dashboard-stats {
+    background-color: #222;
   }
-
-  a:hover {
-    color: #88c0d0;
+  
+  #dashboard-stats td {
+    border-bottom: 1px solid #444;
   }
 }
