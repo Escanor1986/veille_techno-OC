@@ -39,6 +39,15 @@
     monospace;
 }
 
+body,
+.main-content,
+.site-nav,
+.site-header,
+.site-footer {
+  background-color: var(--color-background) !important;
+  color:            var(--color-text)       !important;
+}
+
 
 /* Global */
 body {
