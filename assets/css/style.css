@@ -1,3 +1,6 @@
+---
+---
+
 /* custom.css – thème Demon Slayer × Ghost in the Shell */
 
 /* Importation de la police */
@@ -10,18 +13,32 @@
   --color-background: #0b0c10;
   --color-sidebar-background: #131415;
   --color-text: #c5c6c7;
-  
+
   /* Accents néon (cyber‑punk) et organiques */
   --color-accent: #08f7fe;         /* cyan néon */
   --color-accent-alt: #fe53bb;     /* magenta néon */
   --color-organic: #66fcf1;        /* vert clair */
   --color-inline-code-bg: rgba(238, 34, 34, 0.1); /* rouge sakura */
   --color-inline-code-text: #e23e57;
-  
-  /* Typographie */
-  --body-font-family: "Inter", system-ui, sans-serif;
-  --mono-font-family: "Major Mono Display", monospace;
+
+  /* Typographie – on ajoute les polices d’émoji couleur avant le fallback */
+  --body-font-family: 
+    "Inter", 
+    system-ui, 
+    -apple-system, 
+    "Segoe UI", 
+    /* polices d’émojis couleur */
+    "Apple Color Emoji", 
+    "Segoe UI Emoji", 
+    "Noto Color Emoji", 
+    sans-serif;
+  --mono-font-family: 
+    "Major Mono Display", 
+    Menlo, 
+    Consolas, 
+    monospace;
 }
+
 
 /* Global */
 body {
