@@ -181,7 +181,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 .feature-card {
   flex: 1 1 200px;
-  background-color: #f6f8fa;
+  background-color: var(--color-sidebar-background);
   border-radius: 8px;
   padding: 1rem;
   text-align: center;
@@ -229,7 +229,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 .link-card {
   display: flex;
-  background-color: #f6f8fa;
+  background-color: var(--color-sidebar-background);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);

@@ -21,13 +21,13 @@
   --color-inline-code-bg: rgba(238, 34, 34, 0.1); /* rouge sakura */
   --color-inline-code-text: #e23e57;
 
-  /* Typographie – on ajoute les polices d’émoji couleur avant le fallback */
+  /* Typographie – on ajoute les polices d'émoji couleur avant le fallback */
   --body-font-family: 
     "Inter", 
     system-ui, 
     -apple-system, 
     "Segoe UI", 
-    /* polices d’émojis couleur */
+    /* polices d'émojis couleur */
     "Apple Color Emoji", 
     "Segoe UI Emoji", 
     "Noto Color Emoji", 
@@ -45,9 +45,8 @@ body,
 .site-header,
 .site-footer {
   background-color: var(--color-background) !important;
-  color:            var(--color-text)       !important;
+  color: var(--color-text) !important;
 }
-
 
 /* Global */
 body {
@@ -70,6 +69,7 @@ body {
 .main-content h4 {
   font-family: var(--mono-font-family);
   background: linear-gradient(90deg, var(--color-accent), var(--color-accent-alt));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 1.5em;
@@ -161,7 +161,9 @@ body {
 
 /* Mode sombre forcé (prefers-color-scheme conserve la même palette) */
 body.dark-theme {
-  /* on reste sur les mêmes couleurs pour l’effet dramatique */
+  /* Même couleurs que par défaut - pas besoin de redéfinir */
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 /* Effet de léger motif circuit sur le fond */
