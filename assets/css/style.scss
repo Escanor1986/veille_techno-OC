@@ -1,13 +1,28 @@
 ---
 ---
 
-/* custom.css – thème Demon Slayer × Ghost in the Shell */
+/* custom.scss – thème Demon Slayer × Ghost in the Shell corrigé */
 
-/* Importation de la police */
+/* 1) Priorité aux polices d’émojis couleur et variante emoji */
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    /* polices d’émojis couleur */
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
+    sans-serif;
+  font-variant-emoji: emoji;
+}
+
+/* 2) Importation des polices de titres et monospace */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
-/* Variables personnalisées */
+/* 3) Variables personnalisées */
 :root {
   /* Fond général – un bleu nuit très sombre */
   --color-background: #0b0c10;
@@ -21,45 +36,46 @@
   --color-inline-code-bg: rgba(238, 34, 34, 0.1); /* rouge sakura */
   --color-inline-code-text: #e23e57;
 
-  /* Typographie – on ajoute les polices d'émoji couleur avant le fallback */
-  --body-font-family: 
-    "Inter", 
-    system-ui, 
-    -apple-system, 
-    "Segoe UI", 
-    /* polices d'émojis couleur */
-    "Apple Color Emoji", 
-    "Segoe UI Emoji", 
-    "Noto Color Emoji", 
+  /* Typographie */
+  --body-font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
     sans-serif;
-  --mono-font-family: 
-    "Major Mono Display", 
-    Menlo, 
-    Consolas, 
+  --mono-font-family:
+    "Major Mono Display",
+    Menlo,
+    Consolas,
     monospace;
 }
 
-body,
-.main-content,
-.site-nav,
-.site-header,
-.site-footer {
-  background-color: var(--color-background) !important;
-  color: var(--color-text) !important;
-}
-
-/* Global */
+/* 4) Global – couleurs de fond et de texte */
 body {
-  font-family: var(--body-font-family);
   background-color: var(--color-background);
   color: var(--color-text);
   transition: background-color 0.3s, color 0.3s;
 }
 
 /* Sidebar & header */
-.site-nav, .site-header, .site-footer {
+.site-nav,
+.site-header,
+.site-footer {
   background-color: var(--color-sidebar-background);
   border-color: #1f2833;
+}
+
+/* Correction pour les titres avec emojis */
+.main-content h1 span, 
+.main-content h2 span, 
+.main-content h3 span, 
+.main-content h4 span {
+  background: none;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
 }
 
 /* Titres – jeu de dégradé néon */
@@ -69,8 +85,8 @@ body {
 .main-content h4 {
   font-family: var(--mono-font-family);
   background: linear-gradient(90deg, var(--color-accent), var(--color-accent-alt));
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
@@ -115,7 +131,6 @@ body {
 }
 .main-content pre code {
   background: none;
-  padding: 0;
   color: #c5c6c7;
   font-family: var(--mono-font-family);
 }
@@ -159,13 +174,6 @@ body {
   color: #0b0c10;
 }
 
-/* Mode sombre forcé (prefers-color-scheme conserve la même palette) */
-body.dark-theme {
-  /* Même couleurs que par défaut - pas besoin de redéfinir */
-  background-color: var(--color-background);
-  color: var(--color-text);
-}
-
 /* Effet de léger motif circuit sur le fond */
 body::before {
   content: '';
@@ -194,7 +202,8 @@ body::before {
 
 /* Responsive ajustements */
 @media (max-width: 768px) {
-  .feature-card, .link-card {
+  .feature-card,
+  .link-card {
     padding: 0.75rem;
   }
 }

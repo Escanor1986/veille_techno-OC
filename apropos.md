@@ -5,7 +5,7 @@ layout: page
 permalink: /apropos/
 ---
 
-# 🙋 À propos du projet
+# <span>🙋</span> À propos du projet
 
 Ce site a été réalisé dans le cadre du projet OpenClassrooms **"Organisez une veille technologique"**.
 
@@ -17,14 +17,14 @@ Il s'appuie sur :
 - 📥 Flux RSS (mise à jour automatique hebdomadaire)
 - 🧠 Analyse manuelle + curation
 
-## 👨‍💻 Contexte
+## <span>👨‍💻</span> Contexte
 
 - Formation : Développeur Fullstack Java / Angular
 - Auteur : [Escanor1986](https://github.com/Escanor1986)
 - Date : Avril 2025
 - Objectif : Produire un tableau de bord de veille structuré, fiable et maintenu automatiquement
 
-## 🔗 Technologies surveillées
+## <span>🔗</span> Technologies surveillées
 
 - Java, Spring Boot, Angular
 - Librairies de tests (JUnit, Mockito…)

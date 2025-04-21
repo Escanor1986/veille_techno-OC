@@ -5,7 +5,7 @@ permalink: /paradigmes/
 nav_order: 4
 ---
 
-# 🧠 Paradigmes de programmation
+# <span>🧠</span> Paradigmes de programmation
 
 ## Pourquoi ?
 

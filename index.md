@@ -5,7 +5,7 @@ nav_order: 1
 
 <img src="{{ '/assets/images/veille_tech.webp' | relative_url }}" alt="Logo de la veille" width="200" />
 
-# 👀 Veille Technologique – Projet OpenClassrooms
+# <span>👀</span> Veille Technologique – Projet OpenClassrooms
 
 Ce tableau de bord présente une veille structurée autour des besoins de l'entreprise, avec un focus sur :
 
@@ -40,7 +40,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
   </div>
 </div>
 
-## 📚 Sommaire
+## <span>📚</span> Sommaire
 
 - [📰 Dernières mises à jour]({{ '/latest-updates' | relative_url }}) - *Articles récents toutes catégories*
 - [📝 Veille statique](#veille-statique) - *Analyses manuelles*
@@ -51,7 +51,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 ---
 
-## 📝 Veille statique {#veille-statique}
+## <span>📝</span> Veille statique {#veille-statique}
 
 <div class="grid-container">
   <div class="grid-item">
@@ -113,7 +113,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 ---
 
-## 🔄 Veille automatique {#veille-automatique}
+## <span>🔄</span> Veille automatique {#veille-automatique}
 
 <div class="grid-container">
   <div class="grid-item">
@@ -164,7 +164,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 ---
 
-## 📊 Tableau de bord {#tableau-de-bord}
+## <span>📊</span> Tableau de bord {#tableau-de-bord}
 
 <div id="dashboard-stats">
   <p>Chargement des statistiques en cours...</p>

@@ -4,7 +4,7 @@ layout: page
 permalink: /auto_paradigmes/
 ---
 
-# 🧠 Veille automatique – Paradigmes de programmation
+# <span>🧠</span> Veille automatique – Paradigmes de programmation
 
 🕒 *Dernière mise à jour : lundi 21 avril 2025*
 

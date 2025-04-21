@@ -4,7 +4,7 @@ layout: page
 permalink: /auto_ui/
 ---
 
-# 🎨 Veille automatique – Librairies UI
+# <span>🎨</span> Veille automatique – Librairies UI
 
 🕒 *Dernière mise à jour : lundi 21 avril 2025*
 

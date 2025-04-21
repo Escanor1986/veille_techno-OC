@@ -5,7 +5,7 @@ permalink: /tests/
 nav_order: 2
 ---
 
-# 🔬 Librairies de Test
+# <span>🔬</span> Librairies de Test
 
 ## Pourquoi ?
 

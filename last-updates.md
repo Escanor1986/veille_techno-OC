@@ -5,7 +5,7 @@ permalink: /latest-updates/
 nav_order: 2
 ---
 
-# 📰 Dernières mises à jour de la veille
+# <span>📰</span> Dernières mises à jour de la veille
 
 <div class="latest-updates-header">
   <p>Cette page présente les articles les plus récents, toutes catégories confondues.</p>

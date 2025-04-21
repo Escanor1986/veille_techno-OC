@@ -5,7 +5,7 @@ permalink: /methodologies/
 nav_order: 6
 ---
 
-# 📚 Méthodologie de veille
+# <span>📚</span> Méthodologie de veille
 
 ## Objectifs
 

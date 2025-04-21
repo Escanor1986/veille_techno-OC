@@ -4,7 +4,7 @@ layout: page
 permalink: /auto_tests/
 ---
 
-# 🧪 Veille automatique – Librairies de test
+# <span>🧪</span> Veille automatique – Librairies de test
 
 🕒 *Dernière mise à jour : lundi 21 avril 2025*
 

@@ -5,7 +5,7 @@ permalink: /stack/
 nav_order: 5
 ---
 
-# 🌐 Stack Java / Angular
+# <span>🌐</span> Stack Java / Angular
 
 ## Pourquoi ?
 

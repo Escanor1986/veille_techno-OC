@@ -5,7 +5,7 @@ permalink: /ui/
 nav_order: 3
 ---
 
-# 🎨 Librairies UI
+# <span>🎨</span> Librairies UI
 
 ## Pourquoi ?
 
