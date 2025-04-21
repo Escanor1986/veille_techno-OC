@@ -331,198 +331,159 @@ document.addEventListener("DOMContentLoaded", () => {
   function addCustomStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      /* Styles de base du dashboard */
+    /* Styles de base du dashboard – Demon Slayer × Ghost in the Shell */
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  
+    .dashboard-controls {
+      display: flex;
+      gap: 0.75rem;
+    }
+  
+    .dashboard-btn {
+      background-color: var(--color-accent);
+      color: var(--color-background);
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      transition: background-color 0.2s, box-shadow 0.2s;
+    }
+    .dashboard-btn:hover {
+      background-color: var(--color-accent-alt);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    }
+  
+    /* Table des statistiques */
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      background-color: var(--color-sidebar-background);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .stats-table th,
+    .stats-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #30363d;
+      color: var(--color-text);
+    }
+    .stats-table th {
+      background-color: #1b1d21;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+    .stats-table tr:last-child td {
+      border-bottom: none;
+    }
+    .stats-table tbody tr:hover {
+      background-color: #131415;
+    }
+  
+    /* Badges de catégorie */
+    .category-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-alt));
+      color: var(--color-background);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+  
+    /* Section des articles récents */
+    .latest-articles {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: var(--color-sidebar-background);
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    }
+    .latest-articles h4 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--color-accent);
+    }
+    .latest-articles-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .article-item {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #30363d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .article-item:last-child {
+      border-bottom: none;
+    }
+    .article-link {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .article-link:hover {
+      color: var(--color-accent);
+    }
+    .article-meta {
+      font-size: 0.85rem;
+      color: #8b949e;
+      display: flex;
+      gap: 1rem;
+    }
+    .article-category-tag {
+      background: linear-gradient(135deg, var(--color-accent-alt), var(--color-accent));
+      color: var(--color-background);
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .article-date {
+      font-style: italic;
+    }
+  
+    .loading {
+      text-align: center;
+      padding: 1rem;
+      color: #8b949e;
+    }
+  
+    /* Responsive design */
+    @media (max-width: 768px) {
       .dashboard-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
+        flex-direction: column;
+        align-items: flex-start;
       }
-      
       .dashboard-controls {
-        display: flex;
-        gap: 10px;
-      }
-      
-      .dashboard-btn {
-        background-color: #1f6feb;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 6px 12px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        transition: background-color 0.2s;
-      }
-      
-      .dashboard-btn:hover {
-        background-color: #0d5bdb;
-      }
-      
-      /* Table des statistiques */
-      .stats-table {
+        margin-top: 1rem;
         width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        border-radius: 6px;
-        overflow: hidden;
-      }
-      
-      .stats-table th, .stats-table td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #e1e4e8;
-      }
-      
-      .stats-table th {
-        background-color: #f6f8fa;
-        font-weight: 600;
-      }
-      
-      .stats-table tr:last-child td {
-        border-bottom: none;
-      }
-      
-      .stats-table tbody tr:hover {
-        background-color: #f6f8fa;
-      }
-      
-      /* Badges de catégorie */
-      .category-badge {
-        display: inline-block;
-        padding: 4px 8px;
-        border-radius: 12px;
-        color: white;
-        font-size: 0.85rem;
-        font-weight: 500;
-      }
-      
-      /* Section des articles récents */
-      .latest-articles {
-        margin-top: 30px;
-        padding: 15px;
-        background-color: #f6f8fa;
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      }
-      
-      .latest-articles h4 {
-        margin-top: 0;
-        margin-bottom: 15px;
-        color: #24292e;
-      }
-      
-      .latest-articles-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      
-      .article-item {
-        padding: 12px 0;
-        border-bottom: 1px solid #e1e4e8;
-      }
-      
-      .article-item:last-child {
-        border-bottom: none;
-      }
-      
-      .article-link {
-        display: block;
-        font-weight: 500;
-        margin-bottom: 5px;
-        color: #0366d6;
-        text-decoration: none;
-      }
-      
-      .article-link:hover {
-        text-decoration: underline;
-      }
-      
-      .article-meta {
-        display: flex;
         justify-content: space-between;
-        font-size: 0.85rem;
-        color: #586069;
       }
-      
-      .article-category-tag {
-        font-weight: 500;
+      .stats-table th,
+      .stats-table td {
+        padding: 0.5rem;
       }
-      
-      .article-date {
-        font-style: italic;
+      .article-meta {
+        flex-direction: column;
+        font-size: 0.8rem;
       }
-      
-      .loading {
-        text-align: center;
-        padding: 20px;
-        color: #586069;
-      }
-      
-      /* Mode sombre */
-      body.dark-theme {
-        background-color: #0d1117;
-        color: #c9d1d9;
-      }
-      
-      body.dark-theme .stats-table {
-        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-      }
-      
-      body.dark-theme .stats-table th {
-        background-color: #161b22;
-        color: #c9d1d9;
-      }
-      
-      body.dark-theme .stats-table td {
-        border-bottom: 1px solid #30363d;
-      }
-      
-      body.dark-theme .stats-table tbody tr:hover {
-        background-color: #161b22;
-      }
-      
-      body.dark-theme .latest-articles {
-        background-color: #161b22;
-      }
-      
-      body.dark-theme .article-item {
-        border-bottom: 1px solid #30363d;
-      }
-      
-      body.dark-theme .article-link {
-        color: #58a6ff;
-      }
-      
-      body.dark-theme .article-meta {
-        color: #8b949e;
-      }
-      
-      body.dark-theme h3, body.dark-theme h4 {
-        color: #c9d1d9;
-      }
-      
-      /* Responsive design */
-      @media (max-width: 768px) {
-        .dashboard-header {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        
-        .dashboard-controls {
-          margin-top: 10px;
-          width: 100%;
-          justify-content: space-between;
-        }
-        
-        .stats-table th, .stats-table td {
-          padding: 8px;
-        }
-      }
-    `;
-    
+    }
+  `;
     document.head.appendChild(style);
   }
 });

@@ -1,35 +1,51 @@
-/* custom.css - styles personnalisés pour Just the Docs */
+/* custom.css – thème Demon Slayer × Ghost in the Shell */
 
 /* Importation de la police */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
 /* Variables personnalisées */
 :root {
-  --color-accent: #1f6feb;
-  --color-background: #fdfdfd;
-  --color-sidebar-background: #f2f2f2;
-  --color-text: #333;
-  --color-inline-code-bg: #f1f1f1;
-  --color-inline-code-text: #d6336c;
+  /* Fond général – un bleu nuit très sombre */
+  --color-background: #0b0c10;
+  --color-sidebar-background: #131415;
+  --color-text: #c5c6c7;
+  
+  /* Accents néon (cyber‑punk) et organiques */
+  --color-accent: #08f7fe;         /* cyan néon */
+  --color-accent-alt: #fe53bb;     /* magenta néon */
+  --color-organic: #66fcf1;        /* vert clair */
+  --color-inline-code-bg: rgba(238, 34, 34, 0.1); /* rouge sakura */
+  --color-inline-code-text: #e23e57;
+  
+  /* Typographie */
   --body-font-family: "Inter", system-ui, sans-serif;
+  --mono-font-family: "Major Mono Display", monospace;
 }
 
-/* Styles globaux */
+/* Global */
 body {
   font-family: var(--body-font-family);
   background-color: var(--color-background);
   color: var(--color-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Titres */
+/* Sidebar & header */
+.site-nav, .site-header, .site-footer {
+  background-color: var(--color-sidebar-background);
+  border-color: #1f2833;
+}
+
+/* Titres – jeu de dégradé néon */
 .main-content h1,
 .main-content h2,
 .main-content h3,
-.main-content h4,
-.main-content h5,
-.main-content h6 {
-  color: var(--color-accent);
+.main-content h4 {
+  font-family: var(--mono-font-family);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-alt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
 }
@@ -37,318 +53,120 @@ body {
 /* Liens */
 .main-content a {
   color: var(--color-accent);
+  position: relative;
   text-decoration: none;
-  transition: color 0.2s ease;
+}
+.main-content a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent-alt);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+.main-content a:hover::after {
+  transform: scaleX(1);
 }
 
-.main-content a:hover {
-  text-decoration: underline;
-}
-
-/* Code */
+/* Code inline & blocs */
 .main-content code {
   background-color: var(--color-inline-code-bg);
   color: var(--color-inline-code-text);
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-family: var(--mono-font-family);
 }
-
 .main-content pre {
-  background-color: #f8f8f8;
+  background-color: #1f2833;
+  border-left: 4px solid var(--color-accent);
   border-radius: 4px;
   padding: 1em;
   overflow-x: auto;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-
 .main-content pre code {
-  background-color: transparent;
+  background: none;
   padding: 0;
+  color: #c5c6c7;
+  font-family: var(--mono-font-family);
 }
 
 /* Images */
 .main-content img {
+  border: 2px solid var(--color-accent-alt);
   border-radius: 8px;
-  max-width: 100%;
-  height: auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
 }
 
 /* Dashboard */
 #dashboard-stats {
-  background-color: #f8f8f8;
+  background-color: #1f2833;
   border-radius: 8px;
   padding: 1.5rem;
   margin: 1.5rem 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
 }
-
-#dashboard-stats table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 #dashboard-stats th {
-  text-align: left;
-  padding: 8px;
   color: var(--color-accent);
-  border-bottom: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent-alt);
 }
-
 #dashboard-stats td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #34495e;
 }
 
-/* Navigation */
-.site-nav, .site-header, .site-footer {
-  font-family: var(--body-font-family);
+/* Navigation active & hover */
+.nav-list .nav-list-item .nav-list-link {
+  color: var(--color-text);
 }
-
-.nav-list .nav-list-item .nav-list-link:hover {
-  background-color: #f2f2f2;
-  color: var(--color-accent);
-}
-
+.nav-list .nav-list-item .nav-list-link:hover,
 .nav-list .nav-list-item .nav-list-link.active {
+  background-color: #1b1d21;
   color: var(--color-accent);
 }
 
-/* Badges et éléments spéciaux */
+/* Badges et spéciaux */
 .badge {
-  display: inline-block;
-  padding: 0.3em 0.6em;
-  font-size: 0.75em;
-  font-weight: 600;
-  border-radius: 99px;
-  background-color: var(--color-accent);
-  color: white;
-  margin: 0 0.2em;
+  background: linear-gradient(135deg, var(--color-organic), var(--color-accent));
+  color: #0b0c10;
 }
 
-/* Mode sombre */
-@media (prefers-color-scheme: dark) {
-  body.dark-theme {
-    --color-background: #1a1a1a;
-    --color-sidebar-background: #222;
-    --color-text: #ddd;
-    --color-accent: #58a6ff;
-    --color-inline-code-bg: #2d2d2d;
-    --color-inline-code-text: #bb86fc;
-  }
-  
-  body.dark-theme .main-content pre {
-    background-color: #2d2d2d;
-  }
-  
-  body.dark-theme #dashboard-stats {
-    background-color: #222;
-  }
-  
-  body.dark-theme #dashboard-stats td {
-    border-bottom: 1px solid #444;
-  }
-  
-  body.dark-theme .nav-list .nav-list-item .nav-list-link:hover {
-    background-color: #2d2d2d;
-  }
-  
-  body.dark-theme .site-header,
-  body.dark-theme .site-nav,
-  body.dark-theme .side-bar,
-  body.dark-theme .site-footer {
-    background-color: #161b22;
-    border-color: #30363d;
-  }
+/* Mode sombre forcé (prefers-color-scheme conserve la même palette) */
+body.dark-theme {
+  /* on reste sur les mêmes couleurs pour l’effet dramatique */
 }
 
-/* Styles pour les fonctionnalités améliorées */
-.features-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1.5rem 0;
+/* Effet de léger motif circuit sur le fond */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url('data:image/svg+xml;charset=UTF-8,\
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" opacity="0.03">\
+      <path d="M0 0 L200 0 L200 200" stroke="%23ffffff" stroke-width="1" fill="none"/>\
+      <path d="M0 50 L150 50" stroke="%23ffffff" stroke-width="0.5"/>\
+      <path d="M50 100 L200 100" stroke="%23ffffff" stroke-width="0.5"/>\
+    </svg>');
+  pointer-events: none;
+  z-index: 0;
 }
 
-.feature-card {
-  flex: 1 1 200px;
-  background-color: #f6f8fa;
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-icon {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.feature-card h3 {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.feature-card p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #586069;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.grid-item {
-  min-width: 0;
-}
-
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
+/* Veille techno cards */
+.feature-card,
 .link-card {
-  display: flex;
-  background-color: #f6f8fa;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
+  background-color: #131415;
+  border: 1px solid #2c3e50;
 }
-
+.feature-card:hover,
 .link-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
-.auto-link {
-  background-color: #f0f7ff;
-}
-
-.card-icon {
-  font-size: 2rem;
-  margin-right: 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.card-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.card-content h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.card-content p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #586069;
-}
-
-/* Mode sombre pour les cartes */
-body.dark-theme .feature-card,
-body.dark-theme .link-card {
-  background-color: #161b22;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-body.dark-theme .auto-link {
-  background-color: #0d2548;
-}
-
-body.dark-theme .feature-card p,
-body.dark-theme .card-content p {
-  color: #8b949e;
-}
-
-body.dark-theme .feature-card:hover,
-body.dark-theme .link-card:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-}
-
-/* Responsive */
+/* Responsive ajustements */
 @media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr;
+  .feature-card, .link-card {
+    padding: 0.75rem;
   }
-  
-  .features-container {
-    flex-direction: column;
-  }
-}
-
-/* Correction pour la barre de recherche */
-.search-input {
-  padding-left: 2.3rem !important; /* Espace pour l'icône de loupe */
-  background-position: 0.7rem 0.7rem !important; /* Position ajustée de l'icône */
-  background-size: 1rem 1rem !important; /* Taille de l'icône */
-}
-
-.search-label .search-icon {
-  width: 1rem;
-  height: 1rem;
-  position: absolute;
-  left: 0.7rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #959396;
-}
-
-/* Correction du focus sur la recherche */
-.search-input:focus {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 0;
-  box-shadow: none;
-}
-
-/* Correction pour les résultats de recherche */
-.search-results {
-  width: 100%;
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-  background-color: var(--color-background);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 14px rgba(0,0,0,0.05);
-  border-radius: 4px;
-}
-
-/* Mode sombre pour la recherche */
-body.dark-theme .search-input {
-  background-color: #161b22;
-  border-color: #30363d;
-  color: #c9d1d9;
-}
-
-body.dark-theme .search-label .search-icon {
-  color: #8b949e;
-}
-
-body.dark-theme .search-input:focus {
-  outline-color: #58a6ff;
-}
-
-body.dark-theme .search-results {
-  background-color: #161b22;
-  border-color: #30363d;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 14px rgba(0,0,0,0.15);
-}
-
-/* En cas de besoin, cette classe peut être ajoutée au conteneur de recherche pour plus de contrôle */
-.search-container-fixed {
-  position: relative;
 }

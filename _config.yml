@@ -27,7 +27,17 @@ plugins:
 
 # Thème et apparence
 # Utiliser un schéma intégré au lieu d'un personnalisé
-color_scheme: light
+color_scheme: dark
+# Couleur de la barre de navigation
+nav_color: "#333333"
+# Couleur de fond
+background_color: "#121212"
+# Couleur du texte
+text_color: "#FFFFFF"
+# Couleur des liens
+link_color: "#1E90FF"
+# Couleur des liens au survol
+link_hover_color: "#FF6347"
 favicon_ico: "/assets/images/favicon.ico"
 
 # Navigation et liens

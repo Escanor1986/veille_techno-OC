@@ -148,127 +148,56 @@ function updateChartsIfPresent(isDarkTheme) {
 function addToggleStyles() {
   const style = document.createElement("style");
   style.textContent = `
-    /* Styles pour le bouton de basculement de thème */
+    /* Theme‑toggle styles – Demon Slayer × Ghost in the Shell */
     .theme-switch-container {
       margin-right: 1rem;
       display: flex;
       align-items: center;
+      z-index: 10;
     }
     
     .theme-toggle-btn {
-      background: none;
-      border: none;
+      background-color: var(--color-sidebar-background);
+      border: 1px solid #30363d;
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       padding: 0.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      width: 2rem;
-      height: 2rem;
-      transition: background-color 0.2s;
+      width: 2.25rem;
+      height: 2.25rem;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      color: var(--color-accent);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
-    
     .theme-toggle-btn:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: var(--color-accent);
+      color: var(--color-background);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.8);
     }
     
-    body.dark-theme .theme-toggle-btn:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+    .theme-toggle-light,
+    .theme-toggle-dark {
+      transition: transform 0.4s ease;
     }
-    
-    .theme-toggle-light, .theme-toggle-dark {
-      display: block;
-      transition: transform 0.5s;
-    }
-    
     .hidden {
-      display: none;
+      display: none !important;
     }
     
-    /* Styles globaux pour le mode sombre */
-    body.dark-theme {
-      background-color: #0d1117;
-      color: #c9d1d9;
-    }
-    
-    body.dark-theme a {
-      color: #58a6ff;
-    }
-    
-    body.dark-theme .main-content h1,
-    body.dark-theme .main-content h2,
-    body.dark-theme .main-content h3,
-    body.dark-theme .main-content h4,
-    body.dark-theme .main-content h5,
-    body.dark-theme .main-content h6 {
-      color: #c9d1d9;
-    }
-    
-    body.dark-theme .site-header,
-    body.dark-theme .sidebar,
-    body.dark-theme .site-footer {
-      background-color: #161b22;
-      border-color: #30363d;
-    }
-    
-    body.dark-theme .navigation-list-item .navigation-list-child-list {
-      background-color: #161b22;
-    }
-    
-    body.dark-theme .search-input {
-      background-color: #0d1117;
-      border-color: #30363d;
-      color: #c9d1d9;
-    }
-    
-    body.dark-theme table th {
-      background-color: #161b22;
-    }
-    
-    body.dark-theme table td {
-      background-color: #0d1117;
-      border-color: #30363d;
-    }
-    
-    body.dark-theme hr {
-      border-color: #30363d;
-    }
-    
-    body.dark-theme code {
-      background-color: #161b22;
-      border-color: #30363d;
-    }
-    
-    body.dark-theme .btn {
-      background-color: #21262d;
-      color: #c9d1d9;
-      border-color: #30363d;
-    }
-    
-    body.dark-theme .btn:hover {
-      background-color: #30363d;
-    }
-    
-    body.dark-theme blockquote {
-      color: #8b949e;
-      border-left-color: #30363d;
-    }
-    
-    /* Ajustement pour mobile */
+    /* Mobile reposition */
     @media (max-width: 768px) {
       .theme-toggle-wrapper {
         position: absolute;
         top: 1rem;
-        right: 4rem;
+        right: 1rem;
       }
-      
       .theme-switch-container {
         margin-right: 0;
       }
     }
   `;
-  
   document.head.appendChild(style);
 }
+

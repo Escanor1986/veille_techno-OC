@@ -305,7 +305,7 @@ body.dark-theme .link-card:hover {
 <!-- Scripts JavaScript -->
 <script src="{{ '/assets/js/stats.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+<!-- <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script> -->
 
 
 ---
