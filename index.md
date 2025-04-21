@@ -42,12 +42,12 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 ## 📚 Sommaire
 
-- [📰 Dernières mises à jour]({{ '/latest-updates.md' | relative_url }}) - *Articles récents toutes catégories*
+- [📰 Dernières mises à jour]({{ '/latest-updates' | relative_url }}) - *Articles récents toutes catégories*
 - [📝 Veille statique](#veille-statique) - *Analyses manuelles*
 - [🔄 Veille automatique](#veille-automatique) - *Flux RSS automatisés*
 - [📊 Tableau de bord](#tableau-de-bord) - *Statistiques et visualisations*
-- [ℹ️ À propos]({{ '/apropos.md' | relative_url }}) - *Présentation du projet*
-- [🔖 Sources]({{ '/source.md' | relative_url }}) - *Références et bibliographie*
+- [ℹ️ À propos]({{ '/apropos' | relative_url }}) - *Présentation du projet*
+- [🔖 Sources]({{ '/source' | relative_url }}) - *Références et bibliographie*
 
 ---
 
@@ -55,7 +55,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 <div class="grid-container">
   <div class="grid-item">
-    <a href="{{ '/tests.md' | relative_url }}" class="card-link">
+    <a href="{{ '/tests' | relative_url }}" class="card-link">
       <div class="link-card">
         <div class="card-icon">🧪</div>
         <div class="card-content">
@@ -66,7 +66,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/ui.md' | relative_url }}" class="card-link">
+    <a href="{{ '/ui' | relative_url }}" class="card-link">
       <div class="link-card">
         <div class="card-icon">🎨</div>
         <div class="card-content">
@@ -77,7 +77,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/paradigmes.md' | relative_url }}" class="card-link">
+    <a href="{{ '/paradigmes' | relative_url }}" class="card-link">
       <div class="link-card">
         <div class="card-icon">🧠</div>
         <div class="card-content">
@@ -88,7 +88,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/stack.md' | relative_url }}" class="card-link">
+    <a href="{{ '/stack' | relative_url }}" class="card-link">
       <div class="link-card">
         <div class="card-icon">🌐</div>
         <div class="card-content">
@@ -99,7 +99,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/methodologie.md' | relative_url }}" class="card-link">
+    <a href="{{ '/methodologie' | relative_url }}" class="card-link">
       <div class="link-card">
         <div class="card-icon">📘</div>
         <div class="card-content">
@@ -117,7 +117,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 <div class="grid-container">
   <div class="grid-item">
-    <a href="{{ '/auto_tests.md' | relative_url }}" class="card-link">
+    <a href="{{ '/auto_tests' | relative_url }}" class="card-link">
       <div class="link-card auto-link">
         <div class="card-icon">🔬</div>
         <div class="card-content">
@@ -128,7 +128,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/auto_ui.md' | relative_url }}" class="card-link">
+    <a href="{{ '/auto_ui' | relative_url }}" class="card-link">
       <div class="link-card auto-link">
         <div class="card-icon">🎨</div>
         <div class="card-content">
@@ -139,7 +139,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/auto_paradigmes.md' | relative_url }}" class="card-link">
+    <a href="{{ '/auto_paradigmes' | relative_url }}" class="card-link">
       <div class="link-card auto-link">
         <div class="card-icon">🧠</div>
         <div class="card-content">
@@ -150,7 +150,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     </a>
   </div>
   <div class="grid-item">
-    <a href="{{ '/auto_stack.md' | relative_url }}" class="card-link">
+    <a href="{{ '/auto_stack' | relative_url }}" class="card-link">
       <div class="link-card auto-link">
         <div class="card-icon">🌐</div>
         <div class="card-content">

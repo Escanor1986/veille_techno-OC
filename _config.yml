@@ -22,6 +22,8 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-remote-theme
+
 
 # Thème et apparence
 # Utiliser un schéma intégré au lieu d'un personnalisé
