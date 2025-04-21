@@ -1,5 +1,7 @@
 ---
 title: "Méthodologie de veille"
+layout: page
+permalink: /methodologies/
 nav_order: 6
 ---
 

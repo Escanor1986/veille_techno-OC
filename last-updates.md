@@ -1,7 +1,8 @@
 ---
 title: Dernières mises à jour
-nav_order: 2
+layout: page
 permalink: /latest-updates/
+nav_order: 2
 ---
 
 # 📰 Dernières mises à jour de la veille

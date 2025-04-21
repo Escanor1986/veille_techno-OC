@@ -1,5 +1,7 @@
 ---
 title: "Librairies UI"
+layout: page
+permalink: /ui/
 nav_order: 3
 ---
 

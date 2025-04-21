@@ -1,5 +1,7 @@
 ---
 title: Sources complémentaires
+layout: page
+permalink: /sources/
 nav_order: 98
 ---
 

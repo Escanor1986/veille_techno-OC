@@ -2,6 +2,7 @@
 title: "Veille auto : Paradigmes de programmation"
 layout: page
 permalink: /auto_paradigmes/
+nav_order: 10
 ---
 
       # 📰 Veille automatique – Paradigmes de programmation

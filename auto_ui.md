@@ -2,6 +2,7 @@
 title: "Veille auto : Librairies UI"
 layout: page
 permalink: /auto_ui/
+nav_order: 7
 ---
 
       # 📰 Veille automatique – Librairies UI

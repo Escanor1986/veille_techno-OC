@@ -1,5 +1,7 @@
 ---
 title: "Paradigmes de programmation"
+layout: page
+permalink: /paradigmes/
 nav_order: 4
 ---
 

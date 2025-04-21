@@ -1,6 +1,8 @@
 ---
 title: À propos
 nav_order: 99
+layout: page
+permalink: /apropos/
 ---
 
 # 🙋 À propos du projet

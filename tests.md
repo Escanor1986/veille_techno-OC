@@ -1,5 +1,7 @@
 ---
 title: "Librairies de Test"
+layout: page
+permalink: /tests/
 nav_order: 2
 ---
 

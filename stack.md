@@ -1,5 +1,7 @@
 ---
 title: "Stack Java / Angular"
+layout: page
+permalink: /stack/
 nav_order: 5
 ---
 
