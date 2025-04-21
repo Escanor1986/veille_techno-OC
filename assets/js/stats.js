@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Récupération des données pour chaque catégorie
   categories.forEach(category => {
-    fetch(baseUrl + category.id)
+    fetch(baseUrl + category.id.replace('.md', '/'))
       .then(res => res.text())
       .then(text => {
         // Extraction des articles avec regex améliorée pour capturer plus d'informations
