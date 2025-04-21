@@ -47,7 +47,7 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 - [🔄 Veille automatique](#veille-automatique) - *Flux RSS automatisés*
 - [📊 Tableau de bord](#tableau-de-bord) - *Statistiques et visualisations*
 - [ℹ️ À propos]({{ '/apropos' | relative_url }}) - *Présentation du projet*
-- [🔖 Sources]({{ '/source' | relative_url }}) - *Références et bibliographie*
+- [🔖 Sources]({{ '/sources' | relative_url }}) - *Références et bibliographie*
 
 ---
 
@@ -242,9 +242,9 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
-.auto-link {
+/* .auto-link {
   background-color: #f0f7ff;
-}
+} */
 
 .card-icon {
   font-size: 2rem;
