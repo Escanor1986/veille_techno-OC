@@ -33,11 +33,6 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
     <h3>Système de tags</h3>
     <p>Organisez votre contenu efficacement</p>
   </div>
-  <div class="feature-card">
-    <span class="feature-icon">🌓</span>
-    <h3>Mode sombre/clair</h3>
-    <p>Pour un confort de lecture optimal</p>
-  </div>
 </div>
 
 ## <span>📚</span> Sommaire
