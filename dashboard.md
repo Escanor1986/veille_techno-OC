@@ -342,9 +342,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
   initDashboard();
 });
-
+let siteRoot;
 // Replace the existing initDashboard function with this improved version
 async function initDashboard() {
+
+    // Construction of base URL
+  siteRoot = window.location.origin + (window.location.pathname.includes("/veille_techno-OC") ? "/veille_techno-OC/" : "/");
+
   // Configuration des catégories
   const categories = [
     { id: "auto_tests", label: "🧪 Tests", color: "#4285F4", tag: "test" },
@@ -370,13 +374,14 @@ async function initDashboard() {
   for (const category of categories) {
     try {
       // Simplifier pour n'utiliser que les URL qui fonctionnent selon la console
-      const possibleUrls = [
-        `${siteRoot}${category.id}/`,
-        `${siteRoot}${category.id}`
-      ];
+const possibleUrls = [
+  `${siteRoot}${category.id}/`,
+  `${siteRoot}${category.id}`,
+  `${siteRoot}${category.id}.html`
+];
       
       console.log(`Tentatives d'URLs pour ${category.label}:`, possibleUrls);
-      
+      console.log(`Full URL being attempted: ${possibleUrls[0]}`);
       // Tester les URLs jusqu'à ce qu'une fonctionne
       let text = null;
       for (const url of possibleUrls) {
@@ -1160,4 +1165,5 @@ function adjustColor(color, percent) {
 
   return "#" + RR + GG + BB;
 }
+
 </script>

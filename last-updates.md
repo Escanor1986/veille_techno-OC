@@ -81,13 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Charger tous les articles avec une meilleure gestion d'erreurs
   Promise.all(sources.map(source => {
     // Simplifier pour ne garder que les URLs qui fonctionnent
-    const possibleUrls = [
-      `${siteRoot}${source.id}/`,
-      `${siteRoot}${source.id}`
-    ];
+const possibleUrls = [
+  `${siteRoot}${category.id}/`,
+  `${siteRoot}${category.id}`,
+  `${siteRoot}${category.id}.html`
+];
     
     console.log(`Tentative de chargement pour ${source.label}:`, possibleUrls);
-    
+    console.log(`Full URL being attempted: ${possibleUrls[0]}`);
     // Essayer chaque URL jusqu'à ce qu'une fonctionne
     return tryFetchUrls(possibleUrls)
       .then(html => {
