@@ -343,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initDashboard();
 });
 
+// Replace the existing initDashboard function with this improved version
 async function initDashboard() {
   // Configuration des catégories
   const categories = [
@@ -368,12 +369,10 @@ async function initDashboard() {
   // Charger les données pour toutes les catégories
   for (const category of categories) {
     try {
-      // Essayer plusieurs formats d'URL possibles
+      // Simplifier pour n'utiliser que les URL qui fonctionnent selon la console
       const possibleUrls = [
         `${siteRoot}${category.id}/`,
-        `${siteRoot}${category.id}`,
-        `${siteRoot}${category.id}.html`,
-        `${siteRoot}${category.id}.md`
+        `${siteRoot}${category.id}`
       ];
       
       console.log(`Tentatives d'URLs pour ${category.label}:`, possibleUrls);
@@ -397,64 +396,110 @@ async function initDashboard() {
         throw new Error(`Aucune URL n'a fonctionné pour ${category.id}`);
       }
       
-      // Extraction des articles
-      const articleMatches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
-      const count = articleMatches.length;
-      totalArticleCount += count;
+      // Créer un parser pour traiter le HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
       
-      console.log(`Articles trouvés pour ${category.label}: ${count}`);
-      
-      // Extraire les articles avec leurs détails
+      // Extraire les articles des éléments li
+      const listItems = doc.querySelectorAll("li");
       const articles = [];
-      articleMatches.forEach(match => {
-        const titleMatch = match.match(/^- \[(.*?)\]\((.*?)\)(.*)$/);
-        if (titleMatch) {
-          const title = titleMatch[1];
-          const url = titleMatch[2];
-          const metadata = titleMatch[3];
-          
-          // Extraire la date
-          const dateMatch = metadata.match(/\*([^*]+)\*/);
-          const dateStr = dateMatch ? dateMatch[1].trim() : null;
-          let date = null;
-          
+      
+      listItems.forEach(item => {
+        // Vérifier si c'est un article
+        const linkElement = item.querySelector("a");
+        if (!linkElement) return;
+        
+        const title = linkElement.textContent.trim();
+        const url = linkElement.getAttribute("href");
+        
+        // Tenter d'extraire les données depuis l'attribut data-article si disponible
+        const dataSpan = item.querySelector('span[data-article]');
+        if (dataSpan) {
           try {
-            if (dateStr) {
-              date = new Date(dateStr);
-              if (isNaN(date)) date = null;
-            }
-          } catch (e) {
-            console.warn(`Date invalide: ${dateStr}`);
-            date = null;
-          }
-          
-          // Extraire les tags
-          const tags = [];
-          const tagMatches = metadata.match(/`#([^`]+)`/g) || [];
-          tagMatches.forEach(tag => {
-            const tagName = tag.replace(/`#|`/g, '');
-            tags.push(tagName);
+            const articleData = JSON.parse(dataSpan.getAttribute('data-article').replace(/&apos;/g, "'"));
             
-            // Compter les tags pour le nuage de tags
-            if (!allTags[tagName]) allTags[tagName] = 0;
-            allTags[tagName]++;
-          });
-          
-          articles.push({
-            title,
-            url,
-            date,
-            dateStr: dateStr || "Date inconnue",
-            tags,
-            category: category.label,
-            categoryId: category.id,
-            categoryColor: category.color
-          });
+            // Extraire les tags
+            const tags = articleData.tags || [];
+            
+            // Mettre à jour le compteur de tags global
+            tags.forEach(tag => {
+              if (!allTags[tag]) allTags[tag] = 0;
+              allTags[tag]++;
+            });
+            
+            // Créer l'objet article
+            articles.push({
+              title: articleData.title,
+              url: articleData.link || url,
+              date: new Date(articleData.date),
+              dateStr: articleData.date || "Date inconnue",
+              tags,
+              category: category.label,
+              categoryId: category.id,
+              categoryColor: category.color
+            });
+            
+            return;
+          } catch (e) {
+            console.warn("Erreur parsing data-article:", e);
+          }
         }
+        
+        // Méthode alternative si data-article n'est pas disponible
+        // Extraire la date (généralement en italique ou entre *)
+        let dateStr = "Date inconnue";
+        const italicDate = item.querySelector("em");
+        if (italicDate) {
+          dateStr = italicDate.textContent.trim();
+        } else {
+          const content = item.textContent;
+          const dateMatch = content.match(/\*([^*]+)\*/);
+          if (dateMatch) {
+            dateStr = dateMatch[1].trim();
+          }
+        }
+        
+        // Extraire les tags (généralement en `#tag`)
+        const tags = [];
+        const codeElements = item.querySelectorAll("code");
+        codeElements.forEach(code => {
+          const text = code.textContent.trim();
+          if (text.startsWith("#")) {
+            const tag = text.substring(1);
+            tags.push(tag);
+            
+            // Mettre à jour le compteur de tags global
+            if (!allTags[tag]) allTags[tag] = 0;
+            allTags[tag]++;
+          }
+        });
+        
+        let date = null;
+        try {
+          date = new Date(dateStr);
+          if (isNaN(date.getTime())) date = null;
+        } catch (e) {
+          date = null;
+        }
+        
+        articles.push({
+          title,
+          url,
+          date,
+          dateStr,
+          tags,
+          category: category.label,
+          categoryId: category.id,
+          categoryColor: category.color
+        });
       });
       
       // Ajouter les articles à l'array global
       allArticles = [...allArticles, ...articles];
+      const count = articles.length;
+      totalArticleCount += count;
+      
+      console.log(`Articles extraits pour ${category.label}: ${count}`);
       
       // Ajouter les stats de catégorie
       categoryStats.push({
@@ -482,10 +527,10 @@ async function initDashboard() {
   console.log("Stats des catégories:", categoryStats);
   console.log("Tags uniques:", Object.keys(allTags).length);
   
-  // Mettre à jour le dashboard avec les données collectées
+  // Continuer avec le reste de la fonction pour mettre à jour l'UI
   updateDashboardStats(totalArticleCount, categories.length, Object.keys(allTags).length, allArticles);
   
-  // Créer les graphiques et visualisations
+  // Charger Chart.js si nécessaire et créer les visualisations
   if (typeof Chart === 'undefined') {
     console.log("Chargement de Chart.js...");
     await loadChartJS();
@@ -496,7 +541,7 @@ async function initDashboard() {
   displayRecentArticles(allArticles);
   createTimelineChart(allArticles);
   
-  // Initialiser les écouteurs d'événements
+  // Initialiser les contrôles du dashboard
   initDashboardControls(allArticles, categoryStats, allTags);
 }
 

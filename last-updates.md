@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   
   // Obtenir l'URL de base de manière plus robuste
-  // Correction importante: utiliser un chemin relatif au site plutôt qu'à la page
   const siteRoot = window.location.origin + (window.location.pathname.includes("/veille_techno-OC") 
     ? "/veille_techno-OC/" 
     : "/");
@@ -81,26 +80,24 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Charger tous les articles avec une meilleure gestion d'erreurs
   Promise.all(sources.map(source => {
-    // Essayer plusieurs formats d'URL possibles
+    // Simplifier pour ne garder que les URLs qui fonctionnent
     const possibleUrls = [
       `${siteRoot}${source.id}/`,
-      `${siteRoot}${source.id}`,
-      `${siteRoot}${source.id}.html`,
-      `${siteRoot}${source.id}.md`
+      `${siteRoot}${source.id}`
     ];
     
     console.log(`Tentative de chargement pour ${source.label}:`, possibleUrls);
     
     // Essayer chaque URL jusqu'à ce qu'une fonctionne
     return tryFetchUrls(possibleUrls)
-      .then(text => {
-        if (!text) {
+      .then(html => {
+        if (!html) {
           console.error(`Aucune URL n'a fonctionné pour ${source.id}`);
           return [];
         }
         
-        // Analyser le texte pour extraire les articles
-        const articles = extractArticlesFromMarkdown(text, source);
+        // Analyser l'HTML pour extraire les articles
+        const articles = extractArticlesFromHTML(html, source);
         console.log(`Articles extraits pour ${source.label}:`, articles.length);
         return articles;
       })
@@ -110,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }))
   .then(articlesArrays => {
-    // Fusionner et traiter tous les articles
+    // Continuer avec le code existant...
     allArticles = articlesArrays.flat();
     console.log("Tous les articles récupérés:", allArticles.length);
     
@@ -152,8 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
   async function tryFetchUrls(urls) {
     for (const url of urls) {
       try {
+        console.log(`Essai de fetch sur: ${url}`);
         const response = await fetch(url);
         if (response.ok) {
+          console.log(`Succès pour URL: ${url}`);
           return await response.text();
         }
       } catch (error) {
@@ -163,54 +162,105 @@ document.addEventListener("DOMContentLoaded", () => {
     return null;
   }
   
-  // Extraire les articles du markdown
-  function extractArticlesFromMarkdown(text, source) {
+  function extractArticlesFromHTML(html, source) {
     const articles = [];
-    const matches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
     
-    matches.forEach(match => {
-      const parts = match.match(/^- \[(.*?)\]\((.*?)\)(.*)$/);
-      if (parts) {
-        const title = parts[1];
-        const url = parts[2];
-        const metadata = parts[3];
-        
-        // Extraire la date
-        const dateMatch = metadata.match(/\*([^*]+)\*/);
-        const dateStr = dateMatch ? dateMatch[1].trim() : null;
-        let date = null;
-        
+    // Trouver tous les éléments li qui contiennent des articles
+    const listItems = doc.querySelectorAll('li');
+    console.log(`Found ${listItems.length} list items for ${source.label}`);
+    
+    listItems.forEach(item => {
+      // Vérifier si c'est un élément d'article
+      const linkElement = item.querySelector('a');
+      if (!linkElement) return;
+      
+      const title = linkElement.textContent.trim();
+      const url = linkElement.getAttribute('href');
+      
+      // Essayer d'extraire les données depuis l'attribut data-article si disponible
+      const dataSpan = item.querySelector('span[data-article]');
+      if (dataSpan) {
         try {
-          if (dateStr) {
-            date = new Date(dateStr);
-            if (isNaN(date)) date = null;
+          const articleData = JSON.parse(dataSpan.getAttribute('data-article').replace(/&apos;/g, "'"));
+          
+          // Extraire les tags et la date
+          const tags = articleData.tags || [];
+          const dateStr = articleData.date || "Date inconnue";
+          let date = null;
+          
+          try {
+            if (dateStr) {
+              date = new Date(dateStr);
+              if (isNaN(date.getTime())) date = null;
+            }
+          } catch (e) {
+            console.warn(`Date invalide: ${dateStr}`);
           }
+          
+          articles.push({
+            title: articleData.title,
+            url: articleData.link || url,
+            date,
+            dateStr,
+            tags,
+            category: source.category,
+            categoryLabel: source.label,
+            color: source.color
+          });
+          
+          return;
         } catch (e) {
-          console.warn(`Date invalide: ${dateStr}`);
-          date = null;
+          console.warn("Erreur parsing data-article:", e);
         }
-        
-        // Extraire les tags
-        const tags = [];
-        const tagMatches = metadata.match(/`#([^`]+)`/g) || [];
-        tagMatches.forEach(tag => {
-          const tagName = tag.replace(/`#|`/g, '');
-          tags.push(tagName);
-        });
-        
-        articles.push({
-          title,
-          url,
-          date,
-          dateStr: dateStr || "Date inconnue",
-          tags,
-          category: source.category,
-          categoryLabel: source.label,
-          color: source.color
-        });
       }
+      
+      // Méthode alternative si data-article n'est pas disponible
+      // Extraire la date
+      let dateStr = "Date inconnue";
+      const italicDate = item.querySelector("em");
+      if (italicDate) {
+        dateStr = italicDate.textContent.trim();
+      } else {
+        const content = item.textContent;
+        const dateMatch = content.match(/\*([^*]+)\*/);
+        if (dateMatch) {
+          dateStr = dateMatch[1].trim();
+        }
+      }
+      
+      // Extraire les tags
+      const tags = [];
+      const codeElements = item.querySelectorAll("code");
+      codeElements.forEach(code => {
+        const text = code.textContent.trim();
+        if (text.startsWith("#")) {
+          tags.push(text.substring(1));
+        }
+      });
+      
+      let date = null;
+      try {
+        date = new Date(dateStr);
+        if (isNaN(date.getTime())) date = null;
+      } catch (e) {
+        date = null;
+      }
+      
+      articles.push({
+        title,
+        url,
+        date,
+        dateStr,
+        tags,
+        category: source.category,
+        categoryLabel: source.label,
+        color: source.color
+      });
     });
     
+    console.log(`Extracted ${articles.length} articles from ${source.label}`);
     return articles;
   }
   
