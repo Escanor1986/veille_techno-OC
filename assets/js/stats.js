@@ -88,57 +88,155 @@ document.addEventListener("DOMContentLoaded", () => {
   const siteRoot = getBaseUrl();
   console.log("URL de base du site:", siteRoot);
   
+  // Extract articles from HTML content instead of markdown
+  function extractArticlesFromHtml(html, category) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const articles = [];
+    
+    // Find all list items that contain links (articles)
+    const listItems = doc.querySelectorAll('li');
+    console.log(`Found ${listItems.length} list items in HTML for ${category.label}`);
+    
+    listItems.forEach(item => {
+      // Check if this list item contains an article link
+      const link = item.querySelector('a');
+      if (!link) return;
+      
+      const title = link.textContent.trim();
+      const url = link.getAttribute('href');
+      
+      // Try to get data from data attribute first (if available)
+      const dataSpan = item.querySelector('span[data-article]');
+      if (dataSpan) {
+        try {
+          const articleData = JSON.parse(dataSpan.getAttribute('data-article').replace(/&apos;/g, "'"));
+          articles.push({
+            title: articleData.title,
+            url: articleData.link || url,
+            date: articleData.date,
+            tags: articleData.tags || [],
+            category: category.label,
+            categoryTag: category.tag,
+            categoryColor: category.color
+          });
+          return;
+        } catch (e) {
+          console.warn("Error parsing data attribute:", e);
+          // Continue with regular parsing if data attribute fails
+        }
+      }
+      
+      // Extract date - typically in italics or marked with asterisks
+      let date = 'Date inconnue';
+      const italicDate = item.querySelector('em');
+      if (italicDate) {
+        date = italicDate.textContent.trim();
+      } else {
+        // Try to extract date from text content using regex
+        const dateMatch = item.textContent.match(/\*([^*]+)\*/);
+        if (dateMatch) {
+          date = dateMatch[1].trim();
+        }
+      }
+      
+      // Extract tags - typically in code blocks with # prefix
+      const tags = [];
+      const codeTags = item.querySelectorAll('code');
+      codeTags.forEach(codeTag => {
+        const tagText = codeTag.textContent.trim();
+        if (tagText.startsWith('#')) {
+          tags.push(tagText.substring(1)); // Remove the # prefix
+        }
+      });
+      
+      articles.push({
+        title,
+        url,
+        date,
+        tags,
+        category: category.label,
+        categoryTag: category.tag,
+        categoryColor: category.color
+      });
+    });
+    
+    console.log(`Extracted ${articles.length} articles from HTML for ${category.label}`);
+    if (articles.length > 0) {
+      console.log(`First article: ${JSON.stringify(articles[0])}`);
+    }
+    
+    return articles;
+  }
+
+  // Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
+  async function tryFetchUrls(urls, category) {
+    console.log("Tentative de fetch sur plusieurs URLs:", urls);
+    
+    for (const url of urls) {
+      try {
+        console.log(`Essai de fetch sur: ${url}`);
+        const response = await fetch(url);
+        
+        if (response.ok) {
+          console.log(`Succès pour URL: ${url}`);
+          const html = await response.text();
+          console.log(`Contenu récupéré pour ${category.label} (premiers caractères):`, html.substring(0, 100));
+          
+          // Extract articles from HTML instead of using regex on markdown
+          const articles = extractArticlesFromHtml(html, category);
+          return { html, articles, count: articles.length };
+        } else {
+          console.warn(`Échec de fetch pour ${url}: Status ${response.status}`);
+        }
+      } catch (error) {
+        console.warn(`Échec de fetch pour ${url}:`, error.message);
+      }
+    }
+    
+    // Si toutes échouent, essayer une solution de secours avec un appel synchrone
+    try {
+      console.log("Tentative avec XMLHttpRequest synchrone comme dernier recours");
+      const xhr = new XMLHttpRequest();
+      // Essayer la première URL comme recours
+      xhr.open('GET', urls[0], false); // Synchrone
+      xhr.send(null);
+      
+      if (xhr.status === 200) {
+        console.log("Succès avec XMLHttpRequest synchrone");
+        const html = xhr.responseText;
+        const articles = extractArticlesFromHtml(html, category);
+        return { html, articles, count: articles.length };
+      }
+    } catch (e) {
+      console.error("Échec de la tentative de secours:", e);
+    }
+    
+    return { html: null, articles: [], count: 0 };
+  }
+  
   // Récupération des données pour chaque catégorie
   categories.forEach(category => {
     // Tester plusieurs formats d'URL possibles avec plus d'options
     const possibleUrls = [
       `${siteRoot}${category.id}/`,
       `${siteRoot}${category.id}`,
-      `${siteRoot}${category.id}.html`,
-      `${siteRoot}${category.id}.md`
+      `${siteRoot}${category.id}.html`
     ];
     
     console.log(`Tentative de chargement pour ${category.label}:`, possibleUrls);
     
     // Essayer les URLs jusqu'à ce qu'une fonctionne
-    tryFetchUrls(possibleUrls)
-      .then(text => {
-        if (!text) {
+    tryFetchUrls(possibleUrls, category)
+      .then(result => {
+        if (!result.html) {
           throw new Error(`Aucune URL n'a fonctionné pour ${category.id}`);
         }
         
-        console.log(`Contenu récupéré pour ${category.label} (premiers caractères):`, text.substring(0, 100));
-        
-        // Extraction des articles avec regex
-        const articleMatches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
-        const count = articleMatches.length;
+        const { articles, count } = result;
         totalCount += count;
         
         console.log(`Articles trouvés pour ${category.label}: ${count}`);
-        if (count > 0) {
-          console.log(`Premier article trouvé:`, articleMatches[0]);
-        }
-        
-        // Extraction des détails des articles
-        const articles = articleMatches.map(match => {
-          const titleMatch = match.match(/^- \[(.*?)\]\((.*?)\)(.*)$/);
-          if (titleMatch) {
-            const title = titleMatch[1];
-            const url = titleMatch[2];
-            const dateMatch = titleMatch[3].match(/\*([^*]+)\*/);
-            const date = dateMatch ? dateMatch[1].trim() : 'Date inconnue';
-            return { 
-              title, 
-              url, 
-              date, 
-              category: category.label,
-              categoryTag: category.tag
-            };
-          }
-          return null;
-        }).filter(article => article !== null);
-        
-        console.log(`Articles extraits et parsés pour ${category.label}:`, articles.length);
         
         // Stocker les articles
         allArticles = [...allArticles, ...articles];
@@ -203,45 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
   });
-  
-  // Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
-  async function tryFetchUrls(urls) {
-    console.log("Tentative de fetch sur plusieurs URLs:", urls);
-    
-    for (const url of urls) {
-      try {
-        console.log(`Essai de fetch sur: ${url}`);
-        const response = await fetch(url);
-        
-        if (response.ok) {
-          console.log(`Succès pour URL: ${url}`);
-          return await response.text();
-        } else {
-          console.warn(`Échec de fetch pour ${url}: Status ${response.status}`);
-        }
-      } catch (error) {
-        console.warn(`Échec de fetch pour ${url}:`, error.message);
-      }
-    }
-    
-    // Si toutes échouent, essayer une solution de secours avec un appel synchrone
-    try {
-      console.log("Tentative avec XMLHttpRequest synchrone comme dernier recours");
-      const xhr = new XMLHttpRequest();
-      // Essayer la première URL comme recours
-      xhr.open('GET', urls[0], false); // Synchrone
-      xhr.send(null);
-      
-      if (xhr.status === 200) {
-        console.log("Succès avec XMLHttpRequest synchrone");
-        return xhr.responseText;
-      }
-    } catch (e) {
-      console.error("Échec de la tentative de secours:", e);
-    }
-    
-    return null;
-  }
   
   // Fonction pour afficher les articles les plus récents
   function displayLatestArticles() {

@@ -112,66 +112,6 @@ function setupDataDirectory() {
 	return dataDir;
 }
 
-// Fonction pour générer le fichier latest-updates.md
-function generateLatestUpdatesFile(allArticles) {
-	// Tri des articles par date (du plus récent au plus ancien)
-	allArticles.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
-
-	// Prendre les 10 articles les plus récents
-	const latestArticles = allArticles.slice(0, 10);
-
-	// Générer le contenu Markdown
-	let content = `---
-title: "Dernières mises à jour"
-layout: page
-permalink: /latest-updates/
-nav_order: 2
----
-
-# 📰 Dernières mises à jour de la veille
-
-🕒 *Dernière mise à jour : ${new Date().toLocaleDateString('fr-FR', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	})}*
-
-Cette page présente les articles les plus récents, toutes catégories confondues.
-
-`;
-
-	latestArticles.forEach(article => {
-		const formattedDate = new Date(article.isoDate).toLocaleDateString(
-			'fr-FR',
-			{
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric',
-			}
-		);
-
-		content += `## ${article.emoji} [${article.title}](${article.link})\n\n`;
-		content += `*Publié le ${formattedDate} dans ${article.category}*\n\n`;
-
-		if (article.tags && article.tags.length > 0) {
-			content += `${formatTags(article.tags)}\n\n`;
-		}
-
-		// Ajouter un extrait si disponible
-		if (article.contentSnippet) {
-			const snippet =
-				article.contentSnippet.split('\n')[0].substring(0, 200) + '...';
-			content += `> ${snippet}\n\n`;
-		}
-
-		content += `[Lire l'article complet](${article.link})\n\n---\n\n`;
-	});
-
-	fs.writeFileSync('latest-updates.md', content);
-	console.log('✅ Fichier latest-updates.md généré avec succès');
-}
-
 // Création du script de filtrage réutilisable
 const filterScript = `
 <script>
@@ -225,6 +165,75 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>`;
 
+// Fonction pour générer le fichier latest-updates.md
+function generateLatestUpdatesFile(allArticles) {
+	// Tri des articles par date (du plus récent au plus ancien)
+	allArticles.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+
+	// Prendre les 10 articles les plus récents
+	const latestArticles = allArticles.slice(0, 10);
+
+	// Générer le contenu Markdown
+	let content = `---
+title: "Dernières mises à jour"
+layout: page
+permalink: /latest-updates/
+nav_order: 2
+---
+
+# 📰 Dernières mises à jour de la veille
+
+🕒 *Dernière mise à jour : ${new Date().toLocaleDateString('fr-FR', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	})}*
+
+Cette page présente les articles les plus récents, toutes catégories confondues.
+
+`;
+
+	latestArticles.forEach(article => {
+		const formattedDate = new Date(article.isoDate).toLocaleDateString(
+			'fr-FR',
+			{
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+			}
+		);
+
+		// Create JSON data attribute for easier parsing
+        const articleData = {
+          title: article.title,
+          link: article.link,
+          date: article.pubDate,
+          tags: article.tags
+        };
+
+		content += `## ${article.emoji} <span data-article='${JSON.stringify(articleData).replace(/'/g, "&apos;")}'>` +
+		`[${article.title}](${article.link})</span>\n\n`;
+		content += `*Publié le ${formattedDate} dans ${article.category}*\n\n`;
+
+		if (article.tags && article.tags.length > 0) {
+			content += `${formatTags(article.tags)}\n\n`;
+		}
+
+		// Ajouter un extrait si disponible
+		if (article.contentSnippet) {
+			const snippet =
+				article.contentSnippet.split('\n')[0].substring(0, 200) + '...';
+			content += `> ${snippet}\n\n`;
+		}
+
+		content += `[Lire l'article complet](${article.link})\n\n---\n\n`;
+	});
+
+	fs.writeFileSync('latest-updates.md', content);
+	console.log('✅ Fichier latest-updates.md généré avec succès');
+}
+
 // Fonction principale asynchrone
 (async () => {
 	// Date formatée pour l'affichage
@@ -255,7 +264,7 @@ permalink: ${feed.permalink}
 🕒 *Dernière mise à jour : ${date}*
 
 <div class="search-container">
-  <input type="text" id="article-search" placeholder="Rechercher un article..." onkeyup="filterArticles()">
+  <input type="text" id="article-search" placeholder="Rechercher un article...">
   <div class="tag-filters" id="tag-filters">
     <!-- Les filtres par tag seront générés dynamiquement -->
   </div>
@@ -285,10 +294,17 @@ permalink: ${feed.permalink}
 						tags: tags,
 					});
 
-					// Ajout de l'article au contenu markdown avec ses tags
-					content += `- [${item.title}](${item.link}) – *${
-						item.pubDate
-					}* ${formatTags(tags)}\n`;
+					// Create JSON data attribute for easier parsing
+					const articleData = {
+						title: item.title,
+						link: item.link,
+						date: item.pubDate,
+						tags: tags
+					};
+  
+					// Ajout de l'article au contenu markdown avec ses tags et data attribute
+					content += `- <span data-article='${JSON.stringify(articleData).replace(/'/g, "&apos;")}'>` +
+					`[${item.title}](${item.link}) – *${item.pubDate}* ${formatTags(tags)}</span>\n`;
 				});
 			}
 			
