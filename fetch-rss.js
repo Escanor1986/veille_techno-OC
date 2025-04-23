@@ -287,21 +287,49 @@ document.addEventListener('DOMContentLoaded', function() {
 			fs.writeFileSync(feed.file, content);
 			console.log(`✅ Flux "${feed.name}" traité avec succès`);
 
-			// Fonction pour créer un nom de fichier sûr
-      // Remplace les caractères spéciaux par des underscores
+			/**
+			 * Fonction pour créer un nom de fichier sécurisé
+			 */
 			function createSafeFilename(name) {
 				return name
 					.toLowerCase()
-					.replace(/[^\w\s]/g, '_') 
+					.replace(/[\/\\]/g, '_') // Gérer d'abord les slashes qui causaient le problème
+					.replace(/[^\w\s]/g, '_')
 					.replace(/\s+/g, '_')
-					.replace(/_+/g, '_') 
+					.replace(/_+/g, '_')
 					.replace(/^_|_$/g, '');
 			}
 
-			// Ensuite, on génère le fichier JSON
-      // Créer un nom de fichier sûr pour le flux
+			/**
+			 * Fonction pour s'assurer que le répertoire existe
+			 */
+			function ensureDirectoryExists(directory) {
+				const fs = require('fs');
+				const path = require('path');
+
+				// Créer le chemin récursivement s'il n'existe pas
+				if (!fs.existsSync(directory)) {
+					try {
+						fs.mkdirSync(directory, { recursive: true });
+						console.log(`✅ Répertoire créé: ${directory}`);
+					} catch (error) {
+						console.error(
+							`❌ Erreur lors de la création du répertoire ${directory}:`,
+							error
+						);
+						throw error;
+					}
+				}
+
+				return directory;
+			}
+
+			const safeFilename = createSafeFilename(feed.name);
+			console.log(`Nom de fichier sécurisé: ${safeFilename}`);
+			const filePath = path.join(dataDir, `${safeFilename}.json`);
+			console.log(`Chemin du fichier JSON: ${filePath}`);
 			fs.writeFileSync(
-				path.join(dataDir, `${createSafeFilename(feed.name)}.json`),
+				filePath,
 				JSON.stringify(data.items.slice(0, 10), null, 2)
 			);
 		} catch (error) {
