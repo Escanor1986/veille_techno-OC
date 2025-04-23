@@ -26,24 +26,25 @@ permalink: /auto_stack/
 - [Currency Code to Currency Symbol Mapping in Java](https://feeds.feedblitz.com/~/916703195/0/baeldung~Currency-Code-to-Currency-Symbol-Mapping-in-Java) – *Tue, 15 Apr 2025 04:24:10 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
 - [How to Check if Zookeeper Is Running or up From Command Prompt?](https://feeds.feedblitz.com/~/916703198/0/baeldung~How-to-Check-if-Zookeeper-Is-Running-or-up-From-Command-Prompt) – *Tue, 15 Apr 2025 04:21:13 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
 
+
 <script>
-function filterArticles() {
-  const input = document.getElementById('article-search');
-  const filter = input.value.toLowerCase();
-  const items = document.getElementsByTagName('li');
-  
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    const text = item.textContent.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      item.style.display = "";
-    } else {
-      item.style.display = "none";
+document.addEventListener('DOMContentLoaded', function() {
+  function filterArticles() {
+    const input = document.getElementById('article-search');
+    const filter = input.value.toLowerCase();
+    const items = document.getElementsByTagName('li');
+    
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const text = item.textContent.toLowerCase();
+      if (text.indexOf(filter) > -1) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
     }
   }
-}
 
-document.addEventListener('DOMContentLoaded', function() {
   // Extraction de tous les tags présents dans les articles
   const tagElements = document.querySelectorAll('code');
   const tags = new Set();
@@ -56,15 +57,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Génération des filtres par tag
   const tagFiltersContainer = document.getElementById('tag-filters');
-  tags.forEach(tag => {
-    const tagBtn = document.createElement('button');
-    tagBtn.className = 'tag-filter-btn';
-    tagBtn.textContent = '#' + tag;
-    tagBtn.onclick = function() {
-      document.getElementById('article-search').value = tag;
-      filterArticles();
-    };
-    tagFiltersContainer.appendChild(tagBtn);
-  });
+  if (tagFiltersContainer) {
+    tags.forEach(tag => {
+      const tagBtn = document.createElement('button');
+      tagBtn.className = 'tag-filter-btn';
+      tagBtn.textContent = '#' + tag;
+      tagBtn.onclick = function() {
+        document.getElementById('article-search').value = tag;
+        filterArticles();
+      };
+      tagFiltersContainer.appendChild(tagBtn);
+    });
+  }
+  
+  // Attacher l'événement de filtrage au champ de recherche
+  const searchInput = document.getElementById('article-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', filterArticles);
+  }
 });
 </script>

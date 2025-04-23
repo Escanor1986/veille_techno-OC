@@ -22,24 +22,25 @@ permalink: /auto_tests/
 - [How to Make Agile Estimation Process Easy With Planning Poker](https://www.softwaretestinghelp.com/planning-poker-scrum-poker-cards-agile-estimation/) – *Tue, 29 Nov 2022 04:54:35 +0000* `#test` `#qa` `#automation` `#Agile Testing`
 - [Role of Business Analysts in SCRUM and Why is a QA Best for this Role?](https://www.softwaretestinghelp.com/role-of-business-analysts-in-scrum/) – *Sun, 27 Nov 2022 04:24:13 +0000* `#test` `#qa` `#automation` `#Testing Methodologies` `#Agile Testing`
 
+
 <script>
-function filterArticles() {
-  const input = document.getElementById('article-search');
-  const filter = input.value.toLowerCase();
-  const items = document.getElementsByTagName('li');
-  
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    const text = item.textContent.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      item.style.display = "";
-    } else {
-      item.style.display = "none";
+document.addEventListener('DOMContentLoaded', function() {
+  function filterArticles() {
+    const input = document.getElementById('article-search');
+    const filter = input.value.toLowerCase();
+    const items = document.getElementsByTagName('li');
+    
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const text = item.textContent.toLowerCase();
+      if (text.indexOf(filter) > -1) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
     }
   }
-}
 
-document.addEventListener('DOMContentLoaded', function() {
   // Extraction de tous les tags présents dans les articles
   const tagElements = document.querySelectorAll('code');
   const tags = new Set();
@@ -52,15 +53,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Génération des filtres par tag
   const tagFiltersContainer = document.getElementById('tag-filters');
-  tags.forEach(tag => {
-    const tagBtn = document.createElement('button');
-    tagBtn.className = 'tag-filter-btn';
-    tagBtn.textContent = '#' + tag;
-    tagBtn.onclick = function() {
-      document.getElementById('article-search').value = tag;
-      filterArticles();
-    };
-    tagFiltersContainer.appendChild(tagBtn);
-  });
+  if (tagFiltersContainer) {
+    tags.forEach(tag => {
+      const tagBtn = document.createElement('button');
+      tagBtn.className = 'tag-filter-btn';
+      tagBtn.textContent = '#' + tag;
+      tagBtn.onclick = function() {
+        document.getElementById('article-search').value = tag;
+        filterArticles();
+      };
+      tagFiltersContainer.appendChild(tagBtn);
+    });
+  }
+  
+  // Attacher l'événement de filtrage au champ de recherche
+  const searchInput = document.getElementById('article-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', filterArticles);
+  }
 });
 </script>
