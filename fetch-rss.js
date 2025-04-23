@@ -107,30 +107,9 @@ function formatTags(tags) {
 function setupDataDirectory() {
 	const dataDir = path.join(__dirname, 'data');
 	if (!fs.existsSync(dataDir)) {
-		try {
-			fs.mkdirSync(dataDir, { recursive: true });
-			console.log(`✅ Répertoire de données créé: ${dataDir}`);
-		} catch (error) {
-			console.error(`❌ Erreur lors de la création du répertoire ${dataDir}:`, error);
-			throw error;
-		}
+		fs.mkdirSync(dataDir);
 	}
 	return dataDir;
-}
-
-// Fonction pour créer un nom de fichier sûr - Version corrigée
-function createSafeFilename(name) {
-	// D'abord, remplacer explicitement les slashes et autres caractères spéciaux
-	let safeName = name
-		.toLowerCase()
-		.replace(/[\/\\]/g, '_')  // Gérer les slashes
-		.replace(/\s+/g, '_')     // Espaces en underscore
-		.replace(/[^\w]/g, '_')   // Tout ce qui n'est pas alphanumérique en underscore
-		.replace(/_+/g, '_')      // Réduire les underscores multiples
-		.replace(/^_|_$/g, '');   // Supprimer les underscores au début et à la fin
-	
-	console.log(`Nom original: "${name}" => Nom sécurisé: "${safeName}"`);
-	return safeName;
 }
 
 // Fonction pour générer le fichier latest-updates.md
@@ -203,18 +182,13 @@ Cette page présente les articles les plus récents, toutes catégories confondu
 		day: 'numeric',
 	});
 
-	// Préparer le répertoire de données
 	const dataDir = setupDataDirectory();
-	console.log(`Utilisation du répertoire de données: ${dataDir}`);
-	
 	const allArticles = [];
 
 	// Récupérer les flux RSS pour chaque catégorie
 	for (const feed of feeds) {
 		try {
-			console.log(`⏳ Traitement du flux "${feed.name}" (${feed.rss})...`);
 			const data = await parser.parseURL(feed.rss);
-			console.log(`✅ Flux "${feed.name}" récupéré, ${data.items.length} articles trouvés`);
 
 			// Préparation du contenu markdown
 			let content = `---
@@ -311,23 +285,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			// Écriture du fichier markdown
 			fs.writeFileSync(feed.file, content);
-			console.log(`✅ Fichier "${feed.file}" généré avec succès`);
+			console.log(`✅ Flux "${feed.name}" traité avec succès`);
 
-			// Créer un nom de fichier sûr pour le JSON
-			const safeFilename = createSafeFilename(feed.name);
-			const filePath = path.join(dataDir, `${safeFilename}.json`);
-			
-			// Écrire le fichier JSON
-			try {
-				fs.writeFileSync(
-					filePath,
-					JSON.stringify(data.items.slice(0, 10), null, 2)
-				);
-				console.log(`✅ Fichier JSON généré: ${filePath}`);
-			} catch (error) {
-				console.error(`❌ Erreur lors de l'écriture du fichier ${filePath}:`, error);
-				throw error;
+			/**
+			 * Fonction pour créer un nom de fichier sécurisé
+			 */
+			function createSafeFilename(name) {
+				return name
+					.toLowerCase()
+					.replace(/[\/\\]/g, '_') // Gérer d'abord les slashes qui causaient le problème
+					.replace(/[^\w\s]/g, '_')
+					.replace(/\s+/g, '_')
+					.replace(/_+/g, '_')
+					.replace(/^_|_$/g, '');
 			}
+
+			/**
+			 * Fonction pour s'assurer que le répertoire existe
+			 */
+			function ensureDirectoryExists(directory) {
+				const fs = require('fs');
+				const path = require('path');
+
+				// Créer le chemin récursivement s'il n'existe pas
+				if (!fs.existsSync(directory)) {
+					try {
+						fs.mkdirSync(directory, { recursive: true });
+						console.log(`✅ Répertoire créé: ${directory}`);
+					} catch (error) {
+						console.error(
+							`❌ Erreur lors de la création du répertoire ${directory}:`,
+							error
+						);
+						throw error;
+					}
+				}
+
+				return directory;
+			}
+
+			const safeFilename = createSafeFilename(feed.name);
+			console.log(`Nom de fichier sécurisé: ${safeFilename}`);
+			const filePath = path.join(dataDir, `${safeFilename}.json`);
+			console.log(`Chemin du fichier JSON: ${filePath}`);
+			fs.writeFileSync(
+				filePath,
+				JSON.stringify(data.items.slice(0, 10), null, 2)
+			);
 		} catch (error) {
 			console.error(`❌ Erreur flux "${feed.name}" : ${error.message}`);
 
@@ -346,7 +350,6 @@ permalink: ${feed.permalink}
 > Veuillez réessayer ultérieurement ou vérifier l'URL du flux RSS.`;
 
 			fs.writeFileSync(feed.file, fallback);
-			console.log(`⚠️ Fichier d'erreur "${feed.file}" généré`);
 		}
 	}
 
