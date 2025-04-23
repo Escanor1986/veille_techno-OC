@@ -1,22 +1,22 @@
 /**
- * Dashboard analytique pour la veille technologique
- * Version améliorée avec graphique et fonctionnalités responsives
+ * Dashboard analytique pour la veille technologique - Version corrigée
  */
 document.addEventListener("DOMContentLoaded", () => {
-  // Configuration des catégories et fichiers
-  const categories = [
-    { id: "auto_tests.md", label: "🧪 Librairies de test", color: "#4285F4", tag: "test" },
-    { id: "auto_ui.md", label: "🎨 Librairies UI", color: "#EA4335", tag: "ui" },
-    { id: "auto_paradigmes.md", label: "🧠 Paradigmes", color: "#FBBC05", tag: "paradigm" },
-    { id: "auto_stack.md", label: "🌐 Stack Java / Angular", color: "#34A853", tag: "stack" }
-  ];
-
-  const baseUrl = window.location.origin + window.location.pathname.replace(/\/$/, "/");
   const dashboardElement = document.getElementById("dashboard-stats");
-  
   if (!dashboardElement) return;
   
-  // Création de la structure de base du dashboard
+  // Message de débogage initial
+  console.log("Initialisation du dashboard analytique");
+  
+  // Configuration des catégories avec des chemins corrigés
+  const categories = [
+    { id: "auto_tests", label: "🧪 Librairies de test", color: "#4285F4", tag: "test" },
+    { id: "auto_ui", label: "🎨 Librairies UI", color: "#EA4335", tag: "ui" },
+    { id: "auto_paradigmes", label: "🧠 Paradigmes", color: "#FBBC05", tag: "paradigm" },
+    { id: "auto_stack", label: "🌐 Stack Java / Angular", color: "#34A853", tag: "stack" }
+  ];
+  
+  // Création de la structure du dashboard
   dashboardElement.innerHTML = `
     <div class="dashboard-header">
       <h3>📊 Tableau de bord analytique</h3>
@@ -55,27 +55,49 @@ document.addEventListener("DOMContentLoaded", () => {
       <div id="latest-articles-content" class="loading">Chargement des articles...</div>
     </div>
   `;
-
+  
+  // Ajouter les styles CSS
+  addCustomStyles();
+  
   // Variables pour stocker les données
   let totalCount = 0;
   let chartInstance = null;
   let allArticles = [];
   const categoryStats = [];
   
-  // Ajout des styles CSS dynamiques
-  addCustomStyles();
+  // Construction de l'URL de base plus robuste pour GitHub Pages
+  const siteRoot = window.location.origin + (window.location.pathname.includes("/veille_techno-OC") 
+    ? "/veille_techno-OC/" 
+    : "/");
+  
+  console.log("URL de base du site:", siteRoot);
   
   // Récupération des données pour chaque catégorie
   categories.forEach(category => {
-    fetch(baseUrl + category.id.replace('.md', '/'))
-      .then(res => res.text())
+    // Tester plusieurs formats d'URL possibles
+    const possibleUrls = [
+      `${siteRoot}${category.id}/`,
+      `${siteRoot}${category.id}`,
+      `${siteRoot}${category.id}.html`
+    ];
+    
+    console.log(`Tentative de chargement pour ${category.label}:`, possibleUrls);
+    
+    // Essayer les URLs jusqu'à ce qu'une fonctionne
+    tryFetchUrls(possibleUrls)
       .then(text => {
-        // Extraction des articles avec regex améliorée pour capturer plus d'informations
+        if (!text) {
+          throw new Error(`Aucune URL n'a fonctionné pour ${category.id}`);
+        }
+        
+        // Extraction des articles avec regex
         const articleMatches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
         const count = articleMatches.length;
         totalCount += count;
         
-        // Extraction des dates et informations des articles
+        console.log(`Articles trouvés pour ${category.label}: ${count}`);
+        
+        // Extraction des détails des articles
         const articles = articleMatches.map(match => {
           const titleMatch = match.match(/^- \[(.*?)\]\((.*?)\)(.*)$/);
           if (titleMatch) {
@@ -94,10 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
           return null;
         }).filter(article => article !== null);
         
-        // Stocker les articles pour l'affichage récent
+        // Stocker les articles
         allArticles = [...allArticles, ...articles];
         
-        // Mettre à jour les statistiques
+        // Stocker les statistiques
         categoryStats.push({
           label: category.label,
           count: count,
@@ -105,37 +127,44 @@ document.addEventListener("DOMContentLoaded", () => {
           tag: category.tag
         });
         
-        // Ajouter à la table
-        const row = document.createElement("tr");
-        row.setAttribute('data-category', category.tag);
-        row.innerHTML = `
-          <td><span class="category-badge" style="background-color: ${category.color}">${category.label}</span></td>
-          <td>${count}</td>
-          <td>${new Date().toLocaleDateString()}</td>
-        `;
-        document.getElementById("stats-body")?.appendChild(row);
-        document.getElementById("total-count").textContent = totalCount;
+        // Mettre à jour la table des statistiques
+        const statsBody = document.getElementById("stats-body");
+        if (statsBody) {
+          const row = document.createElement("tr");
+          row.setAttribute('data-category', category.tag);
+          row.innerHTML = `
+            <td><span class="category-badge" style="background-color: ${category.color}">${category.label}</span></td>
+            <td>${count}</td>
+            <td>${new Date().toLocaleDateString()}</td>
+          `;
+          statsBody.appendChild(row);
+          
+          // Mettre à jour le total
+          document.getElementById("total-count").textContent = totalCount;
+        }
         
-        // Si toutes les catégories sont chargées
+        // Si toutes les catégories sont chargées, afficher les résultats
         if (categoryStats.length === categories.length) {
-          // Trier et afficher les articles récents
           displayLatestArticles();
-          // Préparer le graphique
           prepareChart();
         }
       })
       .catch(error => {
         console.error(`Erreur lors du chargement de ${category.id}:`, error);
         
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td><span class="category-badge" style="background-color: ${category.color}">${category.label}</span></td>
-          <td>⚠️ Erreur</td>
-          <td>-</td>
-        `;
-        document.getElementById("stats-body")?.appendChild(row);
+        // Ajouter une ligne d'erreur à la table
+        const statsBody = document.getElementById("stats-body");
+        if (statsBody) {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td><span class="category-badge" style="background-color: ${category.color}">${category.label}</span></td>
+            <td>⚠️ Erreur</td>
+            <td>-</td>
+          `;
+          statsBody.appendChild(row);
+        }
         
-        // Continuer à vérifier si toutes les catégories sont traitées
+        // Ajouter quand même aux statistiques avec compte à 0
         categoryStats.push({
           label: category.label,
           count: 0,
@@ -143,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
           tag: category.tag
         });
         
+        // Vérifier si toutes les catégories ont été traitées
         if (categoryStats.length === categories.length) {
           displayLatestArticles();
           prepareChart();
@@ -150,61 +180,82 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
   
-  // Fonction pour afficher les articles les plus récents
-  function displayLatestArticles() {
-    // Trier les articles par date (supposant que les dates sont au format standard)
-    allArticles.sort((a, b) => {
-      // Tentative de conversion des dates en objets Date pour comparaison
-      const dateA = new Date(a.date.replace('*', '').trim());
-      const dateB = new Date(b.date.replace('*', '').trim());
-      
-      // Si la conversion échoue, utiliser une comparaison de chaîne
-      if (isNaN(dateA) || isNaN(dateB)) {
-        return a.date.localeCompare(b.date);
+  // Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
+  async function tryFetchUrls(urls) {
+    for (const url of urls) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          return await response.text();
+        }
+      } catch (error) {
+        console.warn(`Échec de fetch pour ${url}:`, error.message);
       }
-      
-      return dateB - dateA; // ordre décroissant (plus récent d'abord)
-    });
-    
-    // Afficher les 5 articles les plus récents
-    const latestArticlesElement = document.getElementById("latest-articles-content");
-    if (latestArticlesElement) {
-      if (allArticles.length === 0) {
-        latestArticlesElement.innerHTML = "<p>Aucun article trouvé.</p>";
-        return;
-      }
-      
-      latestArticlesElement.classList.remove("loading");
-      latestArticlesElement.innerHTML = "";
-      
-      const articleList = document.createElement("ul");
-      articleList.className = "latest-articles-list";
-      
-      allArticles.slice(0, 5).forEach(article => {
-        const li = document.createElement("li");
-        li.className = `article-item ${article.categoryTag}`;
-        li.innerHTML = `
-          <a href="${article.url}" class="article-link" target="_blank" rel="noopener">
-            ${article.title}
-          </a>
-          <span class="article-meta">
-            <span class="article-category-tag" data-category="${article.categoryTag}">${article.category}</span>
-            <span class="article-date">${article.date}</span>
-          </span>
-        `;
-        articleList.appendChild(li);
-      });
-      
-      latestArticlesElement.appendChild(articleList);
     }
+    return null;
   }
   
-  // Fonction pour préparer et afficher le graphique
+  // Fonction pour afficher les articles les plus récents
+  function displayLatestArticles() {
+    const latestArticlesElement = document.getElementById("latest-articles-content");
+    if (!latestArticlesElement) return;
+    
+    // Trier les articles par date
+    allArticles.sort((a, b) => {
+      // Tentative de conversion des dates
+      try {
+        const dateA = new Date(a.date.replace(/^\*|\*$/g, ""));
+        const dateB = new Date(b.date.replace(/^\*|\*$/g, ""));
+        
+        if (!isNaN(dateA) && !isNaN(dateB)) {
+          return dateB - dateA;
+        }
+      } catch (e) {
+        // En cas d'erreur, utiliser la comparaison de chaînes
+      }
+      
+      return b.date.localeCompare(a.date);
+    });
+    
+    // Vider l'élément et enlever l'indicateur de chargement
+    latestArticlesElement.classList.remove("loading");
+    latestArticlesElement.innerHTML = "";
+    
+    if (allArticles.length === 0) {
+      latestArticlesElement.innerHTML = "<p>Aucun article trouvé.</p>";
+      return;
+    }
+    
+    // Créer la liste d'articles
+    const articleList = document.createElement("ul");
+    articleList.className = "latest-articles-list";
+    
+    allArticles.slice(0, 5).forEach(article => {
+      const li = document.createElement("li");
+      li.className = `article-item ${article.categoryTag}`;
+      li.innerHTML = `
+        <a href="${article.url}" class="article-link" target="_blank" rel="noopener">
+          ${article.title}
+        </a>
+        <span class="article-meta">
+          <span class="article-category-tag" data-category="${article.categoryTag}">${article.category}</span>
+          <span class="article-date">${article.date}</span>
+        </span>
+      `;
+      articleList.appendChild(li);
+    });
+    
+    latestArticlesElement.appendChild(articleList);
+  }
+  
+  // Fonction pour préparer le graphique
   function prepareChart() {
     const chartToggle = document.getElementById("toggle-chart");
+    const chartContainer = document.getElementById("chart-container");
+    
+    if (!chartToggle || !chartContainer) return;
     
     chartToggle.addEventListener("click", () => {
-      const chartContainer = document.getElementById("chart-container");
       if (chartContainer.style.display === "none") {
         chartContainer.style.display = "block";
         chartToggle.textContent = "Masquer graphique";
@@ -219,9 +270,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  // Création du graphique avec Chart.js
+  // Création du graphique
   function createChart() {
-    const ctx = document.getElementById("stats-chart").getContext("2d");
+    const ctx = document.getElementById("stats-chart")?.getContext("2d");
+    if (!ctx) return;
     
     // Vérifier si Chart.js est chargé
     if (typeof Chart === 'undefined') {
@@ -233,8 +285,12 @@ document.addEventListener("DOMContentLoaded", () => {
       script.referrerPolicy = "no-referrer";
       
       script.onload = () => {
-        // Une fois Chart.js chargé, créer le graphique
+        console.log("Chart.js chargé avec succès");
         renderChart(ctx);
+      };
+      
+      script.onerror = () => {
+        console.error("Erreur lors du chargement de Chart.js");
       };
       
       document.head.appendChild(script);
@@ -249,6 +305,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const labels = categoryStats.map(stat => stat.label);
     const data = categoryStats.map(stat => stat.count);
     const colors = categoryStats.map(stat => stat.color);
+    
+    console.log("Données du graphique:", { labels, data, colors });
     
     // Création du graphique
     chartInstance = new Chart(ctx, {
@@ -290,29 +348,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   // Toggle du thème clair/sombre
-  document.getElementById("toggle-theme").addEventListener("click", function() {
-    document.body.classList.toggle("dark-theme");
-    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  const themeToggle = document.getElementById("toggle-theme");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function() {
+      document.body.classList.toggle("dark-theme");
+      localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+      
+      // Mettre à jour le texte du bouton
+      this.textContent = document.body.classList.contains("dark-theme") ? "Mode clair" : "Mode sombre";
+      
+      // Recréer le graphique si nécessaire
+      if (chartInstance) {
+        chartInstance.destroy();
+        createChart();
+      }
+    });
     
-    // Mettre à jour le texte du bouton
-    this.textContent = document.body.classList.contains("dark-theme") ? "Mode clair" : "Mode sombre";
-    
-    // Recréer le graphique si nécessaire pour adapter les couleurs
-    if (chartInstance) {
-      chartInstance.destroy();
-      createChart();
+    // Appliquer le thème sauvegardé
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-theme");
+      themeToggle.textContent = "Mode clair";
     }
-  });
-  
-  // Appliquer le thème sauvegardé
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-theme");
-    document.getElementById("toggle-theme").textContent = "Mode clair";
   }
   
-  // Utilité pour ajuster la luminosité des couleurs
+  // Fonction pour ajuster la luminosité des couleurs
   function adjustColor(color, percent) {
+    if (!color) return '#000000';
+    
     const num = parseInt(color.replace("#", ""), 16),
       amt = Math.round(2.55 * percent),
       R = (num >> 16) + amt,
@@ -327,23 +390,23 @@ document.addEventListener("DOMContentLoaded", () => {
     ).toString(16).slice(1);
   }
   
-  // Ajouter des styles CSS pour le dashboard
+  // Ajouter les styles CSS pour le dashboard
   function addCustomStyles() {
     const style = document.createElement('style');
     style.textContent = `
-    /* Styles de base du dashboard – Demon Slayer × Ghost in the Shell */
+    /* Styles de base du dashboard */
     .dashboard-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
     }
-  
+    
     .dashboard-controls {
       display: flex;
       gap: 0.75rem;
     }
-  
+    
     .dashboard-btn {
       background-color: var(--color-accent);
       color: var(--color-background);
@@ -360,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
       background-color: var(--color-accent-alt);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
     }
-  
+    
     /* Table des statistiques */
     .stats-table {
       width: 100%;
@@ -389,7 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .stats-table tbody tr:hover {
       background-color: #131415;
     }
-  
+    
     /* Badges de catégorie */
     .category-badge {
       display: inline-block;
@@ -400,7 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
       font-size: 0.85rem;
       font-weight: 500;
     }
-  
+    
     /* Section des articles récents */
     .latest-articles {
       margin-top: 2rem;
@@ -456,13 +519,13 @@ document.addEventListener("DOMContentLoaded", () => {
     .article-date {
       font-style: italic;
     }
-  
+    
     .loading {
       text-align: center;
       padding: 1rem;
       color: #8b949e;
     }
-  
+    
     /* Responsive design */
     @media (max-width: 768px) {
       .dashboard-header {
@@ -483,7 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
         font-size: 0.8rem;
       }
     }
-  `;
+    `;
     document.head.appendChild(style);
   }
 });

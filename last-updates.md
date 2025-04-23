@@ -60,81 +60,72 @@ document.addEventListener("DOMContentLoaded", () => {
       day: 'numeric'
     })}`;
   
-  // Configuration des fichiers sources
+  // Configuration des fichiers sources avec plus de robustesse
   const sources = [
-    { id: "auto_tests.md", category: "test", label: "🧪 Tests", color: "#4285F4" },
-    { id: "auto_ui.md", category: "ui", label: "🎨 UI", color: "#EA4335" },
-    { id: "auto_paradigmes.md", category: "paradigm", label: "🧠 Paradigmes", color: "#FBBC05" },
-    { id: "auto_stack.md", category: "stack", label: "🌐 Java/Angular", color: "#34A853" }
+    { id: "auto_tests", category: "test", label: "🧪 Tests", color: "#4285F4" },
+    { id: "auto_ui", category: "ui", label: "🎨 UI", color: "#EA4335" },
+    { id: "auto_paradigmes", category: "paradigm", label: "🧠 Paradigmes", color: "#FBBC05" },
+    { id: "auto_stack", category: "stack", label: "🌐 Java/Angular", color: "#34A853" }
   ];
   
-  const baseUrl = window.location.origin + window.location.pathname.replace("latest-updates/", "").replace(/\/$/, "/");
+  // Obtenir l'URL de base de manière plus robuste
+  // Correction importante: utiliser un chemin relatif au site plutôt qu'à la page
+  const siteRoot = window.location.origin + (window.location.pathname.includes("/veille_techno-OC") 
+    ? "/veille_techno-OC/" 
+    : "/");
+  
+  console.log("URL de base:", siteRoot);
+  
   let allArticles = [];
   let allTags = new Set();
   
-  // Charger tous les articles
-  Promise.all(sources.map(source => 
-    fetch(baseUrl + source.id)
-      .then(res => res.text())
+  // Charger tous les articles avec une meilleure gestion d'erreurs
+  Promise.all(sources.map(source => {
+    // Essayer plusieurs formats d'URL possibles
+    const possibleUrls = [
+      `${siteRoot}${source.id}/`,
+      `${siteRoot}${source.id}`,
+      `${siteRoot}${source.id}.html`,
+      `${siteRoot}${source.id}.md`
+    ];
+    
+    console.log(`Tentative de chargement pour ${source.label}:`, possibleUrls);
+    
+    // Essayer chaque URL jusqu'à ce qu'une fonctionne
+    return tryFetchUrls(possibleUrls)
       .then(text => {
-        // Extraire les articles avec regex
-        const articles = [];
-        const matches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
+        if (!text) {
+          console.error(`Aucune URL n'a fonctionné pour ${source.id}`);
+          return [];
+        }
         
-        matches.forEach(match => {
-          const parts = match.match(/^- \[(.*?)\]\((.*?)\)(.*)$/);
-          if (parts) {
-            const title = parts[1];
-            const url = parts[2];
-            const metadata = parts[3];
-            
-            // Extraire la date
-            const dateMatch = metadata.match(/\*([^*]+)\*/);
-            const dateStr = dateMatch ? dateMatch[1].trim() : null;
-            let date = null;
-            
-            try {
-              if (dateStr) {
-                date = new Date(dateStr);
-                if (isNaN(date)) date = null;
-              }
-            } catch (e) {
-              date = null;
-            }
-            
-            // Extraire les tags
-            const tags = [];
-            const tagMatches = metadata.match(/`#([^`]+)`/g) || [];
-            tagMatches.forEach(tag => {
-              const tagName = tag.replace(/`#|`/g, '');
-              tags.push(tagName);
-              allTags.add(tagName);
-            });
-            
-            articles.push({
-              title,
-              url,
-              date,
-              dateStr: dateStr || "Date inconnue",
-              tags,
-              category: source.category,
-              categoryLabel: source.label,
-              color: source.color
-            });
-          }
-        });
-        
+        // Analyser le texte pour extraire les articles
+        const articles = extractArticlesFromMarkdown(text, source);
+        console.log(`Articles extraits pour ${source.label}:`, articles.length);
         return articles;
       })
       .catch(error => {
         console.error(`Erreur lors du chargement de ${source.id}:`, error);
         return [];
-      })
-  )).then(articlesArrays => {
-    // Fusionner tous les articles
+      });
+  }))
+  .then(articlesArrays => {
+    // Fusionner et traiter tous les articles
     allArticles = articlesArrays.flat();
+    console.log("Tous les articles récupérés:", allArticles.length);
     
-    // Trier par date (du plus récent au plus ancien)
+    if (allArticles.length === 0) {
+      document.getElementById("articles-container").innerHTML = 
+        "<p>Aucun article n'a pu être récupéré. Veuillez vérifier la console pour les erreurs.</p>";
+      return;
+    }
+    
+    // Extraire tous les tags
+    allArticles.forEach(article => {
+      article.tags.forEach(tag => allTags.add(tag));
+    });
+    
+    // Trier par date
     allArticles.sort((a, b) => {
       if (a.date && b.date) return b.date - a.date;
       if (a.date) return -1;
@@ -148,15 +139,89 @@ document.addEventListener("DOMContentLoaded", () => {
     // Afficher les articles
     displayArticles(allArticles);
     
-    // Initialiser les écouteurs d'événements pour les filtres
+    // Initialiser les filtres
     initFilters();
+  })
+  .catch(error => {
+    console.error("Erreur globale:", error);
+    document.getElementById("articles-container").innerHTML = 
+      `<p>Une erreur s'est produite lors du chargement des articles: ${error.message}</p>`;
   });
+  
+  // Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
+  async function tryFetchUrls(urls) {
+    for (const url of urls) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          return await response.text();
+        }
+      } catch (error) {
+        console.warn(`Échec de fetch pour ${url}:`, error.message);
+      }
+    }
+    return null;
+  }
+  
+  // Extraire les articles du markdown
+  function extractArticlesFromMarkdown(text, source) {
+    const articles = [];
+    const matches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
+    
+    matches.forEach(match => {
+      const parts = match.match(/^- \[(.*?)\]\((.*?)\)(.*)$/);
+      if (parts) {
+        const title = parts[1];
+        const url = parts[2];
+        const metadata = parts[3];
+        
+        // Extraire la date
+        const dateMatch = metadata.match(/\*([^*]+)\*/);
+        const dateStr = dateMatch ? dateMatch[1].trim() : null;
+        let date = null;
+        
+        try {
+          if (dateStr) {
+            date = new Date(dateStr);
+            if (isNaN(date)) date = null;
+          }
+        } catch (e) {
+          console.warn(`Date invalide: ${dateStr}`);
+          date = null;
+        }
+        
+        // Extraire les tags
+        const tags = [];
+        const tagMatches = metadata.match(/`#([^`]+)`/g) || [];
+        tagMatches.forEach(tag => {
+          const tagName = tag.replace(/`#|`/g, '');
+          tags.push(tagName);
+        });
+        
+        articles.push({
+          title,
+          url,
+          date,
+          dateStr: dateStr || "Date inconnue",
+          tags,
+          category: source.category,
+          categoryLabel: source.label,
+          color: source.color
+        });
+      }
+    });
+    
+    return articles;
+  }
   
   function generateTagFilters(tags) {
     const tagsContainer = document.getElementById("tag-filters");
     if (!tagsContainer) return;
     
-    // Trier les tags par ordre alphabétique
+    // Vider d'abord le conteneur (au cas où)
+    tagsContainer.innerHTML = "";
+    
+    // Trier les tags
     tags.sort();
     
     tags.forEach(tag => {
@@ -220,12 +285,14 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.addEventListener("input", filterArticles);
     }
     
-    // Bouton d'effacement de la recherche
+    // Bouton d'effacement
     const clearButton = document.getElementById("search-clear");
     if (clearButton) {
       clearButton.addEventListener("click", function() {
-        searchInput.value = "";
-        filterArticles();
+        if (searchInput) {
+          searchInput.value = "";
+          filterArticles();
+        }
       });
     }
     
@@ -253,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
     
-    // Vérifier si on arrive avec un paramètre de filtrage dans l'URL
+    // Paramètre de filtrage dans l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const tagParam = urlParams.get("tag");
     
@@ -291,26 +358,22 @@ document.addEventListener("DOMContentLoaded", () => {
     articles.forEach(article => {
       const title = article.querySelector(".article-title").textContent.toLowerCase();
       const articleCategory = article.getAttribute("data-category");
-      const articleTags = article.getAttribute("data-tags").split(" ");
+      const articleTags = article.getAttribute("data-tags").split(" ").filter(t => t);
       
-      // Vérifier si l'article correspond aux critères de recherche
+      // Vérifier la correspondance aux critères
       const matchesSearch = searchTerm === "" || title.includes(searchTerm);
-      
-      // Vérifier si l'article correspond à la catégorie sélectionnée
       const matchesCategory = category === "all" || articleCategory === category;
-      
-      // Vérifier si l'article a au moins un des tags sélectionnés
       const matchesTags = activeTags.length === 0 || 
         activeTags.some(tag => articleTags.includes(tag));
       
-      // Afficher ou masquer l'article en fonction des filtres
+      // Afficher ou masquer l'article
       const isVisible = matchesSearch && matchesCategory && matchesTags;
       article.style.display = isVisible ? "block" : "none";
       
       if (isVisible) visibleCount++;
     });
     
-    // Afficher ou masquer le message "Aucun résultat"
+    // Afficher/masquer "Aucun résultat"
     document.getElementById("no-results").style.display = 
       visibleCount === 0 ? "block" : "none";
   }

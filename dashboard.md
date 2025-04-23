@@ -327,7 +327,19 @@ Cette page présente une vue analytique complète de ma veille technologique, av
 </style>
 
 <script>
+/**
+ * Dashboard analytique avancé - Script corrigé
+ */
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("Initialisation du dashboard analytique avancé");
+  
+  // Vérifier si nous sommes sur la page dashboard
+  const dashboardContainer = document.querySelector(".dashboard-container");
+  if (!dashboardContainer) {
+    console.log("Conteneur de dashboard non trouvé");
+    return;
+  }
+  
   initDashboard();
 });
 
@@ -340,11 +352,14 @@ async function initDashboard() {
     { id: "auto_stack", label: "🌐 Java/Angular", color: "#34A853", tag: "stack" }
   ];
   
-  // Obtenir l'URL de base du site
-  const baseUrl = window.location.origin + window.location.pathname.replace('/dashboard/', '/');
-  console.log("URL de base pour récupérer les données:", baseUrl);
+  // Construction de l'URL de base plus robuste pour GitHub Pages
+  const siteRoot = window.location.origin + (window.location.pathname.includes("/veille_techno-OC") 
+    ? "/veille_techno-OC/" 
+    : "/");
   
-  // Initialiser les compteurs et conteneurs
+  console.log("URL de base pour récupérer les données:", siteRoot);
+  
+  // Variables pour stocker les données
   let totalArticleCount = 0;
   let allArticles = [];
   let allTags = {};
@@ -353,28 +368,41 @@ async function initDashboard() {
   // Charger les données pour toutes les catégories
   for (const category of categories) {
     try {
-      // Essayer différentes structures d'URL
-      let response;
-      try {
-        response = await fetch(`${baseUrl}${category.id}/`);
-      } catch (e) {
+      // Essayer plusieurs formats d'URL possibles
+      const possibleUrls = [
+        `${siteRoot}${category.id}/`,
+        `${siteRoot}${category.id}`,
+        `${siteRoot}${category.id}.html`,
+        `${siteRoot}${category.id}.md`
+      ];
+      
+      console.log(`Tentatives d'URLs pour ${category.label}:`, possibleUrls);
+      
+      // Tester les URLs jusqu'à ce qu'une fonctionne
+      let text = null;
+      for (const url of possibleUrls) {
         try {
-          response = await fetch(`${baseUrl}${category.id}`);
-        } catch (e2) {
-          response = await fetch(`${baseUrl}${category.id}.html`);
+          const response = await fetch(url);
+          if (response.ok) {
+            text = await response.text();
+            console.log(`URL fonctionnelle trouvée pour ${category.label}: ${url}`);
+            break;
+          }
+        } catch (error) {
+          console.warn(`Échec de fetch pour ${url}:`, error.message);
         }
       }
       
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP! Status: ${response.status}`);
+      if (!text) {
+        throw new Error(`Aucune URL n'a fonctionné pour ${category.id}`);
       }
       
-      const text = await response.text();
-      
-      // Extraire les articles
+      // Extraction des articles
       const articleMatches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
       const count = articleMatches.length;
       totalArticleCount += count;
+      
+      console.log(`Articles trouvés pour ${category.label}: ${count}`);
       
       // Extraire les articles avec leurs détails
       const articles = [];
@@ -396,6 +424,7 @@ async function initDashboard() {
               if (isNaN(date)) date = null;
             }
           } catch (e) {
+            console.warn(`Date invalide: ${dateStr}`);
             date = null;
           }
           
@@ -448,11 +477,17 @@ async function initDashboard() {
     }
   }
   
+  console.log("Toutes les données sont chargées");
+  console.log("Articles totaux:", totalArticleCount);
+  console.log("Stats des catégories:", categoryStats);
+  console.log("Tags uniques:", Object.keys(allTags).length);
+  
   // Mettre à jour le dashboard avec les données collectées
   updateDashboardStats(totalArticleCount, categories.length, Object.keys(allTags).length, allArticles);
   
   // Créer les graphiques et visualisations
   if (typeof Chart === 'undefined') {
+    console.log("Chargement de Chart.js...");
     await loadChartJS();
   }
   
@@ -466,10 +501,21 @@ async function initDashboard() {
 }
 
 function updateDashboardStats(totalCount, categoriesCount, tagsCount, articles) {
-  // Mettre à jour les cartes de statistiques avec les nombres réels
-  document.getElementById('total-article-count').textContent = totalCount;
-  document.getElementById('categories-count').textContent = categoriesCount;
-  document.getElementById('tags-count').textContent = tagsCount;
+  const totalArticleCount = document.getElementById('total-article-count');
+  const categoriesCountElement = document.getElementById('categories-count');
+  const tagsCountElement = document.getElementById('tags-count');
+  const recentCountElement = document.getElementById('recent-count');
+  
+  // Vérifier que les éléments existent
+  if (!totalArticleCount || !categoriesCountElement || !tagsCountElement || !recentCountElement) {
+    console.error("Éléments de statistiques non trouvés dans le DOM");
+    return;
+  }
+  
+  // Mettre à jour les cartes de statistiques
+  totalArticleCount.textContent = totalCount;
+  categoriesCountElement.textContent = categoriesCount;
+  tagsCountElement.textContent = tagsCount;
   
   // Compter les articles de ce mois
   const now = new Date();
@@ -481,7 +527,7 @@ function updateDashboardStats(totalCount, categoriesCount, tagsCount, articles) 
     return article.date.getMonth() === thisMonth && article.date.getFullYear() === thisYear;
   });
   
-  document.getElementById('recent-count').textContent = recentArticles.length;
+  recentCountElement.textContent = recentArticles.length;
 }
 
 async function loadChartJS() {
@@ -492,8 +538,14 @@ async function loadChartJS() {
     script.crossOrigin = "anonymous";
     script.referrerPolicy = "no-referrer";
     
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Échec du chargement de Chart.js"));
+    script.onload = () => {
+      console.log("Chart.js chargé avec succès");
+      resolve();
+    };
+    script.onerror = () => {
+      console.error("Échec du chargement de Chart.js");
+      reject(new Error("Échec du chargement de Chart.js"));
+    };
     
     document.head.appendChild(script);
   });
@@ -501,7 +553,16 @@ async function loadChartJS() {
 
 function createCategoryChart(categoryStats) {
   const ctx = document.getElementById('categories-chart')?.getContext('2d');
-  if (!ctx) return;
+  if (!ctx) {
+    console.error("Contexte du canvas pour le graphique des catégories non trouvé");
+    return;
+  }
+  
+  // Vérifier si nous avons des données à afficher
+  if (categoryStats.length === 0) {
+    console.warn("Pas de données pour le graphique des catégories");
+    return;
+  }
   
   // Graphique initial (diagramme à barres)
   createChart('bar');
@@ -530,6 +591,8 @@ function createCategoryChart(categoryStats) {
     const labels = categoryStats.map(item => item.label);
     const data = categoryStats.map(item => item.count);
     const colors = categoryStats.map(item => item.color);
+    
+    console.log(`Création du graphique de type ${type} avec données:`, { labels, data, colors });
     
     // Options communes
     const options = {
@@ -607,7 +670,10 @@ function createCategoryChart(categoryStats) {
 
 function createTagCloud(tags) {
   const tagCloudElement = document.getElementById('tag-cloud');
-  if (!tagCloudElement) return;
+  if (!tagCloudElement) {
+    console.error("Conteneur pour le nuage de tags non trouvé");
+    return;
+  }
   
   // Effacer le message de chargement
   tagCloudElement.innerHTML = '';
@@ -621,6 +687,8 @@ function createTagCloud(tags) {
     tagCloudElement.innerHTML = '<div class="tag-cloud-loading">Aucun tag trouvé</div>';
     return;
   }
+  
+  console.log("Tags les plus populaires:", tagArray.slice(0, 5));
   
   // Trouver le compte maximum pour le dimensionnement
   const maxCount = tagArray[0].count;
@@ -642,7 +710,7 @@ function createTagCloud(tags) {
     tagElement.setAttribute('title', `${count} article${count !== 1 ? 's' : ''}`);
     
     tagElement.addEventListener('click', () => {
-      window.location.href = `latest-updates?tag=${encodeURIComponent(tag)}`;
+      window.location.href = `${siteRoot}latest-updates?tag=${encodeURIComponent(tag)}`;
     });
     
     tagCloudElement.appendChild(tagElement);
@@ -651,7 +719,10 @@ function createTagCloud(tags) {
 
 function displayRecentArticles(articles) {
   const container = document.getElementById('recent-articles');
-  if (!container) return;
+  if (!container) {
+    console.error("Conteneur pour les articles récents non trouvé");
+    return;
+  }
   
   // Effacer le message de chargement
   container.innerHTML = '';
@@ -668,6 +739,8 @@ function displayRecentArticles(articles) {
     if (b.date) return 1;
     return 0;
   });
+  
+  console.log("Articles récents à afficher:", sortedArticles.slice(0, 3).map(a => a.title));
   
   // Afficher les 10 articles les plus récents
   sortedArticles.slice(0, 10).forEach(article => {
@@ -703,7 +776,10 @@ function displayRecentArticles(articles) {
 
 function createTimelineChart(articles) {
   const ctx = document.getElementById('timeline-chart')?.getContext('2d');
-  if (!ctx || articles.length === 0) return;
+  if (!ctx || articles.length === 0) {
+    console.warn("Contexte du graphique de chronologie non trouvé ou pas d'articles");
+    return;
+  }
   
   // Regrouper les articles par mois
   const articlesByMonth = {};
@@ -752,6 +828,8 @@ function createTimelineChart(articles) {
   
   // Prendre les 12 derniers mois (ou moins s'il n'y a pas assez de données)
   const timelineData = sortedArticles.slice(-12);
+  
+  console.log("Données de chronologie:", timelineData);
   
   // Obtenir les catégories
   const categories = [
@@ -899,6 +977,8 @@ function filterArticlesByPeriod(period, allArticles, categoryStats, allTags) {
       break;
   }
   
+  console.log(`Filtrage par période '${period}': ${filteredArticles.length} articles`);
+  
   // Recalculer les statistiques basées sur les articles filtrés
   let filteredCategoryStats = JSON.parse(JSON.stringify(categoryStats));
   let filteredTags = {};
@@ -943,8 +1023,7 @@ function filterArticlesByPeriod(period, allArticles, categoryStats, allTags) {
     // Mettre à jour la chronologie si elle existe
     const timelineChart = Chart.getChart(document.getElementById('timeline-chart'));
     if (timelineChart) {
-      // Cela nécessiterait une logique plus complexe pour mettre à jour correctement
-      // Par simplicité, nous ne mettons pas à jour le graphique de chronologie ici
+      // Pour simplifier, on ne met pas à jour la chronologie ici
     }
   }
   
@@ -1011,6 +1090,8 @@ function exportCSV(articles, categoryStats, tags) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  
+  console.log("Export CSV généré et téléchargé");
 }
 
 // Fonction utilitaire pour ajuster la luminosité des couleurs
