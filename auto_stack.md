@@ -4,9 +4,67 @@ layout: page
 permalink: /auto_stack/
 ---
 
-# <span>🌐</span> Veille automatique – Stack Java / Angular
+# 🌐 Veille automatique – Stack Java / Angular
 
-> ⚠️ Erreur lors de la récupération du flux RSS.
-> Détail : ENOENT: no such file or directory, open '/home/runner/work/veille_techno-OC/veille_techno-OC/data/stack_java_/_angular.json'
-> 
-> Veuillez réessayer ultérieurement ou vérifier l'URL du flux RSS.
+🕒 *Dernière mise à jour : mercredi 23 avril 2025*
+
+<div class="search-container">
+  <input type="text" id="article-search" placeholder="Rechercher un article..." onkeyup="filterArticles()">
+  <div class="tag-filters" id="tag-filters">
+    <!-- Les filtres par tag seront générés dynamiquement -->
+  </div>
+</div>
+
+- [Thread per Connection vs Thread per Request](https://feeds.feedblitz.com/~/917132147/0/baeldung~Thread-per-Connection-vs-Thread-per-Request) – *Tue, 22 Apr 2025 19:05:53 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Generate a Valid Expression From a String of Numbers to Get Target Number](https://feeds.feedblitz.com/~/917020235/0/baeldung~Generate-a-Valid-Expression-From-a-String-of-Numbers-to-Get-Target-Number) – *Sun, 20 Apr 2025 18:48:15 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Introduction to Apache Kylin](https://feeds.feedblitz.com/~/917019665/0/baeldung~Introduction-to-Apache-Kylin) – *Sun, 20 Apr 2025 18:44:19 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Java Weekly, Issue 590](https://feeds.feedblitz.com/~/916847789/0/baeldung~Java-Weekly-Issue) – *Thu, 17 Apr 2025 15:32:59 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Set Multiple Headers at Once in Spring WebClient](https://feeds.feedblitz.com/~/916791077/0/baeldung~Set-Multiple-Headers-at-Once-in-Spring-WebClient) – *Wed, 16 Apr 2025 16:13:46 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Introduction to Objenesis](https://feeds.feedblitz.com/~/916790267/0/baeldung~Introduction-to-Objenesis) – *Wed, 16 Apr 2025 16:08:37 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Enable or Disable Embedded Tomcat with Profile in Spring Boot](https://feeds.feedblitz.com/~/916777781/0/baeldung~Enable-or-Disable-Embedded-Tomcat-with-Profile-in-Spring-Boot) – *Wed, 16 Apr 2025 12:01:42 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Fix DateTimeParseException: “Unable to obtain LocalDateTime from TemporalAccessor”](https://feeds.feedblitz.com/~/916776893/0/baeldung~Fix-DateTimeParseException-Unable-to-obtain-LocalDateTime-from-TemporalAccessor) – *Wed, 16 Apr 2025 11:55:33 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [Currency Code to Currency Symbol Mapping in Java](https://feeds.feedblitz.com/~/916703195/0/baeldung~Currency-Code-to-Currency-Symbol-Mapping-in-Java) – *Tue, 15 Apr 2025 04:24:10 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+- [How to Check if Zookeeper Is Running or up From Command Prompt?](https://feeds.feedblitz.com/~/916703198/0/baeldung~How-to-Check-if-Zookeeper-Is-Running-or-up-From-Command-Prompt) – *Tue, 15 Apr 2025 04:21:13 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`
+
+<script>
+function filterArticles() {
+  const input = document.getElementById('article-search');
+  const filter = input.value.toLowerCase();
+  const items = document.getElementsByTagName('li');
+  
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const text = item.textContent.toLowerCase();
+    if (text.indexOf(filter) > -1) {
+      item.style.display = "";
+    } else {
+      item.style.display = "none";
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Extraction de tous les tags présents dans les articles
+  const tagElements = document.querySelectorAll('code');
+  const tags = new Set();
+  
+  tagElements.forEach(el => {
+    if (el.textContent.startsWith('#')) {
+      tags.add(el.textContent.substring(1));
+    }
+  });
+  
+  // Génération des filtres par tag
+  const tagFiltersContainer = document.getElementById('tag-filters');
+  tags.forEach(tag => {
+    const tagBtn = document.createElement('button');
+    tagBtn.className = 'tag-filter-btn';
+    tagBtn.textContent = '#' + tag;
+    tagBtn.onclick = function() {
+      document.getElementById('article-search').value = tag;
+      filterArticles();
+    };
+    tagFiltersContainer.appendChild(tagBtn);
+  });
+});
+</script>

@@ -4,9 +4,9 @@ layout: page
 permalink: /auto_paradigmes/
 ---
 
-# <span>🧠</span> Veille automatique – Paradigmes de programmation
+# 🧠 Veille automatique – Paradigmes de programmation
 
-🕒 *Dernière mise à jour : lundi 21 avril 2025*
+🕒 *Dernière mise à jour : mercredi 23 avril 2025*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article..." onkeyup="filterArticles()">
@@ -15,6 +15,7 @@ permalink: /auto_paradigmes/
   </div>
 </div>
 
+- [Impossible Components](https://overreacted.io/impossible-components/) – *Tue, 22 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`
 - [JSX Over The Wire](https://overreacted.io/jsx-over-the-wire/) – *Wed, 16 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`
 - [React for Two Computers](https://overreacted.io/react-for-two-computers/) – *Wed, 09 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns` `#react`
 - [The Two Reacts](https://overreacted.io/the-two-reacts/) – *Thu, 04 Jan 2024 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`
@@ -24,7 +25,6 @@ permalink: /auto_paradigmes/
 - [The WET Codebase](https://overreacted.io/the-wet-codebase/) – *Mon, 13 Jul 2020 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`
 - [Goodbye, Clean Code](https://overreacted.io/goodbye-clean-code/) – *Sat, 11 Jan 2020 00:00:00 GMT* `#paradigm` `#architecture` `#patterns` `#code`
 - [My Decade in Review](https://overreacted.io/my-decade-in-review/) – *Wed, 01 Jan 2020 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`
-- [What Are the React Team Principles?](https://overreacted.io/what-are-the-react-team-principles/) – *Wed, 25 Dec 2019 00:00:00 GMT* `#paradigm` `#architecture` `#patterns` `#react`
 
 <script>
 function filterArticles() {
