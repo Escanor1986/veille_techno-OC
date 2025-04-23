@@ -1,5 +1,5 @@
 /**
- * Dashboard analytique pour la veille technologique - Version corrigée
+ * Dashboard analytique pour la veille technologique - Version optimisée
  */
 document.addEventListener("DOMContentLoaded", () => {
   const dashboardElement = document.getElementById("dashboard-stats");
@@ -65,20 +65,37 @@ document.addEventListener("DOMContentLoaded", () => {
   let allArticles = [];
   const categoryStats = [];
   
-  // Construction de l'URL de base plus robuste pour GitHub Pages
-  const siteRoot = window.location.origin + (window.location.pathname.includes("/veille_techno-OC") 
-    ? "/veille_techno-OC/" 
-    : "/");
+  // Construction de l'URL de base plus robuste pour différents environnements
+  function getBaseUrl() {
+    const origin = window.location.origin;
+    const path = window.location.pathname;
+    let baseUrl = origin;
+    
+    // Déterminer si nous sommes sur GitHub Pages ou en développement local
+    if (origin.includes('github.io') || path.includes('/veille_techno-OC')) {
+      // Extraire la base du chemin pour GitHub Pages
+      const basePath = '/veille_techno-OC/';
+      baseUrl = origin + basePath;
+    } else {
+      // Environnement local - conserver le slash final
+      baseUrl = origin + '/';
+    }
+    
+    console.log("Base URL déterminée:", baseUrl);
+    return baseUrl;
+  }
   
+  const siteRoot = getBaseUrl();
   console.log("URL de base du site:", siteRoot);
   
   // Récupération des données pour chaque catégorie
   categories.forEach(category => {
-    // Tester plusieurs formats d'URL possibles
+    // Tester plusieurs formats d'URL possibles avec plus d'options
     const possibleUrls = [
       `${siteRoot}${category.id}/`,
       `${siteRoot}${category.id}`,
-      `${siteRoot}${category.id}.html`
+      `${siteRoot}${category.id}.html`,
+      `${siteRoot}${category.id}.md`
     ];
     
     console.log(`Tentative de chargement pour ${category.label}:`, possibleUrls);
@@ -90,12 +107,17 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error(`Aucune URL n'a fonctionné pour ${category.id}`);
         }
         
+        console.log(`Contenu récupéré pour ${category.label} (premiers caractères):`, text.substring(0, 100));
+        
         // Extraction des articles avec regex
         const articleMatches = text.match(/^- \[(.*?)\]\((.*?)\)(.*?)$/gm) || [];
         const count = articleMatches.length;
         totalCount += count;
         
         console.log(`Articles trouvés pour ${category.label}: ${count}`);
+        if (count > 0) {
+          console.log(`Premier article trouvé:`, articleMatches[0]);
+        }
         
         // Extraction des détails des articles
         const articles = articleMatches.map(match => {
@@ -115,6 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           return null;
         }).filter(article => article !== null);
+        
+        console.log(`Articles extraits et parsés pour ${category.label}:`, articles.length);
         
         // Stocker les articles
         allArticles = [...allArticles, ...articles];
@@ -182,16 +206,40 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
   async function tryFetchUrls(urls) {
+    console.log("Tentative de fetch sur plusieurs URLs:", urls);
+    
     for (const url of urls) {
       try {
+        console.log(`Essai de fetch sur: ${url}`);
         const response = await fetch(url);
+        
         if (response.ok) {
+          console.log(`Succès pour URL: ${url}`);
           return await response.text();
+        } else {
+          console.warn(`Échec de fetch pour ${url}: Status ${response.status}`);
         }
       } catch (error) {
         console.warn(`Échec de fetch pour ${url}:`, error.message);
       }
     }
+    
+    // Si toutes échouent, essayer une solution de secours avec un appel synchrone
+    try {
+      console.log("Tentative avec XMLHttpRequest synchrone comme dernier recours");
+      const xhr = new XMLHttpRequest();
+      // Essayer la première URL comme recours
+      xhr.open('GET', urls[0], false); // Synchrone
+      xhr.send(null);
+      
+      if (xhr.status === 200) {
+        console.log("Succès avec XMLHttpRequest synchrone");
+        return xhr.responseText;
+      }
+    } catch (e) {
+      console.error("Échec de la tentative de secours:", e);
+    }
+    
     return null;
   }
   
@@ -212,6 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (e) {
         // En cas d'erreur, utiliser la comparaison de chaînes
+        console.warn("Erreur lors de la comparaison des dates:", e);
       }
       
       return b.date.localeCompare(a.date);
@@ -222,9 +271,11 @@ document.addEventListener("DOMContentLoaded", () => {
     latestArticlesElement.innerHTML = "";
     
     if (allArticles.length === 0) {
-      latestArticlesElement.innerHTML = "<p>Aucun article trouvé.</p>";
+      latestArticlesElement.innerHTML = "<p>Aucun article trouvé. Vérifiez la console pour plus de détails sur les erreurs potentielles.</p>";
       return;
     }
+    
+    console.log("Affichage des articles récents:", allArticles.slice(0, 5));
     
     // Créer la liste d'articles
     const articleList = document.createElement("ul");
@@ -273,11 +324,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Création du graphique
   function createChart() {
     const ctx = document.getElementById("stats-chart")?.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      console.error("Contexte du canvas non trouvé");
+      return;
+    }
     
     // Vérifier si Chart.js est chargé
     if (typeof Chart === 'undefined') {
       // Charger Chart.js dynamiquement
+      console.log("Chargement de Chart.js...");
       const script = document.createElement('script');
       script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js";
       script.integrity = "sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==";
@@ -296,6 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.head.appendChild(script);
     } else {
       // Si Chart.js est déjà disponible
+      console.log("Chart.js déjà disponible");
       renderChart(ctx);
     }
   }
@@ -309,42 +365,48 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Données du graphique:", { labels, data, colors });
     
     // Création du graphique
-    chartInstance = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Nombre d\'articles',
-          data: data,
-          backgroundColor: colors,
-          borderColor: colors.map(color => adjustColor(color, -20)),
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Répartition des articles par catégorie',
-            font: {
-              size: 16
+    try {
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Nombre d\'articles',
+            data: data,
+            backgroundColor: colors,
+            borderColor: colors.map(color => adjustColor(color, -20)),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Répartition des articles par catégorie',
+              font: {
+                size: 16
+              }
+            },
+            legend: {
+              display: false
             }
           },
-          legend: {
-            display: false
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              precision: 0
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                precision: 0
+              }
             }
           }
         }
-      }
-    });
+      });
+      
+      console.log("Graphique créé avec succès");
+    } catch (error) {
+      console.error("Erreur lors de la création du graphique:", error);
+    }
   }
   
   // Toggle du thème clair/sombre
@@ -408,8 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     .dashboard-btn {
-      background-color: var(--color-accent);
-      color: var(--color-background);
+      background-color: var(--color-accent, #08f7fe);
+      color: var(--color-background, #0b0c10);
       border: none;
       border-radius: 4px;
       padding: 0.5rem 1rem;
@@ -420,7 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transition: background-color 0.2s, box-shadow 0.2s;
     }
     .dashboard-btn:hover {
-      background-color: var(--color-accent-alt);
+      background-color: var(--color-accent-alt, #fe53bb);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
     }
     
@@ -429,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 1.5rem;
-      background-color: var(--color-sidebar-background);
+      background-color: var(--color-sidebar-background, #131415);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
       border-radius: 6px;
       overflow: hidden;
@@ -439,11 +501,11 @@ document.addEventListener("DOMContentLoaded", () => {
       padding: 0.75rem 1rem;
       text-align: left;
       border-bottom: 1px solid #30363d;
-      color: var(--color-text);
+      color: var(--color-text, #c5c6c7);
     }
     .stats-table th {
       background-color: #1b1d21;
-      color: var(--color-accent);
+      color: var(--color-accent, #08f7fe);
       font-weight: 600;
     }
     .stats-table tr:last-child td {
@@ -458,8 +520,8 @@ document.addEventListener("DOMContentLoaded", () => {
       display: inline-block;
       padding: 0.25rem 0.75rem;
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-alt));
-      color: var(--color-background);
+      background: linear-gradient(135deg, var(--color-accent, #08f7fe), var(--color-accent-alt, #fe53bb));
+      color: var(--color-background, #0b0c10);
       font-size: 0.85rem;
       font-weight: 500;
     }
@@ -468,7 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .latest-articles {
       margin-top: 2rem;
       padding: 1rem;
-      background-color: var(--color-sidebar-background);
+      background-color: var(--color-sidebar-background, #131415);
       border: 1px solid #30363d;
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
@@ -477,7 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
       margin: 0 0 1rem;
       font-size: 1.1rem;
       font-weight: 500;
-      color: var(--color-accent);
+      color: var(--color-accent, #08f7fe);
     }
     .latest-articles-list {
       list-style: none;
@@ -490,27 +552,31 @@ document.addEventListener("DOMContentLoaded", () => {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
     .article-item:last-child {
       border-bottom: none;
     }
     .article-link {
-      color: var(--color-text);
+      color: var(--color-text, #c5c6c7);
       text-decoration: none;
       font-weight: 500;
+      margin-right: 1rem;
+      flex: 1;
     }
     .article-link:hover {
-      color: var(--color-accent);
+      color: var(--color-accent, #08f7fe);
     }
     .article-meta {
       font-size: 0.85rem;
       color: #8b949e;
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
     }
     .article-category-tag {
-      background: linear-gradient(135deg, var(--color-accent-alt), var(--color-accent));
-      color: var(--color-background);
+      background: linear-gradient(135deg, var(--color-accent-alt, #fe53bb), var(--color-accent, #08f7fe));
+      color: var(--color-background, #0b0c10);
       padding: 0.2rem 0.5rem;
       border-radius: 8px;
       font-size: 0.75rem;

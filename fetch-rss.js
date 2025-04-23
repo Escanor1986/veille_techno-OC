@@ -172,6 +172,59 @@ Cette page présente les articles les plus récents, toutes catégories confondu
 	console.log('✅ Fichier latest-updates.md généré avec succès');
 }
 
+// Création du script de filtrage réutilisable
+const filterScript = `
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function filterArticles() {
+    const input = document.getElementById('article-search');
+    const filter = input.value.toLowerCase();
+    const items = document.getElementsByTagName('li');
+    
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const text = item.textContent.toLowerCase();
+      if (text.indexOf(filter) > -1) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    }
+  }
+
+  // Extraction de tous les tags présents dans les articles
+  const tagElements = document.querySelectorAll('code');
+  const tags = new Set();
+  
+  tagElements.forEach(el => {
+    if (el.textContent.startsWith('#')) {
+      tags.add(el.textContent.substring(1));
+    }
+  });
+  
+  // Génération des filtres par tag
+  const tagFiltersContainer = document.getElementById('tag-filters');
+  if (tagFiltersContainer) {
+    tags.forEach(tag => {
+      const tagBtn = document.createElement('button');
+      tagBtn.className = 'tag-filter-btn';
+      tagBtn.textContent = '#' + tag;
+      tagBtn.onclick = function() {
+        document.getElementById('article-search').value = tag;
+        filterArticles();
+      };
+      tagFiltersContainer.appendChild(tagBtn);
+    });
+  }
+  
+  // Attacher l'événement de filtrage au champ de recherche
+  const searchInput = document.getElementById('article-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', filterArticles);
+  }
+});
+</script>`;
+
 // Fonction principale asynchrone
 (async () => {
 	// Date formatée pour l'affichage
@@ -237,51 +290,11 @@ permalink: ${feed.permalink}
 						item.pubDate
 					}* ${formatTags(tags)}\n`;
 				});
-
-				// Ajout du script de recherche et filtrage à la fin du fichier
-				content += `\n<script>
-function filterArticles() {
-  const input = document.getElementById('article-search');
-  const filter = input.value.toLowerCase();
-  const items = document.getElementsByTagName('li');
-  
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    const text = item.textContent.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      item.style.display = "";
-    } else {
-      item.style.display = "none";
-    }
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Extraction de tous les tags présents dans les articles
-  const tagElements = document.querySelectorAll('code');
-  const tags = new Set();
-  
-  tagElements.forEach(el => {
-    if (el.textContent.startsWith('#')) {
-      tags.add(el.textContent.substring(1));
-    }
-  });
-  
-  // Génération des filtres par tag
-  const tagFiltersContainer = document.getElementById('tag-filters');
-  tags.forEach(tag => {
-    const tagBtn = document.createElement('button');
-    tagBtn.className = 'tag-filter-btn';
-    tagBtn.textContent = '#' + tag;
-    tagBtn.onclick = function() {
-      document.getElementById('article-search').value = tag;
-      filterArticles();
-    };
-    tagFiltersContainer.appendChild(tagBtn);
-  });
-});
-</script>`;
 			}
+			
+			// Ajout du script de filtrage et recherche à la fin du fichier
+			// Utilisez le script pré-construit et assurez-vous qu'il est correctement fermé
+			content += `\n${filterScript}`;
 
 			// Écriture du fichier markdown
 			fs.writeFileSync(feed.file, content);
@@ -304,10 +317,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			 * Fonction pour s'assurer que le répertoire existe
 			 */
 			function ensureDirectoryExists(directory) {
-				const fs = require('fs');
-				const path = require('path');
-
-				// Créer le chemin récursivement s'il n'existe pas
 				if (!fs.existsSync(directory)) {
 					try {
 						fs.mkdirSync(directory, { recursive: true });
