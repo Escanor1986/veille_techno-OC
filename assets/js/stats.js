@@ -1,28 +1,47 @@
 /**
  * Dashboard analytique pour la veille technologique - Version optimisée
  */
-document.addEventListener("DOMContentLoaded", () => {
-  const dashboardElement = document.getElementById("dashboard-stats");
-  if (!dashboardElement) return;
-  
-  // Message de débogage initial
-  console.log("Initialisation du dashboard analytique");
-  
-  // Configuration des catégories avec des chemins corrigés
-  const categories = [
-    { id: "auto_tests", label: "🧪 Librairies de test", color: "#4285F4", tag: "test" },
-    { id: "auto_ui", label: "🎨 Librairies UI", color: "#EA4335", tag: "ui" },
-    { id: "auto_paradigmes", label: "🧠 Paradigmes", color: "#FBBC05", tag: "paradigm" },
-    { id: "auto_stack", label: "🌐 Stack Java / Angular", color: "#34A853", tag: "stack" }
-  ];
-  
-  // Création de la structure du dashboard
-  dashboardElement.innerHTML = `
+document.addEventListener('DOMContentLoaded', () => {
+	const dashboardElement = document.getElementById('dashboard-stats');
+	if (!dashboardElement) return;
+
+	// Message de débogage initial
+	// console.log('Initialisation du dashboard analytique');
+
+	// Configuration des catégories avec des chemins corrigés
+	const categories = [
+		{
+			id: 'auto_tests',
+			label: '🧪 Librairies de test',
+			color: '#4285F4',
+			tag: 'test',
+		},
+		{
+			id: 'auto_ui',
+			label: '🎨 Librairies UI',
+			color: '#EA4335',
+			tag: 'ui',
+		},
+		{
+			id: 'auto_paradigmes',
+			label: '🧠 Paradigmes',
+			color: '#FBBC05',
+			tag: 'paradigm',
+		},
+		{
+			id: 'auto_stack',
+			label: '🌐 Stack Java / Angular',
+			color: '#34A853',
+			tag: 'stack',
+		},
+	];
+
+	// Création de la structure du dashboard
+	dashboardElement.innerHTML = `
     <div class="dashboard-header">
-      <h3>📊 Tableau de bord analytique</h3>
+      <h3><span>📊</span> Tableau de bord analytique</h3>
       <div class="dashboard-controls">
         <button id="toggle-chart" class="dashboard-btn">Afficher graphique</button>
-        <button id="toggle-theme" class="dashboard-btn">Mode sombre</button>
       </div>
     </div>
     
@@ -51,299 +70,333 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
     
     <div id="latest-articles" class="latest-articles">
-      <h4>📰 Articles récents</h4>
+      <h4><span>📰</span> Articles récents</h4>
       <div id="latest-articles-content" class="loading">Chargement des articles...</div>
     </div>
   `;
-  
-  // Ajouter les styles CSS
-  addCustomStyles();
-  
-  // Variables pour stocker les données
-  let totalCount = 0;
-  let chartInstance = null;
-  let allArticles = [];
-  const categoryStats = [];
-  
-  // Construction de l'URL de base plus robuste pour différents environnements
-  function getBaseUrl() {
-    const origin = window.location.origin;
-    const path = window.location.pathname;
-    let baseUrl = origin;
-    
-    // Déterminer si nous sommes sur GitHub Pages ou en développement local
-    if (origin.includes('github.io') || path.includes('/veille_techno-OC')) {
-      // Extraire la base du chemin pour GitHub Pages
-      const basePath = '/veille_techno-OC/';
-      baseUrl = origin + basePath;
-    } else {
-      // Environnement local - conserver le slash final
-      baseUrl = origin + '/';
-    }
-    
-    console.log("Base URL déterminée:", baseUrl);
-    return baseUrl;
-  }
-  
-  const siteRoot = getBaseUrl();
-  console.log("URL de base du site:", siteRoot);
-  
-  // Extract articles from HTML content instead of markdown
-  function extractArticlesFromHtml(html, category) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const articles = [];
-    
-    // Find all list items that contain links (articles)
-    const listItems = doc.querySelectorAll('li');
-    console.log(`Found ${listItems.length} list items in HTML for ${category.label}`);
-    
-    listItems.forEach(item => {
-      // Check if this list item contains an article link
-      const link = item.querySelector('a');
-      if (!link) return;
-      
-      const title = link.textContent.trim();
-      const url = link.getAttribute('href');
-      
-      // Try to get data from data attribute first (if available)
-      const dataSpan = item.querySelector('span[data-article]');
-      if (dataSpan) {
-        try {
-          const articleData = JSON.parse(dataSpan.getAttribute('data-article').replace(/&apos;/g, "'"));
-          articles.push({
-            title: articleData.title,
-            url: articleData.link || url,
-            date: articleData.date,
-            tags: articleData.tags || [],
-            category: category.label,
-            categoryTag: category.tag,
-            categoryColor: category.color
-          });
-          return;
-        } catch (e) {
-          console.warn("Error parsing data attribute:", e);
-          // Continue with regular parsing if data attribute fails
-        }
-      }
-      
-      // Extract date - typically in italics or marked with asterisks
-      let date = 'Date inconnue';
-      const italicDate = item.querySelector('em');
-      if (italicDate) {
-        date = italicDate.textContent.trim();
-      } else {
-        // Try to extract date from text content using regex
-        const dateMatch = item.textContent.match(/\*([^*]+)\*/);
-        if (dateMatch) {
-          date = dateMatch[1].trim();
-        }
-      }
-      
-      // Extract tags - typically in code blocks with # prefix
-      const tags = [];
-      const codeTags = item.querySelectorAll('code');
-      codeTags.forEach(codeTag => {
-        const tagText = codeTag.textContent.trim();
-        if (tagText.startsWith('#')) {
-          tags.push(tagText.substring(1)); // Remove the # prefix
-        }
-      });
-      
-      articles.push({
-        title,
-        url,
-        date,
-        tags,
-        category: category.label,
-        categoryTag: category.tag,
-        categoryColor: category.color
-      });
-    });
-    
-    console.log(`Extracted ${articles.length} articles from HTML for ${category.label}`);
-    if (articles.length > 0) {
-      console.log(`First article: ${JSON.stringify(articles[0])}`);
-    }
-    
-    return articles;
-  }
 
-  // Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
-  async function tryFetchUrls(urls, category) {
-    console.log("Tentative de fetch sur plusieurs URLs:", urls);
-    
-    for (const url of urls) {
-      try {
-        console.log(`Essai de fetch sur: ${url}`);
-        const response = await fetch(url);
-        
-        if (response.ok) {
-          console.log(`Succès pour URL: ${url}`);
-          const html = await response.text();
-          console.log(`Contenu récupéré pour ${category.label} (premiers caractères):`, html.substring(0, 100));
-          
-          // Extract articles from HTML instead of using regex on markdown
-          const articles = extractArticlesFromHtml(html, category);
-          return { html, articles, count: articles.length };
-        } else {
-          console.warn(`Échec de fetch pour ${url}: Status ${response.status}`);
-        }
-      } catch (error) {
-        console.warn(`Échec de fetch pour ${url}:`, error.message);
-      }
-    }
-    
-    // Si toutes échouent, essayer une solution de secours avec un appel synchrone
-    try {
-      console.log("Tentative avec XMLHttpRequest synchrone comme dernier recours");
-      const xhr = new XMLHttpRequest();
-      // Essayer la première URL comme recours
-      xhr.open('GET', urls[0], false); // Synchrone
-      xhr.send(null);
-      
-      if (xhr.status === 200) {
-        console.log("Succès avec XMLHttpRequest synchrone");
-        const html = xhr.responseText;
-        const articles = extractArticlesFromHtml(html, category);
-        return { html, articles, count: articles.length };
-      }
-    } catch (e) {
-      console.error("Échec de la tentative de secours:", e);
-    }
-    
-    return { html: null, articles: [], count: 0 };
-  }
-  
-  // Récupération des données pour chaque catégorie
-  categories.forEach(category => {
-    // Tester plusieurs formats d'URL possibles avec plus d'options
-    const possibleUrls = [
-      `${siteRoot}${category.id}/`,
-      `${siteRoot}${category.id}`,
-      `${siteRoot}${category.id}.html`
-    ];
-    
-    console.log(`Tentative de chargement pour ${category.label}:`, possibleUrls);
-    
-    // Essayer les URLs jusqu'à ce qu'une fonctionne
-    tryFetchUrls(possibleUrls, category)
-      .then(result => {
-        if (!result.html) {
-          throw new Error(`Aucune URL n'a fonctionné pour ${category.id}`);
-        }
-        
-        const { articles, count } = result;
-        totalCount += count;
-        
-        console.log(`Articles trouvés pour ${category.label}: ${count}`);
-        
-        // Stocker les articles
-        allArticles = [...allArticles, ...articles];
-        
-        // Stocker les statistiques
-        categoryStats.push({
-          label: category.label,
-          count: count,
-          color: category.color,
-          tag: category.tag
-        });
-        
-        // Mettre à jour la table des statistiques
-        const statsBody = document.getElementById("stats-body");
-        if (statsBody) {
-          const row = document.createElement("tr");
-          row.setAttribute('data-category', category.tag);
-          row.innerHTML = `
-            <td><span class="category-badge" style="background-color: ${category.color}">${category.label}</span></td>
+	// Ajouter les styles CSS
+	addCustomStyles();
+
+	// Variables pour stocker les données
+	let totalCount = 0;
+	let chartInstance = null;
+	let allArticles = [];
+	const categoryStats = [];
+
+	// Construction de l'URL de base plus robuste pour différents environnements
+	function getBaseUrl() {
+		const origin = window.location.origin;
+		const path = window.location.pathname;
+		let baseUrl = origin;
+
+		// Déterminer si nous sommes sur GitHub Pages ou en développement local
+		if (
+			origin.includes('github.io') ||
+			path.includes('/veille_techno-OC')
+		) {
+			// Extraire la base du chemin pour GitHub Pages
+			const basePath = '/veille_techno-OC/';
+			baseUrl = origin + basePath;
+		} else {
+			// Environnement local - conserver le slash final
+			baseUrl = origin + '/';
+		}
+
+		// console.log('Base URL déterminée:', baseUrl);
+		return baseUrl;
+	}
+
+	const siteRoot = getBaseUrl();
+	// console.log('URL de base du site:', siteRoot);
+
+	// Extract articles from HTML content instead of markdown
+	function extractArticlesFromHtml(html, category) {
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(html, 'text/html');
+		const articles = [];
+
+		// Find all list items that contain links (articles)
+		const listItems = doc.querySelectorAll('li');
+		// console.log(
+		// 	`Found ${listItems.length} list items in HTML for ${category.label}`
+		// );
+
+		listItems.forEach(item => {
+			// Check if this list item contains an article link
+			const link = item.querySelector('a');
+			if (!link) return;
+
+			const title = link.textContent.trim();
+			const url = link.getAttribute('href');
+
+			// Try to get data from data attribute first (if available)
+			const dataSpan = item.querySelector('span[data-article]');
+			if (dataSpan) {
+				try {
+					const articleData = JSON.parse(
+						dataSpan
+							.getAttribute('data-article')
+							.replace(/&apos;/g, "'")
+					);
+					articles.push({
+						title: articleData.title,
+						url: articleData.link || url,
+						date: articleData.date,
+						tags: articleData.tags || [],
+						category: category.label,
+						categoryTag: category.tag,
+						categoryColor: category.color,
+					});
+					return;
+				} catch (e) {
+					console.warn('Error parsing data attribute:', e);
+					// Continue with regular parsing if data attribute fails
+				}
+			}
+
+			// Extract date - typically in italics or marked with asterisks
+			let date = 'Date inconnue';
+			const italicDate = item.querySelector('em');
+			if (italicDate) {
+				date = italicDate.textContent.trim();
+			} else {
+				// Try to extract date from text content using regex
+				const dateMatch = item.textContent.match(/\*([^*]+)\*/);
+				if (dateMatch) {
+					date = dateMatch[1].trim();
+				}
+			}
+
+			// Extract tags - typically in code blocks with # prefix
+			const tags = [];
+			const codeTags = item.querySelectorAll('code');
+			codeTags.forEach(codeTag => {
+				const tagText = codeTag.textContent.trim();
+				if (tagText.startsWith('#')) {
+					tags.push(tagText.substring(1)); // Remove the # prefix
+				}
+			});
+
+			articles.push({
+				title,
+				url,
+				date,
+				tags,
+				category: category.label,
+				categoryTag: category.tag,
+				categoryColor: category.color,
+			});
+		});
+
+/* 		console.log(
+			`Extracted ${articles.length} articles from HTML for ${category.label}`
+		); */
+/* 		if (articles.length > 0) {
+			console.log(`First article: ${JSON.stringify(articles[0])}`);
+		} */
+
+		return articles;
+	}
+
+	// Fonction pour essayer plusieurs URLs jusqu'à ce qu'une fonctionne
+	async function tryFetchUrls(urls, category) {
+	/* 	console.log('Tentative de fetch sur plusieurs URLs:', urls); */
+
+		for (const url of urls) {
+			try {
+	/* 			console.log(`Essai de fetch sur: ${url}`); */
+				const response = await fetch(url);
+
+				if (response.ok) {
+				/* 	console.log(`Succès pour URL: ${url}`); */
+					const html = await response.text();
+		/* 			console.log(
+						`Contenu récupéré pour ${category.label} (premiers caractères):`,
+						html.substring(0, 100)
+					); */
+
+					// Extract articles from HTML instead of using regex on markdown
+					const articles = extractArticlesFromHtml(html, category);
+					return { html, articles, count: articles.length };
+				} else {
+					console.warn(
+						`Échec de fetch pour ${url}: Status ${response.status}`
+					);
+				}
+			} catch (error) {
+				console.warn(`Échec de fetch pour ${url}:`, error.message);
+			}
+		}
+
+		// Si toutes échouent, essayer une solution de secours avec un appel synchrone
+		try {
+/* 			console.log(
+				'Tentative avec XMLHttpRequest synchrone comme dernier recours'
+			); */
+			const xhr = new XMLHttpRequest();
+			// Essayer la première URL comme recours
+			xhr.open('GET', urls[0], false); // Synchrone
+			xhr.send(null);
+
+			if (xhr.status === 200) {
+			/* 	console.log('Succès avec XMLHttpRequest synchrone'); */
+				const html = xhr.responseText;
+				const articles = extractArticlesFromHtml(html, category);
+				return { html, articles, count: articles.length };
+			}
+		} catch (e) {
+			console.error('Échec de la tentative de secours:', e);
+		}
+
+		return { html: null, articles: [], count: 0 };
+	}
+
+	// Récupération des données pour chaque catégorie
+	categories.forEach(category => {
+		// Tester plusieurs formats d'URL possibles avec plus d'options
+		const possibleUrls = [
+			`${siteRoot}${category.id}/`,
+			`${siteRoot}${category.id}`,
+			`${siteRoot}${category.id}.html`,
+		];
+
+/* 		console.log(
+			`Tentative de chargement pour ${category.label}:`,
+			possibleUrls
+		); */
+
+		// Essayer les URLs jusqu'à ce qu'une fonctionne
+		tryFetchUrls(possibleUrls, category)
+			.then(result => {
+				if (!result.html) {
+					throw new Error(
+						`Aucune URL n'a fonctionné pour ${category.id}`
+					);
+				}
+
+				const { articles, count } = result;
+				totalCount += count;
+
+/* 				console.log(
+					`Articles trouvés pour ${category.label}: ${count}`
+				); */
+
+				// Stocker les articles
+				allArticles = [...allArticles, ...articles];
+
+				// Stocker les statistiques
+				categoryStats.push({
+					label: category.label,
+					count: count,
+					color: category.color,
+					tag: category.tag,
+				});
+
+				// Mettre à jour la table des statistiques
+				const statsBody = document.getElementById('stats-body');
+				if (statsBody) {
+					const row = document.createElement('tr');
+					row.setAttribute('data-category', category.tag);
+					row.innerHTML = `
+            <td><span class="category-badge" style="background-color: ${
+				category.color
+			}">${category.label}</span></td>
             <td>${count}</td>
             <td>${new Date().toLocaleDateString()}</td>
           `;
-          statsBody.appendChild(row);
-          
-          // Mettre à jour le total
-          document.getElementById("total-count").textContent = totalCount;
-        }
-        
-        // Si toutes les catégories sont chargées, afficher les résultats
-        if (categoryStats.length === categories.length) {
-          displayLatestArticles();
-          prepareChart();
-        }
-      })
-      .catch(error => {
-        console.error(`Erreur lors du chargement de ${category.id}:`, error);
-        
-        // Ajouter une ligne d'erreur à la table
-        const statsBody = document.getElementById("stats-body");
-        if (statsBody) {
-          const row = document.createElement("tr");
-          row.innerHTML = `
+					statsBody.appendChild(row);
+
+					// Mettre à jour le total
+					document.getElementById('total-count').textContent =
+						totalCount;
+				}
+
+				// Si toutes les catégories sont chargées, afficher les résultats
+				if (categoryStats.length === categories.length) {
+					displayLatestArticles();
+					prepareChart();
+				}
+			})
+			.catch(error => {
+				console.error(
+					`Erreur lors du chargement de ${category.id}:`,
+					error
+				);
+
+				// Ajouter une ligne d'erreur à la table
+				const statsBody = document.getElementById('stats-body');
+				if (statsBody) {
+					const row = document.createElement('tr');
+					row.innerHTML = `
             <td><span class="category-badge" style="background-color: ${category.color}">${category.label}</span></td>
             <td>⚠️ Erreur</td>
             <td>-</td>
           `;
-          statsBody.appendChild(row);
-        }
-        
-        // Ajouter quand même aux statistiques avec compte à 0
-        categoryStats.push({
-          label: category.label,
-          count: 0,
-          color: category.color,
-          tag: category.tag
-        });
-        
-        // Vérifier si toutes les catégories ont été traitées
-        if (categoryStats.length === categories.length) {
-          displayLatestArticles();
-          prepareChart();
-        }
-      });
-  });
-  
-  // Fonction pour afficher les articles les plus récents
-  function displayLatestArticles() {
-    const latestArticlesElement = document.getElementById("latest-articles-content");
-    if (!latestArticlesElement) return;
-    
-    // Trier les articles par date
-    allArticles.sort((a, b) => {
-      // Tentative de conversion des dates
-      try {
-        const dateA = new Date(a.date.replace(/^\*|\*$/g, ""));
-        const dateB = new Date(b.date.replace(/^\*|\*$/g, ""));
-        
-        if (!isNaN(dateA) && !isNaN(dateB)) {
-          return dateB - dateA;
-        }
-      } catch (e) {
-        // En cas d'erreur, utiliser la comparaison de chaînes
-        console.warn("Erreur lors de la comparaison des dates:", e);
-      }
-      
-      return b.date.localeCompare(a.date);
-    });
-    
-    // Vider l'élément et enlever l'indicateur de chargement
-    latestArticlesElement.classList.remove("loading");
-    latestArticlesElement.innerHTML = "";
-    
-    if (allArticles.length === 0) {
-      latestArticlesElement.innerHTML = "<p>Aucun article trouvé. Vérifiez la console pour plus de détails sur les erreurs potentielles.</p>";
-      return;
-    }
-    
-    console.log("Affichage des articles récents:", allArticles.slice(0, 5));
-    
-    // Créer la liste d'articles
-    const articleList = document.createElement("ul");
-    articleList.className = "latest-articles-list";
-    
-    allArticles.slice(0, 5).forEach(article => {
-      const li = document.createElement("li");
-      li.className = `article-item ${article.categoryTag}`;
-      li.innerHTML = `
+					statsBody.appendChild(row);
+				}
+
+				// Ajouter quand même aux statistiques avec compte à 0
+				categoryStats.push({
+					label: category.label,
+					count: 0,
+					color: category.color,
+					tag: category.tag,
+				});
+
+				// Vérifier si toutes les catégories ont été traitées
+				if (categoryStats.length === categories.length) {
+					displayLatestArticles();
+					prepareChart();
+				}
+			});
+	});
+
+	// Fonction pour afficher les articles les plus récents
+	function displayLatestArticles() {
+		const latestArticlesElement = document.getElementById(
+			'latest-articles-content'
+		);
+		if (!latestArticlesElement) return;
+
+		// Trier les articles par date
+		allArticles.sort((a, b) => {
+			// Tentative de conversion des dates
+			try {
+				const dateA = new Date(a.date.replace(/^\*|\*$/g, ''));
+				const dateB = new Date(b.date.replace(/^\*|\*$/g, ''));
+
+				if (!isNaN(dateA) && !isNaN(dateB)) {
+					return dateB - dateA;
+				}
+			} catch (e) {
+				// En cas d'erreur, utiliser la comparaison de chaînes
+				console.warn('Erreur lors de la comparaison des dates:', e);
+			}
+
+			return b.date.localeCompare(a.date);
+		});
+
+		// Vider l'élément et enlever l'indicateur de chargement
+		latestArticlesElement.classList.remove('loading');
+		latestArticlesElement.innerHTML = '';
+
+		if (allArticles.length === 0) {
+			latestArticlesElement.innerHTML =
+				'<p>Aucun article trouvé. Vérifiez la console pour plus de détails sur les erreurs potentielles.</p>';
+			return;
+		}
+/* 
+		console.log('Affichage des articles récents:', allArticles.slice(0, 5));
+ */
+		// Créer la liste d'articles
+		const articleList = document.createElement('ul');
+		articleList.className = 'latest-articles-list';
+
+		allArticles.slice(0, 5).forEach(article => {
+			const li = document.createElement('li');
+			li.className = `article-item ${article.categoryTag}`;
+			li.innerHTML = `
         <a href="${article.url}" class="article-link" target="_blank" rel="noopener">
           ${article.title}
         </a>
@@ -352,170 +405,192 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="article-date">${article.date}</span>
         </span>
       `;
-      articleList.appendChild(li);
-    });
-    
-    latestArticlesElement.appendChild(articleList);
-  }
-  
-  // Fonction pour préparer le graphique
-  function prepareChart() {
-    const chartToggle = document.getElementById("toggle-chart");
-    const chartContainer = document.getElementById("chart-container");
-    
-    if (!chartToggle || !chartContainer) return;
-    
-    chartToggle.addEventListener("click", () => {
-      if (chartContainer.style.display === "none") {
-        chartContainer.style.display = "block";
-        chartToggle.textContent = "Masquer graphique";
-        
-        if (!chartInstance) {
-          createChart();
-        }
-      } else {
-        chartContainer.style.display = "none";
-        chartToggle.textContent = "Afficher graphique";
-      }
-    });
-  }
-  
-  // Création du graphique
-  function createChart() {
-    const ctx = document.getElementById("stats-chart")?.getContext("2d");
-    if (!ctx) {
-      console.error("Contexte du canvas non trouvé");
-      return;
-    }
-    
-    // Vérifier si Chart.js est chargé
-    if (typeof Chart === 'undefined') {
-      // Charger Chart.js dynamiquement
-      console.log("Chargement de Chart.js...");
-      const script = document.createElement('script');
-      script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js";
-      script.integrity = "sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==";
-      script.crossOrigin = "anonymous";
-      script.referrerPolicy = "no-referrer";
-      
-      script.onload = () => {
-        console.log("Chart.js chargé avec succès");
-        renderChart(ctx);
-      };
-      
-      script.onerror = () => {
-        console.error("Erreur lors du chargement de Chart.js");
-      };
-      
-      document.head.appendChild(script);
-    } else {
-      // Si Chart.js est déjà disponible
-      console.log("Chart.js déjà disponible");
-      renderChart(ctx);
-    }
-  }
-  
-  function renderChart(ctx) {
-    // Données pour le graphique
-    const labels = categoryStats.map(stat => stat.label);
-    const data = categoryStats.map(stat => stat.count);
-    const colors = categoryStats.map(stat => stat.color);
-    
-    console.log("Données du graphique:", { labels, data, colors });
-    
-    // Création du graphique
-    try {
-      chartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Nombre d\'articles',
-            data: data,
-            backgroundColor: colors,
-            borderColor: colors.map(color => adjustColor(color, -20)),
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            title: {
-              display: true,
-              text: 'Répartition des articles par catégorie',
-              font: {
-                size: 16
-              }
-            },
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                precision: 0
-              }
-            }
-          }
-        }
-      });
-      
-      console.log("Graphique créé avec succès");
-    } catch (error) {
-      console.error("Erreur lors de la création du graphique:", error);
-    }
-  }
-  
-  // Toggle du thème clair/sombre
-  const themeToggle = document.getElementById("toggle-theme");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function() {
-      document.body.classList.toggle("dark-theme");
-      localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
-      
-      // Mettre à jour le texte du bouton
-      this.textContent = document.body.classList.contains("dark-theme") ? "Mode clair" : "Mode sombre";
-      
-      // Recréer le graphique si nécessaire
-      if (chartInstance) {
-        chartInstance.destroy();
-        createChart();
-      }
-    });
-    
-    // Appliquer le thème sauvegardé
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark-theme");
-      themeToggle.textContent = "Mode clair";
-    }
-  }
-  
-  // Fonction pour ajuster la luminosité des couleurs
-  function adjustColor(color, percent) {
-    if (!color) return '#000000';
-    
-    const num = parseInt(color.replace("#", ""), 16),
-      amt = Math.round(2.55 * percent),
-      R = (num >> 16) + amt,
-      G = (num >> 8 & 0x00FF) + amt,
-      B = (num & 0x0000FF) + amt;
-    
-    return "#" + (
-      0x1000000 +
-      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-      (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-      (B < 255 ? (B < 1 ? 0 : B) : 255)
-    ).toString(16).slice(1);
-  }
-  
-  // Ajouter les styles CSS pour le dashboard
-  function addCustomStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
+			articleList.appendChild(li);
+		});
+
+		latestArticlesElement.appendChild(articleList);
+	}
+
+	// Fonction pour préparer le graphique
+	function prepareChart() {
+		const chartToggle = document.getElementById('toggle-chart');
+		const chartContainer = document.getElementById('chart-container');
+
+		if (!chartToggle || !chartContainer) return;
+
+		chartToggle.addEventListener('click', () => {
+			if (chartContainer.style.display === 'none') {
+				chartContainer.style.display = 'block';
+				chartToggle.textContent = 'Masquer graphique';
+
+				if (!chartInstance) {
+					createChart();
+				}
+			} else {
+				chartContainer.style.display = 'none';
+				chartToggle.textContent = 'Afficher graphique';
+			}
+		});
+	}
+
+	// Création du graphique
+	function createChart() {
+		const ctx = document.getElementById('stats-chart')?.getContext('2d');
+		if (!ctx) {
+			console.error('Contexte du canvas non trouvé');
+			return;
+		}
+
+		// Vérifier si Chart.js est chargé
+		if (typeof Chart === 'undefined') {
+			// Charger Chart.js dynamiquement
+/* 			console.log('Chargement de Chart.js...'); */
+			const script = document.createElement('script');
+			script.src =
+				'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+			script.integrity =
+				'sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==';
+			script.crossOrigin = 'anonymous';
+			script.referrerPolicy = 'no-referrer';
+
+			script.onload = () => {
+		/* 		console.log('Chart.js chargé avec succès'); */
+				renderChart(ctx);
+			};
+
+			script.onerror = () => {
+				console.error('Erreur lors du chargement de Chart.js');
+			};
+
+			document.head.appendChild(script);
+		} else {
+			// Si Chart.js est déjà disponible
+			console.log('Chart.js déjà disponible');
+			renderChart(ctx);
+		}
+	}
+
+	function renderChart(ctx) {
+		// Données pour le graphique
+		const labels = categoryStats.map(stat => stat.label);
+		const data = categoryStats.map(stat => stat.count);
+		const colors = categoryStats.map(stat => stat.color);
+/* 
+		console.log('Données du graphique:', { labels, data, colors });
+ */
+		// Création du graphique
+		try {
+			chartInstance = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [
+						{
+							label: "Nombre d'articles",
+							data: data,
+							backgroundColor: colors,
+							borderColor: colors.map(color =>
+								adjustColor(color, -20)
+							),
+							borderWidth: 1,
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					plugins: {
+						title: {
+							display: true,
+							text: 'Répartition des articles par catégorie',
+							font: {
+								size: 16,
+							},
+						},
+						legend: {
+							display: false,
+						},
+					},
+					scales: {
+						y: {
+							beginAtZero: true,
+							ticks: {
+								precision: 0,
+							},
+						},
+					},
+				},
+			});
+
+/* 			console.log('Graphique créé avec succès'); */
+		} catch (error) {
+			console.error('Erreur lors de la création du graphique:', error);
+		}
+	}
+
+	// Toggle du thème clair/sombre
+	const themeToggle = document.getElementById('toggle-theme');
+	if (themeToggle) {
+		themeToggle.addEventListener('click', function () {
+			document.body.classList.toggle('dark-theme');
+			localStorage.setItem(
+				'theme',
+				document.body.classList.contains('dark-theme')
+					? 'dark'
+					: 'light'
+			);
+
+			// Mettre à jour le texte du bouton
+			this.textContent = document.body.classList.contains('dark-theme')
+				? 'Mode clair'
+				: 'Mode sombre';
+
+			// Recréer le graphique si nécessaire
+			if (chartInstance) {
+				chartInstance.destroy();
+				createChart();
+			}
+		});
+
+		// Appliquer le thème sauvegardé
+		const savedTheme = localStorage.getItem('theme');
+		if (savedTheme === 'dark') {
+			document.body.classList.add('dark-theme');
+			themeToggle.textContent = 'Mode clair';
+		}
+	}
+
+	// Fonction pour ajuster la luminosité des couleurs
+	function adjustColor(color, percent) {
+		if (!color) return '#000000';
+
+		const num = parseInt(color.replace('#', ''), 16),
+			amt = Math.round(2.55 * percent),
+			R = (num >> 16) + amt,
+			G = ((num >> 8) & 0x00ff) + amt,
+			B = (num & 0x0000ff) + amt;
+
+		return (
+			'#' +
+			(
+				0x1000000 +
+				(R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+				(G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+				(B < 255 ? (B < 1 ? 0 : B) : 255)
+			)
+				.toString(16)
+				.slice(1)
+		);
+	}
+
+	// Ajouter les styles CSS pour le dashboard
+	function addCustomStyles() {
+		const style = document.createElement('style');
+		style.textContent = `
     /* Styles de base du dashboard */
+    span {
+      backgroundColor: transparent;
+    }
+
     .dashboard-header {
       display: flex;
       justify-content: space-between;
@@ -672,6 +747,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     `;
-    document.head.appendChild(style);
-  }
+		document.head.appendChild(style);
+	}
 });
