@@ -6,7 +6,7 @@ permalink: /auto_paradigmes/
 
 # 🧠 Veille automatique – Paradigmes de programmation
 
-🕒 *Dernière mise à jour : mercredi 23 avril 2025*
+🕒 *Dernière mise à jour : lundi 28 avril 2025*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,7 @@ permalink: /auto_paradigmes/
   </div>
 </div>
 
+- <span data-article='{"title":"What Does \"use client\" Do?","link":"https://overreacted.io/what-does-use-client-do/","date":"Fri, 25 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[What Does "use client" Do?](https://overreacted.io/what-does-use-client-do/) – *Fri, 25 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Impossible Components","link":"https://overreacted.io/impossible-components/","date":"Tue, 22 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Impossible Components](https://overreacted.io/impossible-components/) – *Tue, 22 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"JSX Over The Wire","link":"https://overreacted.io/jsx-over-the-wire/","date":"Wed, 16 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[JSX Over The Wire](https://overreacted.io/jsx-over-the-wire/) – *Wed, 16 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"React for Two Computers","link":"https://overreacted.io/react-for-two-computers/","date":"Wed, 09 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns","react"]}'>[React for Two Computers](https://overreacted.io/react-for-two-computers/) – *Wed, 09 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns` `#react`</span>
@@ -24,7 +25,6 @@ permalink: /auto_paradigmes/
 - <span data-article='{"title":"Before You memo()","link":"https://overreacted.io/before-you-memo/","date":"Tue, 23 Feb 2021 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Before You memo()](https://overreacted.io/before-you-memo/) – *Tue, 23 Feb 2021 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"The WET Codebase","link":"https://overreacted.io/the-wet-codebase/","date":"Mon, 13 Jul 2020 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[The WET Codebase](https://overreacted.io/the-wet-codebase/) – *Mon, 13 Jul 2020 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Goodbye, Clean Code","link":"https://overreacted.io/goodbye-clean-code/","date":"Sat, 11 Jan 2020 00:00:00 GMT","tags":["paradigm","architecture","patterns","code"]}'>[Goodbye, Clean Code](https://overreacted.io/goodbye-clean-code/) – *Sat, 11 Jan 2020 00:00:00 GMT* `#paradigm` `#architecture` `#patterns` `#code`</span>
-- <span data-article='{"title":"My Decade in Review","link":"https://overreacted.io/my-decade-in-review/","date":"Wed, 01 Jan 2020 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[My Decade in Review](https://overreacted.io/my-decade-in-review/) – *Wed, 01 Jan 2020 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 
 
 <script>
