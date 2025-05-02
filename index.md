@@ -17,24 +17,6 @@ Ce tableau de bord présente une veille structurée autour des besoins de l'entr
 
 ![GitHub Workflow Status](https://github.com/Escanor1986/veille_techno-OC/actions/workflows/rss.yml/badge.svg)
 
-<div class="features-container">
-  <div class="feature-card">
-    <span class="feature-icon">🔍</span>
-    <h3>Recherche avancée</h3>
-    <p>Filtrez par tags, catégories et texte</p>
-  </div>
-  <div class="feature-card">
-    <span class="feature-icon">📊</span>
-    <h3>Tableau de bord</h3>
-    <p>Visualisez vos données de veille</p>
-  </div>
-  <div class="feature-card">
-    <span class="feature-icon">🏷️</span>
-    <h3>Système de tags</h3>
-    <p>Organisez votre contenu efficacement</p>
-  </div>
-</div>
-
 ## <span>📚</span> Sommaire
 
 - [📰 Dernières mises à jour]({{ '/latest-updates' | relative_url }}) - *Articles récents toutes catégories*
@@ -299,9 +281,9 @@ body.dark-theme .link-card:hover {
 
 <!-- Scripts JavaScript -->
 <script src="{{ '/assets/js/stats.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+<!-- <script src="{{ '/assets/js/search.js' | relative_url }}"></script> -->
 <!-- <script src="{{ '/assets/js/debug-helper.js' | relative_url }}"></script> -->
 <!-- <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script> -->
-
+<!--  -->
 
 ---
