@@ -6,7 +6,7 @@ permalink: /auto_paradigmes/
 
 # 🧠 Veille automatique – Paradigmes de programmation
 
-🕒 *Dernière mise à jour : lundi 2 juin 2025*
+🕒 *Dernière mise à jour : lundi 9 juin 2025*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,7 @@ permalink: /auto_paradigmes/
   </div>
 </div>
 
+- <span data-article='{"title":"How Imports Work in RSC","link":"https://overreacted.io/how-imports-work-in-rsc/","date":"Thu, 05 Jun 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[How Imports Work in RSC](https://overreacted.io/how-imports-work-in-rsc/) – *Thu, 05 Jun 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"RSC for LISP Developers","link":"https://overreacted.io/rsc-for-lisp-developers/","date":"Sun, 01 Jun 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[RSC for LISP Developers](https://overreacted.io/rsc-for-lisp-developers/) – *Sun, 01 Jun 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Progressive JSON","link":"https://overreacted.io/progressive-json/","date":"Sat, 31 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Progressive JSON](https://overreacted.io/progressive-json/) – *Sat, 31 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Why Does RSC Integrate with a Bundler?","link":"https://overreacted.io/why-does-rsc-integrate-with-a-bundler/","date":"Fri, 30 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Why Does RSC Integrate with a Bundler?](https://overreacted.io/why-does-rsc-integrate-with-a-bundler/) – *Fri, 30 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
@@ -24,7 +25,6 @@ permalink: /auto_paradigmes/
 - <span data-article='{"title":"Functional HTML","link":"https://overreacted.io/functional-html/","date":"Fri, 02 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Functional HTML](https://overreacted.io/functional-html/) – *Fri, 02 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"What Does \"use client\" Do?","link":"https://overreacted.io/what-does-use-client-do/","date":"Fri, 25 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[What Does "use client" Do?](https://overreacted.io/what-does-use-client-do/) – *Fri, 25 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Impossible Components","link":"https://overreacted.io/impossible-components/","date":"Tue, 22 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Impossible Components](https://overreacted.io/impossible-components/) – *Tue, 22 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
-- <span data-article='{"title":"JSX Over The Wire","link":"https://overreacted.io/jsx-over-the-wire/","date":"Wed, 16 Apr 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[JSX Over The Wire](https://overreacted.io/jsx-over-the-wire/) – *Wed, 16 Apr 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 
 
 <script>
