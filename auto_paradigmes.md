@@ -6,7 +6,7 @@ permalink: /auto_paradigmes/
 
 # 🧠 Veille automatique – Paradigmes de programmation
 
-🕒 *Dernière mise à jour : lundi 28 juillet 2025*
+🕒 *Dernière mise à jour : lundi 4 août 2025*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,7 @@ permalink: /auto_paradigmes/
   </div>
 </div>
 
+- <span data-article='{"title":"The Math Is Haunted","link":"https://overreacted.io/the-math-is-haunted/","date":"Wed, 30 Jul 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[The Math Is Haunted](https://overreacted.io/the-math-is-haunted/) – *Wed, 30 Jul 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Suppressions of Suppressions","link":"https://overreacted.io/suppressions-of-suppressions/","date":"Wed, 11 Jun 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Suppressions of Suppressions](https://overreacted.io/suppressions-of-suppressions/) – *Wed, 11 Jun 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"I&apos;m Doing a Little Consulting","link":"https://overreacted.io/im-doing-a-little-consulting/","date":"Wed, 11 Jun 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[I'm Doing a Little Consulting](https://overreacted.io/im-doing-a-little-consulting/) – *Wed, 11 Jun 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"How Imports Work in RSC","link":"https://overreacted.io/how-imports-work-in-rsc/","date":"Thu, 05 Jun 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[How Imports Work in RSC](https://overreacted.io/how-imports-work-in-rsc/) – *Thu, 05 Jun 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
@@ -24,7 +25,6 @@ permalink: /auto_paradigmes/
 - <span data-article='{"title":"One Roundtrip Per Navigation","link":"https://overreacted.io/one-roundtrip-per-navigation/","date":"Thu, 29 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[One Roundtrip Per Navigation](https://overreacted.io/one-roundtrip-per-navigation/) – *Thu, 29 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Static as a Server","link":"https://overreacted.io/static-as-a-server/","date":"Thu, 08 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Static as a Server](https://overreacted.io/static-as-a-server/) – *Thu, 08 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"RSC for Astro Developers","link":"https://overreacted.io/rsc-for-astro-developers/","date":"Tue, 06 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[RSC for Astro Developers](https://overreacted.io/rsc-for-astro-developers/) – *Tue, 06 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
-- <span data-article='{"title":"Functional HTML","link":"https://overreacted.io/functional-html/","date":"Fri, 02 May 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Functional HTML](https://overreacted.io/functional-html/) – *Fri, 02 May 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 
 
 <script>
