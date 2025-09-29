@@ -6,7 +6,7 @@ permalink: /auto_ui/
 
 # 🎨 Veille automatique – Librairies UI
 
-🕒 *Dernière mise à jour : lundi 22 septembre 2025*
+🕒 *Dernière mise à jour : lundi 29 septembre 2025*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
