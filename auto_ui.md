@@ -6,74 +6,7 @@ permalink: /auto_ui/
 
 # 🎨 Veille automatique – Librairies UI
 
-🕒 *Dernière mise à jour : lundi 23 mars 2026*
-
-<div class="search-container">
-  <input type="text" id="article-search" placeholder="Rechercher un article...">
-  <div class="tag-filters" id="tag-filters">
-    <!-- Les filtres par tag seront générés dynamiquement -->
-  </div>
-</div>
-
-- <span data-article='{"title":"AI-Generated Code Has a Shelf Life","link":"https://blog.bitsrc.io/ai-generated-code-has-a-shelf-life-460732ccf25c?source=rss----5c2fdf847f4a---4","date":"Mon, 23 Feb 2026 12:13:37 GMT","tags":["ui","frontend","design","ai-code-generation","developer-productivity"]}'>[AI-Generated Code Has a Shelf Life](https://blog.bitsrc.io/ai-generated-code-has-a-shelf-life-460732ccf25c?source=rss----5c2fdf847f4a---4) – *Mon, 23 Feb 2026 12:13:37 GMT* `#ui` `#frontend` `#design` `#ai-code-generation` `#developer-productivity`</span>
-- <span data-article='{"title":"Top 7 Lovable alternatives for production-grade apps in 2026","link":"https://blog.bitsrc.io/top-7-lovable-alternatives-for-production-grade-apps-in-2026-590d36ab0744?source=rss----5c2fdf847f4a---4","date":"Mon, 09 Feb 2026 11:53:59 GMT","tags":["ui","frontend","design","ai-tools","saas"]}'>[Top 7 Lovable alternatives for production-grade apps in 2026](https://blog.bitsrc.io/top-7-lovable-alternatives-for-production-grade-apps-in-2026-590d36ab0744?source=rss----5c2fdf847f4a---4) – *Mon, 09 Feb 2026 11:53:59 GMT* `#ui` `#frontend` `#design` `#ai-tools` `#saas`</span>
-- <span data-article='{"title":"The Architect and the Apprentice: Retaining Control in the Age of Code Generation","link":"https://blog.bitsrc.io/the-architect-and-the-apprentice-retaining-control-in-the-age-of-code-generation-a6f3f39196c1?source=rss----5c2fdf847f4a---4","date":"Tue, 04 Nov 2025 13:03:03 GMT","tags":["ui","frontend","design","software-development","ai"]}'>[The Architect and the Apprentice: Retaining Control in the Age of Code Generation](https://blog.bitsrc.io/the-architect-and-the-apprentice-retaining-control-in-the-age-of-code-generation-a6f3f39196c1?source=rss----5c2fdf847f4a---4) – *Tue, 04 Nov 2025 13:03:03 GMT* `#ui` `#frontend` `#design` `#software-development` `#ai`</span>
-- <span data-article='{"title":"Top Replit Alternatives for Composable App Development","link":"https://blog.bitsrc.io/top-replit-alternatives-for-composable-app-development-68ea839a8629?source=rss----5c2fdf847f4a---4","date":"Mon, 27 Oct 2025 12:04:54 GMT","tags":["ui","frontend","design","coding","replit"]}'>[Top Replit Alternatives for Composable App Development](https://blog.bitsrc.io/top-replit-alternatives-for-composable-app-development-68ea839a8629?source=rss----5c2fdf847f4a---4) – *Mon, 27 Oct 2025 12:04:54 GMT* `#ui` `#frontend` `#design` `#coding` `#replit`</span>
-- <span data-article='{"title":"A Practical Guide to Prompting Fully Featured Platforms in single prompt","link":"https://blog.bitsrc.io/developers-practical-guide-prompting-hope-ai-0ba0e62a0cb4?source=rss----5c2fdf847f4a---4","date":"Tue, 26 Aug 2025 12:29:03 GMT","tags":["ui","frontend","design","ai-hope","vibe-coding"]}'>[A Practical Guide to Prompting Fully Featured Platforms in single prompt](https://blog.bitsrc.io/developers-practical-guide-prompting-hope-ai-0ba0e62a0cb4?source=rss----5c2fdf847f4a---4) – *Tue, 26 Aug 2025 12:29:03 GMT* `#ui` `#frontend` `#design` `#ai-hope` `#vibe-coding`</span>
-- <span data-article='{"title":"5 Top Lovable Alternatives in 2025","link":"https://blog.bitsrc.io/5-top-lovable-alternatives-in-2025-72def3f96ac1?source=rss----5c2fdf847f4a---4","date":"Thu, 13 Mar 2025 04:11:12 GMT","tags":["ui","frontend","design","ai-coding-assistant","generative-ai-tools"]}'>[5 Top Lovable Alternatives in 2025](https://blog.bitsrc.io/5-top-lovable-alternatives-in-2025-72def3f96ac1?source=rss----5c2fdf847f4a---4) – *Thu, 13 Mar 2025 04:11:12 GMT* `#ui` `#frontend` `#design` `#ai-coding-assistant` `#generative-ai-tools`</span>
-- <span data-article='{"title":"Design System Success with AI Coding Assistants","link":"https://blog.bitsrc.io/design-system-success-with-ai-coding-assistants-78b13443ca23?source=rss----5c2fdf847f4a---4","date":"Thu, 13 Mar 2025 04:07:53 GMT","tags":["ui","frontend","design","design-systems","ai-assistant"]}'>[Design System Success with AI Coding Assistants](https://blog.bitsrc.io/design-system-success-with-ai-coding-assistants-78b13443ca23?source=rss----5c2fdf847f4a---4) – *Thu, 13 Mar 2025 04:07:53 GMT* `#ui` `#frontend` `#design` `#design-systems` `#ai-assistant`</span>
-- <span data-article='{"title":"Vibe Coding: The Future of AI-Powered Development or a Recipe for Technical Debt?","link":"https://blog.bitsrc.io/vibe-coding-the-future-of-ai-powered-development-or-a-recipe-for-technical-debt-2fd3a0a4e8b3?source=rss----5c2fdf847f4a---4","date":"Wed, 12 Mar 2025 11:41:37 GMT","tags":["ui","frontend","design","ai-coding","nodejs"]}'>[Vibe Coding: The Future of AI-Powered Development or a Recipe for Technical Debt?](https://blog.bitsrc.io/vibe-coding-the-future-of-ai-powered-development-or-a-recipe-for-technical-debt-2fd3a0a4e8b3?source=rss----5c2fdf847f4a---4) – *Wed, 12 Mar 2025 11:41:37 GMT* `#ui` `#frontend` `#design` `#ai-coding` `#nodejs`</span>
-- <span data-article='{"title":"AI Coding Assistants: MCP-Powered Extensions vs. Fully Integrated Platforms","link":"https://blog.bitsrc.io/ai-coding-assistants-mcp-powered-extensions-vs-fully-integrated-platforms-c9c6daaa7687?source=rss----5c2fdf847f4a---4","date":"Tue, 11 Mar 2025 15:37:46 GMT","tags":["ui","frontend","design","javascript","web-development"]}'>[AI Coding Assistants: MCP-Powered Extensions vs. Fully Integrated Platforms](https://blog.bitsrc.io/ai-coding-assistants-mcp-powered-extensions-vs-fully-integrated-platforms-c9c6daaa7687?source=rss----5c2fdf847f4a---4) – *Tue, 11 Mar 2025 15:37:46 GMT* `#ui` `#frontend` `#design` `#javascript` `#web-development`</span>
-- <span data-article='{"title":"How Bit Reduces Development Costs","link":"https://blog.bitsrc.io/how-bit-reduces-development-costs-b85c625699d1?source=rss----5c2fdf847f4a---4","date":"Tue, 11 Mar 2025 13:09:04 GMT","tags":["ui","frontend","design","ai-coding","javascript"]}'>[How Bit Reduces Development Costs](https://blog.bitsrc.io/how-bit-reduces-development-costs-b85c625699d1?source=rss----5c2fdf847f4a---4) – *Tue, 11 Mar 2025 13:09:04 GMT* `#ui` `#frontend` `#design` `#ai-coding` `#javascript`</span>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  function filterArticles() {
-    const input = document.getElementById('article-search');
-    const filter = input.value.toLowerCase();
-    const items = document.getElementsByTagName('li');
-    
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      const text = item.textContent.toLowerCase();
-      if (text.indexOf(filter) > -1) {
-        item.style.display = "";
-      } else {
-        item.style.display = "none";
-      }
-    }
-  }
-
-  // Extraction de tous les tags présents dans les articles
-  const tagElements = document.querySelectorAll('code');
-  const tags = new Set();
-  
-  tagElements.forEach(el => {
-    if (el.textContent.startsWith('#')) {
-      tags.add(el.textContent.substring(1));
-    }
-  });
-  
-  // Génération des filtres par tag
-  const tagFiltersContainer = document.getElementById('tag-filters');
-  if (tagFiltersContainer) {
-    tags.forEach(tag => {
-      const tagBtn = document.createElement('button');
-      tagBtn.className = 'tag-filter-btn';
-      tagBtn.textContent = '#' + tag;
-      tagBtn.onclick = function() {
-        document.getElementById('article-search').value = tag;
-        filterArticles();
-      };
-      tagFiltersContainer.appendChild(tagBtn);
-    });
-  }
-  
-  // Attacher l'événement de filtrage au champ de recherche
-  const searchInput = document.getElementById('article-search');
-  if (searchInput) {
-    searchInput.addEventListener('input', filterArticles);
-  }
-});
-</script>
+> ⚠️ Erreur lors de la récupération du flux RSS.
+> Détail : unable to verify the first certificate
+> 
+> Veuillez réessayer ultérieurement ou vérifier l'URL du flux RSS.
