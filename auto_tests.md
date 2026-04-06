@@ -6,7 +6,7 @@ permalink: /auto_tests/
 
 # 🧪 Veille automatique – Librairies de test
 
-🕒 *Dernière mise à jour : lundi 30 mars 2026*
+🕒 *Dernière mise à jour : lundi 6 avril 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
