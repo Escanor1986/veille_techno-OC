@@ -6,7 +6,7 @@ permalink: /auto_stack/
 
 # 🌐 Veille automatique – Stack Java / Angular
 
-🕒 *Dernière mise à jour : lundi 4 mai 2026*
+🕒 *Dernière mise à jour : lundi 11 mai 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,9 @@ permalink: /auto_stack/
   </div>
 </div>
 
+- <span data-article='{"title":"Java Weekly, Issue 645","link":"https://feeds.feedblitz.com/~/955547105/0/baeldung~Java-Weekly-Issue","date":"Fri, 08 May 2026 12:10:36 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 645](https://feeds.feedblitz.com/~/955547105/0/baeldung~Java-Weekly-Issue) – *Fri, 08 May 2026 12:10:36 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
+- <span data-article='{"title":"A Guide to Camel Observability Services","link":"https://feeds.feedblitz.com/~/955428392/0/baeldung~A-Guide-to-Camel-Observability-Services","date":"Wed, 06 May 2026 22:20:39 +0000","tags":["java","angular","spring","backend","frontend"]}'>[A Guide to Camel Observability Services](https://feeds.feedblitz.com/~/955428392/0/baeldung~A-Guide-to-Camel-Observability-Services) – *Wed, 06 May 2026 22:20:39 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
+- <span data-article='{"title":"Parallel Testing With Gradle and JUnit 5","link":"https://feeds.feedblitz.com/~/955344461/0/baeldung~Parallel-Testing-With-Gradle-and-JUnit","date":"Tue, 05 May 2026 22:53:11 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Parallel Testing With Gradle and JUnit 5](https://feeds.feedblitz.com/~/955344461/0/baeldung~Parallel-Testing-With-Gradle-and-JUnit) – *Tue, 05 May 2026 22:53:11 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"JDBC Series","link":"https://feeds.feedblitz.com/~/955198892/0/baeldung~JDBC-Series","date":"Mon, 04 May 2026 07:42:55 +0000","tags":["java","angular","spring","backend","frontend"]}'>[JDBC Series](https://feeds.feedblitz.com/~/955198892/0/baeldung~JDBC-Series) – *Mon, 04 May 2026 07:42:55 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 644","link":"https://feeds.feedblitz.com/~/954947657/0/baeldung~Java-Weekly-Issue","date":"Fri, 01 May 2026 08:59:37 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 644](https://feeds.feedblitz.com/~/954947657/0/baeldung~Java-Weekly-Issue) – *Fri, 01 May 2026 08:59:37 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"IntelliJ Series","link":"https://feeds.feedblitz.com/~/954893270/0/baeldung~IntelliJ-Series","date":"Thu, 30 Apr 2026 18:18:17 +0000","tags":["java","angular","spring","backend","frontend"]}'>[IntelliJ Series](https://feeds.feedblitz.com/~/954893270/0/baeldung~IntelliJ-Series) – *Thu, 30 Apr 2026 18:18:17 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
@@ -22,9 +25,6 @@ permalink: /auto_stack/
 - <span data-article='{"title":"Java Maps Series","link":"https://feeds.feedblitz.com/~/954859364/0/baeldung~Java-Maps-Series","date":"Thu, 30 Apr 2026 08:12:05 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Maps Series](https://feeds.feedblitz.com/~/954859364/0/baeldung~Java-Maps-Series) – *Thu, 30 Apr 2026 08:12:05 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java List Series","link":"https://feeds.feedblitz.com/~/954857483/0/baeldung~Java-List-Series","date":"Thu, 30 Apr 2026 07:50:21 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java List Series](https://feeds.feedblitz.com/~/954857483/0/baeldung~Java-List-Series) – *Thu, 30 Apr 2026 07:50:21 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Store Java Objects in HttpSession","link":"https://feeds.feedblitz.com/~/954837605/0/baeldung~Store-Java-Objects-in-HttpSession","date":"Thu, 30 Apr 2026 00:07:54 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Store Java Objects in HttpSession](https://feeds.feedblitz.com/~/954837605/0/baeldung~Store-Java-Objects-in-HttpSession) – *Thu, 30 Apr 2026 00:07:54 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Algorithms in Java Series","link":"https://feeds.feedblitz.com/~/954821783/0/baeldung~Algorithms-in-Java-Series","date":"Wed, 29 Apr 2026 17:40:01 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Algorithms in Java Series](https://feeds.feedblitz.com/~/954821783/0/baeldung~Algorithms-in-Java-Series) – *Wed, 29 Apr 2026 17:40:01 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Spring AI Series","link":"https://feeds.feedblitz.com/~/954792065/0/baeldung~Spring-AI-Series","date":"Wed, 29 Apr 2026 08:43:50 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Spring AI Series](https://feeds.feedblitz.com/~/954792065/0/baeldung~Spring-AI-Series) – *Wed, 29 Apr 2026 08:43:50 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"AI in Java Series","link":"https://feeds.feedblitz.com/~/954788495/0/baeldung~AI-in-Java-Series","date":"Wed, 29 Apr 2026 06:59:57 +0000","tags":["java","angular","spring","backend","frontend"]}'>[AI in Java Series](https://feeds.feedblitz.com/~/954788495/0/baeldung~AI-in-Java-Series) – *Wed, 29 Apr 2026 06:59:57 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 
 
 <script>
