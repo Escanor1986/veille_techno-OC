@@ -6,7 +6,7 @@ permalink: /auto_stack/
 
 # 🌐 Veille automatique – Stack Java / Angular
 
-🕒 *Dernière mise à jour : lundi 18 mai 2026*
+🕒 *Dernière mise à jour : lundi 25 mai 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,8 @@ permalink: /auto_stack/
   </div>
 </div>
 
+- <span data-article='{"title":"Getting HTTP Basic Authentication from HttpServletRequest","link":"https://feeds.feedblitz.com/~/957111833/0/baeldung~Getting-HTTP-Basic-Authentication-from-HttpServletRequest","date":"Sat, 23 May 2026 23:11:28 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Getting HTTP Basic Authentication from HttpServletRequest](https://feeds.feedblitz.com/~/957111833/0/baeldung~Getting-HTTP-Basic-Authentication-from-HttpServletRequest) – *Sat, 23 May 2026 23:11:28 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
+- <span data-article='{"title":"Java Weekly, Issue 647","link":"https://feeds.feedblitz.com/~/956980241/0/baeldung~Java-Weekly-Issue","date":"Fri, 22 May 2026 13:41:58 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 647](https://feeds.feedblitz.com/~/956980241/0/baeldung~Java-Weekly-Issue) – *Fri, 22 May 2026 13:41:58 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 646","link":"https://feeds.feedblitz.com/~/956081237/0/baeldung~Java-Weekly-Issue","date":"Fri, 15 May 2026 12:51:12 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 646](https://feeds.feedblitz.com/~/956081237/0/baeldung~Java-Weekly-Issue) – *Fri, 15 May 2026 12:51:12 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Introduction to WebDriverManager","link":"https://feeds.feedblitz.com/~/956008835/0/baeldung~Introduction-to-WebDriverManager","date":"Fri, 15 May 2026 01:11:19 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Introduction to WebDriverManager](https://feeds.feedblitz.com/~/956008835/0/baeldung~Introduction-to-WebDriverManager) – *Fri, 15 May 2026 01:11:19 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Query Records Between Two Dates With Hibernate","link":"https://feeds.feedblitz.com/~/955832234/0/baeldung~Query-Records-Between-Two-Dates-With-Hibernate","date":"Wed, 13 May 2026 03:47:58 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Query Records Between Two Dates With Hibernate](https://feeds.feedblitz.com/~/955832234/0/baeldung~Query-Records-Between-Two-Dates-With-Hibernate) – *Wed, 13 May 2026 03:47:58 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
@@ -23,8 +25,6 @@ permalink: /auto_stack/
 - <span data-article='{"title":"Synchronize Virtual Thread Without Pinning","link":"https://feeds.feedblitz.com/~/955767131/0/baeldung~Synchronize-Virtual-Thread-Without-Pinning","date":"Mon, 11 May 2026 23:46:04 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Synchronize Virtual Thread Without Pinning](https://feeds.feedblitz.com/~/955767131/0/baeldung~Synchronize-Virtual-Thread-Without-Pinning) – *Mon, 11 May 2026 23:46:04 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Key Derivation Function API in Java 25","link":"https://feeds.feedblitz.com/~/955766681/0/baeldung~Key-Derivation-Function-API-in-Java","date":"Mon, 11 May 2026 23:20:37 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Key Derivation Function API in Java 25](https://feeds.feedblitz.com/~/955766681/0/baeldung~Key-Derivation-Function-API-in-Java) – *Mon, 11 May 2026 23:20:37 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Anthropic Agent Skills Support in Spring AI","link":"https://feeds.feedblitz.com/~/955766684/0/baeldung~Anthropic-Agent-Skills-Support-in-Spring-AI","date":"Mon, 11 May 2026 23:14:10 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Anthropic Agent Skills Support in Spring AI](https://feeds.feedblitz.com/~/955766684/0/baeldung~Anthropic-Agent-Skills-Support-in-Spring-AI) – *Mon, 11 May 2026 23:14:10 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Java Weekly, Issue 645","link":"https://feeds.feedblitz.com/~/955547105/0/baeldung~Java-Weekly-Issue","date":"Fri, 08 May 2026 12:10:36 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 645](https://feeds.feedblitz.com/~/955547105/0/baeldung~Java-Weekly-Issue) – *Fri, 08 May 2026 12:10:36 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"A Guide to Camel Observability Services","link":"https://feeds.feedblitz.com/~/955428392/0/baeldung~A-Guide-to-Camel-Observability-Services","date":"Wed, 06 May 2026 22:20:39 +0000","tags":["java","angular","spring","backend","frontend"]}'>[A Guide to Camel Observability Services](https://feeds.feedblitz.com/~/955428392/0/baeldung~A-Guide-to-Camel-Observability-Services) – *Wed, 06 May 2026 22:20:39 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 
 
 <script>
