@@ -6,7 +6,7 @@ permalink: /auto_paradigmes/
 
 # 🧠 Veille automatique – Paradigmes de programmation
 
-🕒 *Dernière mise à jour : lundi 15 juin 2026*
+🕒 *Dernière mise à jour : lundi 22 juin 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,7 @@ permalink: /auto_paradigmes/
   </div>
 </div>
 
+- <span data-article='{"title":"There Are No Instances in atproto","link":"https://overreacted.io/there-are-no-instances-in-atproto/","date":"Fri, 19 Jun 2026 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[There Are No Instances in atproto](https://overreacted.io/there-are-no-instances-in-atproto/) – *Fri, 19 Jun 2026 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"A Social Filesystem","link":"https://overreacted.io/a-social-filesystem/","date":"Sun, 18 Jan 2026 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[A Social Filesystem](https://overreacted.io/a-social-filesystem/) – *Sun, 18 Jan 2026 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Introducing RSC Explorer","link":"https://overreacted.io/introducing-rsc-explorer/","date":"Fri, 19 Dec 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Introducing RSC Explorer](https://overreacted.io/introducing-rsc-explorer/) – *Fri, 19 Dec 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Hire Me in Japan","link":"https://overreacted.io/hire-me-in-japan/","date":"Tue, 11 Nov 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Hire Me in Japan](https://overreacted.io/hire-me-in-japan/) – *Tue, 11 Nov 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
@@ -24,7 +25,6 @@ permalink: /auto_paradigmes/
 - <span data-article='{"title":"A Lean Syntax Primer","link":"https://overreacted.io/a-lean-syntax-primer/","date":"Tue, 02 Sep 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[A Lean Syntax Primer](https://overreacted.io/a-lean-syntax-primer/) – *Tue, 02 Sep 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"Beyond Booleans","link":"https://overreacted.io/beyond-booleans/","date":"Sat, 16 Aug 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Beyond Booleans](https://overreacted.io/beyond-booleans/) – *Sat, 16 Aug 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 - <span data-article='{"title":"The Math Is Haunted","link":"https://overreacted.io/the-math-is-haunted/","date":"Wed, 30 Jul 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[The Math Is Haunted](https://overreacted.io/the-math-is-haunted/) – *Wed, 30 Jul 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
-- <span data-article='{"title":"Suppressions of Suppressions","link":"https://overreacted.io/suppressions-of-suppressions/","date":"Wed, 11 Jun 2025 00:00:00 GMT","tags":["paradigm","architecture","patterns"]}'>[Suppressions of Suppressions](https://overreacted.io/suppressions-of-suppressions/) – *Wed, 11 Jun 2025 00:00:00 GMT* `#paradigm` `#architecture` `#patterns`</span>
 
 
 <script>
