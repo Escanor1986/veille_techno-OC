@@ -6,7 +6,7 @@ permalink: /auto_stack/
 
 # 🌐 Veille automatique – Stack Java / Angular
 
-🕒 *Dernière mise à jour : lundi 10 août 2026*
+🕒 *Dernière mise à jour : lundi 17 août 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,7 @@ permalink: /auto_stack/
   </div>
 </div>
 
+- <span data-article='{"title":"Java Weekly, Issue 659","link":"https://feeds.feedblitz.com/~/967864352/0/baeldung","date":"Sat, 15 Aug 2026 10:23:09 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 659](https://feeds.feedblitz.com/~/967864352/0/baeldung) – *Sat, 15 Aug 2026 10:23:09 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 658","link":"https://feeds.feedblitz.com/~/967388204/0/baeldung","date":"Sat, 08 Aug 2026 10:07:32 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 658](https://feeds.feedblitz.com/~/967388204/0/baeldung) – *Sat, 08 Aug 2026 10:07:32 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Introduction to Google GenAI Chat and Spring AI","link":"https://feeds.feedblitz.com/~/967131092/0/baeldung","date":"Fri, 07 Aug 2026 03:22:20 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Introduction to Google GenAI Chat and Spring AI](https://feeds.feedblitz.com/~/967131092/0/baeldung) – *Fri, 07 Aug 2026 03:22:20 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Spring AI AutoMemoryTools","link":"https://feeds.feedblitz.com/~/967131095/0/baeldung","date":"Fri, 07 Aug 2026 03:11:28 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Spring AI AutoMemoryTools](https://feeds.feedblitz.com/~/967131095/0/baeldung) – *Fri, 07 Aug 2026 03:11:28 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
@@ -24,7 +25,6 @@ permalink: /auto_stack/
 - <span data-article='{"title":"Building Intelligent Document Processing with Apache Camel, Docling and LangChain4j","link":"https://feeds.feedblitz.com/~/964749371/0/baeldung","date":"Thu, 30 Jul 2026 23:35:25 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Building Intelligent Document Processing with Apache Camel, Docling and LangChain4j](https://feeds.feedblitz.com/~/964749371/0/baeldung) – *Thu, 30 Jul 2026 23:35:25 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"CTE Support in Hibernate","link":"https://feeds.feedblitz.com/~/964749374/0/baeldung","date":"Thu, 30 Jul 2026 23:28:05 +0000","tags":["java","angular","spring","backend","frontend"]}'>[CTE Support in Hibernate](https://feeds.feedblitz.com/~/964749374/0/baeldung) – *Thu, 30 Jul 2026 23:28:05 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"LLM Integration With Apache Camel OpenAI Component","link":"https://feeds.feedblitz.com/~/964742375/0/baeldung","date":"Thu, 30 Jul 2026 23:25:13 +0000","tags":["java","angular","spring","backend","frontend"]}'>[LLM Integration With Apache Camel OpenAI Component](https://feeds.feedblitz.com/~/964742375/0/baeldung) – *Thu, 30 Jul 2026 23:25:13 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"A Guide to Ahead-of-Time Cache in the Java","link":"https://feeds.feedblitz.com/~/964742378/0/baeldung","date":"Thu, 30 Jul 2026 23:21:22 +0000","tags":["java","angular","spring","backend","frontend"]}'>[A Guide to Ahead-of-Time Cache in the Java](https://feeds.feedblitz.com/~/964742378/0/baeldung) – *Thu, 30 Jul 2026 23:21:22 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 
 
 <script>
