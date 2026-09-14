@@ -6,7 +6,7 @@ permalink: /auto_paradigmes/
 
 # 🧠 Veille automatique – Paradigmes de programmation
 
-🕒 *Dernière mise à jour : lundi 7 septembre 2026*
+🕒 *Dernière mise à jour : lundi 14 septembre 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
