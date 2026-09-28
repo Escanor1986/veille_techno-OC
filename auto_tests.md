@@ -6,7 +6,7 @@ permalink: /auto_tests/
 
 # 🧪 Veille automatique – Librairies de test
 
-🕒 *Dernière mise à jour : lundi 21 septembre 2026*
+🕒 *Dernière mise à jour : lundi 28 septembre 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,7 +15,7 @@ permalink: /auto_tests/
   </div>
 </div>
 
-- <span data-article='{"title":"Manual Software Testing Live Project Free Training","link":"https://www.softwaretestinghelp.com/free-online-software-testing-qa-training-course/","date":"Tue, 07 Jan 2025 16:58:26 +0000","tags":["test","qa","automation","Software Testing"]}'>[Manual Software Testing Live Project Free Training](https://www.softwaretestinghelp.com/free-online-software-testing-qa-training-course/) – *Tue, 07 Jan 2025 16:58:26 +0000* `#test` `#qa` `#automation` `#Software Testing`</span>
+- <span data-article='{"title":"Manual Testing Live Project – Free QA Training Series","link":"https://www.softwaretestinghelp.com/free-online-software-testing-qa-training-course/","date":"Tue, 07 Jan 2025 16:58:26 +0000","tags":["test","qa","automation","Software Testing"]}'>[Manual Testing Live Project – Free QA Training Series](https://www.softwaretestinghelp.com/free-online-software-testing-qa-training-course/) – *Tue, 07 Jan 2025 16:58:26 +0000* `#test` `#qa` `#automation` `#Software Testing`</span>
 - <span data-article='{"title":"Acunetix Web Vulnerability Scanner (WVS) Review","link":"https://www.softwaretestinghelp.com/acunetix-web-vulnerability-scanner-wvs-review/","date":"Mon, 06 Jan 2025 08:12:53 +0000","tags":["test","qa","automation","QA Tool Review"]}'>[Acunetix Web Vulnerability Scanner (WVS) Review](https://www.softwaretestinghelp.com/acunetix-web-vulnerability-scanner-wvs-review/) – *Mon, 06 Jan 2025 08:12:53 +0000* `#test` `#qa` `#automation` `#QA Tool Review`</span>
 - <span data-article='{"title":"Acceptance Test Report Template with Examples","link":"https://www.softwaretestinghelp.com/acceptance-test-reports/","date":"Sat, 04 Jan 2025 23:20:58 +0000","tags":["test","qa","automation","Documents and Templates"]}'>[Acceptance Test Report Template with Examples](https://www.softwaretestinghelp.com/acceptance-test-reports/) – *Sat, 04 Jan 2025 23:20:58 +0000* `#test` `#qa` `#automation` `#Documents and Templates`</span>
 - <span data-article='{"title":"50+ Helpful QA Software Testing Resources (Download)","link":"https://www.softwaretestinghelp.com/68-essential-resources-to-be-a-successful-tester/","date":"Sat, 04 Jan 2025 07:48:31 +0000","tags":["test","qa","automation","Testing Skills Tips and Resources"]}'>[50+ Helpful QA Software Testing Resources (Download)](https://www.softwaretestinghelp.com/68-essential-resources-to-be-a-successful-tester/) – *Sat, 04 Jan 2025 07:48:31 +0000* `#test` `#qa` `#automation` `#Testing Skills Tips and Resources`</span>
