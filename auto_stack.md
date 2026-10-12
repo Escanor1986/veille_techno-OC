@@ -6,7 +6,7 @@ permalink: /auto_stack/
 
 # 🌐 Veille automatique – Stack Java / Angular
 
-🕒 *Dernière mise à jour : lundi 5 octobre 2026*
+🕒 *Dernière mise à jour : lundi 12 octobre 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,16 +15,16 @@ permalink: /auto_stack/
   </div>
 </div>
 
+- <span data-article='{"title":"Building Graph-Based Workflows With Spring AI Alibaba","link":"https://feeds.feedblitz.com/~/971204387/0/baeldung","date":"Sat, 10 Oct 2026 01:04:27 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Building Graph-Based Workflows With Spring AI Alibaba](https://feeds.feedblitz.com/~/971204387/0/baeldung) – *Sat, 10 Oct 2026 01:04:27 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
+- <span data-article='{"title":"Java Weekly, Issue 667","link":"https://feeds.feedblitz.com/~/971192846/0/baeldung","date":"Fri, 09 Oct 2026 15:26:39 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 667](https://feeds.feedblitz.com/~/971192846/0/baeldung) – *Fri, 09 Oct 2026 15:26:39 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
+- <span data-article='{"title":"Documenting Form Parameters With Spring REST Docs","link":"https://feeds.feedblitz.com/~/971064149/0/baeldung","date":"Tue, 06 Oct 2026 15:29:15 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Documenting Form Parameters With Spring REST Docs](https://feeds.feedblitz.com/~/971064149/0/baeldung) – *Tue, 06 Oct 2026 15:29:15 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 666","link":"https://feeds.feedblitz.com/~/970894736/0/baeldung","date":"Fri, 02 Oct 2026 12:07:00 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 666](https://feeds.feedblitz.com/~/970894736/0/baeldung) – *Fri, 02 Oct 2026 12:07:00 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"New Features in Java 27","link":"https://feeds.feedblitz.com/~/970740575/0/baeldung","date":"Tue, 29 Sep 2026 06:55:30 +0000","tags":["java","angular","spring","backend","frontend"]}'>[New Features in Java 27](https://feeds.feedblitz.com/~/970740575/0/baeldung) – *Tue, 29 Sep 2026 06:55:30 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 665","link":"https://feeds.feedblitz.com/~/970561523/0/baeldung","date":"Sun, 27 Sep 2026 13:04:27 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 665](https://feeds.feedblitz.com/~/970561523/0/baeldung) – *Sun, 27 Sep 2026 13:04:27 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"The @Find Annotation in Hibernate","link":"https://feeds.feedblitz.com/~/970277321/0/baeldung","date":"Sat, 26 Sep 2026 04:20:54 +0000","tags":["java","angular","spring","backend","frontend"]}'>[The @Find Annotation in Hibernate](https://feeds.feedblitz.com/~/970277321/0/baeldung) – *Sat, 26 Sep 2026 04:20:54 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Performance Improvements in JDK 26","link":"https://feeds.feedblitz.com/~/970060151/0/baeldung","date":"Fri, 25 Sep 2026 05:21:31 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Performance Improvements in JDK 26](https://feeds.feedblitz.com/~/970060151/0/baeldung) – *Fri, 25 Sep 2026 05:21:31 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"A Guide to Structured Output in Spring AI","link":"https://feeds.feedblitz.com/~/970058585/0/baeldung","date":"Fri, 25 Sep 2026 05:15:12 +0000","tags":["java","angular","spring","backend","frontend"]}'>[A Guide to Structured Output in Spring AI](https://feeds.feedblitz.com/~/970058585/0/baeldung) – *Fri, 25 Sep 2026 05:15:12 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Introduction to FitNesse – An Acceptance Testing Framework","link":"https://feeds.feedblitz.com/~/969527999/0/baeldung","date":"Wed, 23 Sep 2026 06:58:59 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Introduction to FitNesse – An Acceptance Testing Framework](https://feeds.feedblitz.com/~/969527999/0/baeldung) – *Wed, 23 Sep 2026 06:58:59 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Introduction to Triton Java API","link":"https://feeds.feedblitz.com/~/969527177/0/baeldung","date":"Wed, 23 Sep 2026 06:48:14 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Introduction to Triton Java API](https://feeds.feedblitz.com/~/969527177/0/baeldung) – *Wed, 23 Sep 2026 06:48:14 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Upgrading Spring Framework Version in Spring Boot","link":"https://feeds.feedblitz.com/~/969518291/0/baeldung","date":"Wed, 23 Sep 2026 03:55:47 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Upgrading Spring Framework Version in Spring Boot](https://feeds.feedblitz.com/~/969518291/0/baeldung) – *Wed, 23 Sep 2026 03:55:47 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Introduction to Solon","link":"https://feeds.feedblitz.com/~/969398114/0/baeldung","date":"Mon, 21 Sep 2026 04:05:19 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Introduction to Solon](https://feeds.feedblitz.com/~/969398114/0/baeldung) – *Mon, 21 Sep 2026 04:05:19 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 
 
 <script>
