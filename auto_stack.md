@@ -6,7 +6,7 @@ permalink: /auto_stack/
 
 # 🌐 Veille automatique – Stack Java / Angular
 
-🕒 *Dernière mise à jour : lundi 19 octobre 2026*
+🕒 *Dernière mise à jour : lundi 26 octobre 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
