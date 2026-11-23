@@ -6,7 +6,7 @@ permalink: /auto_stack/
 
 # 🌐 Veille automatique – Stack Java / Angular
 
-🕒 *Dernière mise à jour : lundi 16 novembre 2026*
+🕒 *Dernière mise à jour : lundi 23 novembre 2026*
 
 <div class="search-container">
   <input type="text" id="article-search" placeholder="Rechercher un article...">
@@ -15,6 +15,8 @@ permalink: /auto_stack/
   </div>
 </div>
 
+- <span data-article='{"title":"Java Weekly, Issue 672","link":"https://feeds.feedblitz.com/~/973557479/0/baeldung","date":"Fri, 20 Nov 2026 21:31:59 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 672](https://feeds.feedblitz.com/~/973557479/0/baeldung) – *Fri, 20 Nov 2026 21:31:59 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
+- <span data-article='{"title":"A Guide to the System Properties Extension Annotations in JUnit 6.1","link":"https://feeds.feedblitz.com/~/973461452/0/baeldung","date":"Thu, 19 Nov 2026 23:40:23 +0000","tags":["java","angular","spring","backend","frontend"]}'>[A Guide to the System Properties Extension Annotations in JUnit 6.1](https://feeds.feedblitz.com/~/973461452/0/baeldung) – *Thu, 19 Nov 2026 23:40:23 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Rate Limit Information from Anthropic API Response Headers Using ChatResponseMetadata in Spring AI","link":"https://feeds.feedblitz.com/~/972994280/0/baeldung","date":"Sat, 14 Nov 2026 14:14:40 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Rate Limit Information from Anthropic API Response Headers Using ChatResponseMetadata in Spring AI](https://feeds.feedblitz.com/~/972994280/0/baeldung) – *Sat, 14 Nov 2026 14:14:40 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Using the Official OpenAI Java SDK With Spring AI","link":"https://feeds.feedblitz.com/~/972994283/0/baeldung","date":"Sat, 14 Nov 2026 14:11:09 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Using the Official OpenAI Java SDK With Spring AI](https://feeds.feedblitz.com/~/972994283/0/baeldung) – *Sat, 14 Nov 2026 14:11:09 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 671","link":"https://feeds.feedblitz.com/~/972991964/0/baeldung","date":"Sat, 14 Nov 2026 12:51:19 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 671](https://feeds.feedblitz.com/~/972991964/0/baeldung) – *Sat, 14 Nov 2026 12:51:19 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
@@ -23,8 +25,6 @@ permalink: /auto_stack/
 - <span data-article='{"title":"Automating Shadow DOM in Selenium WebDriver","link":"https://feeds.feedblitz.com/~/972628949/0/baeldung","date":"Sun, 08 Nov 2026 13:20:05 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Automating Shadow DOM in Selenium WebDriver](https://feeds.feedblitz.com/~/972628949/0/baeldung) – *Sun, 08 Nov 2026 13:20:05 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 670","link":"https://feeds.feedblitz.com/~/972505319/0/baeldung","date":"Fri, 06 Nov 2026 17:35:09 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 670](https://feeds.feedblitz.com/~/972505319/0/baeldung) – *Fri, 06 Nov 2026 17:35:09 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 - <span data-article='{"title":"Java Weekly, Issue 669","link":"https://feeds.feedblitz.com/~/972125879/0/baeldung","date":"Fri, 30 Oct 2026 16:16:14 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Java Weekly, Issue 669](https://feeds.feedblitz.com/~/972125879/0/baeldung) – *Fri, 30 Oct 2026 16:16:14 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Query Transformation in Spring AI Modular RAG","link":"https://feeds.feedblitz.com/~/972117848/0/baeldung","date":"Fri, 30 Oct 2026 11:51:20 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Query Transformation in Spring AI Modular RAG](https://feeds.feedblitz.com/~/972117848/0/baeldung) – *Fri, 30 Oct 2026 11:51:20 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
-- <span data-article='{"title":"Handle Forwarded Headers in Spring Boot","link":"https://feeds.feedblitz.com/~/972117851/0/baeldung","date":"Fri, 30 Oct 2026 11:42:54 +0000","tags":["java","angular","spring","backend","frontend"]}'>[Handle Forwarded Headers in Spring Boot](https://feeds.feedblitz.com/~/972117851/0/baeldung) – *Fri, 30 Oct 2026 11:42:54 +0000* `#java` `#angular` `#spring` `#backend` `#frontend`</span>
 
 
 <script>
